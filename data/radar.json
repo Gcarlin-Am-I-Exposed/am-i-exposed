@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-14T16:55:57+00:00",
+ "generated": "2026-11-15T17:38:33+00:00",
  "window_days": 180,
  "sources": [
   {
@@ -14,6 +14,62 @@
   }
  ],
  "items": [
+  {
+   "day": "2026-11-15",
+   "seen": "2026-11-15T17:38:26+00:00",
+   "victim": "pah.com.my",
+   "group": "lockbit5",
+   "type": "ransomware",
+   "status": "reclamado",
+   "source": "RansomLook",
+   "sourceUrl": "https://www.ransomlook.io/group/lockbit5",
+   "id": "f90579ee6df081e3",
+   "country": "MY",
+   "sector": "salud",
+   "tried": 1
+  },
+  {
+   "day": "2026-11-15",
+   "seen": "2026-11-15T17:38:26+00:00",
+   "victim": "Sarimelati Kencana Tbk PT",
+   "group": "inc ransom",
+   "type": "ransomware",
+   "status": "reclamado",
+   "source": "RansomLook",
+   "sourceUrl": "https://www.ransomlook.io/group/inc%20ransom",
+   "id": "404cd8e05fedc2eb",
+   "country": "ID",
+   "sector": "hoteleria",
+   "tried": 1
+  },
+  {
+   "day": "2026-11-15",
+   "seen": "2026-11-15T17:38:26+00:00",
+   "victim": "PT. Fiber Networks Indonesia (AltosDLP surveillance platform, fiber.net.id)",
+   "group": "pixelleaks",
+   "type": "ransomware",
+   "status": "reclamado",
+   "source": "RansomLook",
+   "sourceUrl": "https://www.ransomlook.io/group/pixelleaks",
+   "id": "0f9e815fb31f6721",
+   "country": "ID",
+   "sector": "telecom",
+   "tried": 1
+  },
+  {
+   "day": "2026-11-15",
+   "seen": "2026-11-15T17:38:26+00:00",
+   "victim": "Kayaku Safety Systems Malaysia Sdn Bhd",
+   "group": "qilin",
+   "type": "ransomware",
+   "status": "reclamado",
+   "source": "RansomLook",
+   "sourceUrl": "https://www.ransomlook.io/group/qilin",
+   "id": "8b86dacfb48de710",
+   "country": "MY",
+   "sector": "manufactura",
+   "tried": 1
+  },
   {
    "day": "2026-11-14",
    "seen": "2026-11-14T16:55:46+00:00",
@@ -100,6 +156,20 @@
   },
   {
    "day": "2026-11-14",
+   "seen": "2026-11-15T17:38:26+00:00",
+   "victim": "Promantra, Inc.",
+   "group": "metaencryptor",
+   "type": "ransomware",
+   "status": "reclamado",
+   "source": "RansomLook",
+   "sourceUrl": "https://www.ransomlook.io/group/metaencryptor",
+   "id": "c6734cb213133a1c",
+   "country": "US",
+   "sector": "salud",
+   "tried": 1
+  },
+  {
+   "day": "2026-11-14",
    "seen": "2026-11-14T16:55:46+00:00",
    "victim": "Professional baseball club Wisconsin Timber Rattlers",
    "group": "qilin",
@@ -124,6 +194,20 @@
    "id": "bab1f52e6fb28c72",
    "country": "US",
    "sector": "educacion",
+   "tried": 1
+  },
+  {
+   "day": "2026-11-14",
+   "seen": "2026-11-15T17:38:26+00:00",
+   "victim": "Momentum Telecom",
+   "group": "endzone",
+   "type": "ransomware",
+   "status": "reclamado",
+   "source": "RansomLook",
+   "sourceUrl": "https://www.ransomlook.io/group/endzone",
+   "id": "efbcf2121be624e3",
+   "country": "US",
+   "sector": "telecom",
    "tried": 1
   },
   {
@@ -156,6 +240,20 @@
   },
   {
    "day": "2026-11-14",
+   "seen": "2026-11-15T17:38:26+00:00",
+   "victim": "Home Instead",
+   "group": "anubis",
+   "type": "ransomware",
+   "status": "reclamado",
+   "source": "RansomLook",
+   "sourceUrl": "https://www.ransomlook.io/group/anubis",
+   "id": "134c983483f07991",
+   "country": "",
+   "sector": "salud",
+   "tried": 1
+  },
+  {
+   "day": "2026-11-14",
    "seen": "2026-11-14T16:55:46+00:00",
    "victim": "Grundbaulabor Trier GmbH",
    "group": "everest",
@@ -180,6 +278,20 @@
    "id": "d851d7101bd691d9",
    "country": "US",
    "sector": "tecnologia",
+   "tried": 1
+  },
+  {
+   "day": "2026-11-14",
+   "seen": "2026-11-15T17:38:26+00:00",
+   "victim": "Absolute Bail Bonds",
+   "group": "endzone",
+   "type": "ransomware",
+   "status": "reclamado",
+   "source": "RansomLook",
+   "sourceUrl": "https://www.ransomlook.io/group/endzone",
+   "id": "741398dcb8a8c720",
+   "country": "US",
+   "sector": "servicios",
    "tried": 1
   },
   {
@@ -20102,20 +20214,6 @@
    "id": "043ab2537f1771ed",
    "country": "PT",
    "sector": "transporte",
-   "tried": 1
-  },
-  {
-   "day": "2026-05-18",
-   "seen": "2026-05-18T12:00:00+00:00",
-   "victim": "Addi",
-   "group": "—",
-   "type": "filtracion",
-   "status": "verificado",
-   "source": "Have I Been Pwned",
-   "sourceUrl": "https://haveibeenpwned.com/PwnedWebsites#ADDI",
-   "id": "216cb50832487939",
-   "country": "CO",
-   "sector": "finanzas",
    "tried": 1
   }
  ]
