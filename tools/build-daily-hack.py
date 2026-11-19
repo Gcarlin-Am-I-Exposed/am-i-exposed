@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Genera /daily-hack/ y /es/daily-hack/ desde data/radar.json.
+"""Genera /daily-hack/ y /es/daily-hack/.
+
+Fuente: el registro combinado que arma tools/merge-radar.py (Radar de Ataques
++ data/radar.json), pasado con --data. Sin --data usa data/radar.json solo, que
+es como funcionaba antes y sirve para probar.
 
 Las dos paginas salen del mismo registro y se diferencian en dos cosas: el
 idioma, y el orden de los bloques regionales. En ingles manda Estados Unidos,
@@ -32,6 +36,8 @@ DOM = 'https://www.am-i-exposed.com'
 # Cuanto se publica. "Daily" quiere decir lo de esta semana; el resto del
 # historico vive en data/radar.json y alimenta las cifras, no la tabla.
 DIAS_PAGINA = 7
+DIAS_TENDENCIA = 30
+TOPE_BARRAS = 10
 FILAS_VISIBLES = 40
 # Debajo de este ancho la tabla deja de ser tabla y cada fila es una ficha.
 # Seis columnas con "Servicios Financieros y Seguros" dentro no caben en la
@@ -91,10 +97,10 @@ T = {
               'no pudimos identificar con certeza no aparecen aquí.'),
   'readh': 'Cómo leer esta página',
   'read1': ('<b>Lo que publica un grupo criminal es una afirmación, no una '
-            'confirmación.</b> {c} de los {t} casos vienen del sitio de '
-            'filtración del propio atacante: el grupo dice tener los datos y '
-            'aún nadie lo verificó. Solo {v} fueron verificados por Have I Been '
-            'Pwned. Cada fila dice en qué estado está y de dónde sale.'),
+            'confirmación.</b> En {c} de los {t} casos solo existe la palabra '
+            'del atacante. {v} fueron confirmados por la víctima o verificados '
+            'por Have I Been Pwned. Cada fila dice en qué estado está y de dónde '
+            'sale.'),
   'read2': ('El país y la industria los asignamos nosotros a partir del nombre '
             'de la organización. Cuando no estamos seguros decimos "sin '
             'identificar" en lugar de adivinar, así que esa columna tiene '
@@ -107,8 +113,9 @@ T = {
   'n4': 'Cómo saber si mi contraseña fue filtrada',
   'dish': 'Informamos, no acusamos',
   'dis1': ('Cada caso de esta página sale de lo que un grupo criminal publicó '
-           'en su propio sitio de filtración, o de una brecha verificada por '
-           'Have I Been Pwned. Que una empresa aparezca aquí significa que '
+           'en su propio sitio de filtración, según rastreadores públicos, de '
+           'una brecha verificada por Have I Been Pwned o de la prensa. Que una '
+           'empresa aparezca aquí significa que '
            '<b>alguien reclamó un ataque</b>: no es una sentencia, no prueba '
            'que la empresa hiciera algo mal, y no prueba que tus datos estén '
            'circulando.'),
@@ -117,6 +124,11 @@ T = {
            'grupos dicen tener. Cada fila dice en qué estado está y enlaza su '
            'fuente para que lo compruebes tú.'),
   'src': 'Fuentes', 'under': 'bajo',
+  'trendh': 'Víctimas por día', 'trendp': 'Últimos {d} días.',
+  'countryh': 'Por país', 'countryp': 'Los {n} países con más casos en los últimos {d} días.',
+  'grouph': 'Grupos más activos', 'groupp': 'Los {n} grupos con más víctimas publicadas en los últimos {d} días.',
+  'srcnote': ('Datos recopilados de rastreadores públicos de sitios de filtración, '
+              'Have I Been Pwned y prensa. Cada fila enlaza su fuente original.'),
   'foot': 'Guillermo Carlin, Lima.',
   'fcheck': 'Revisar mi correo', 'fcases': 'Acuerdos', 'ffaq': 'Preguntas frecuentes',
   'fmail': 'Si se filtró mi correo', 'fpw': 'Si se filtró mi contraseña',
@@ -167,10 +179,10 @@ T = {
               'not identify with confidence are left out.'),
   'readh': 'How to read this page',
   'read1': ('<b>What a criminal group publishes is a claim, not a '
-            'confirmation.</b> {c} of the {t} cases come from the attacker’s '
-            'own leak site: the group says it holds the data and nobody has '
-            'verified it. Only {v} were verified by Have I Been Pwned. Every '
-            'row states its status and where it comes from.'),
+            'confirmation.</b> In {c} of the {t} cases there is only the '
+            'attacker’s word. {v} were confirmed by the victim or verified by '
+            'Have I Been Pwned. Every row states its status and where it comes '
+            'from.'),
   'read2': ('Country and industry are assigned by us from the name of the '
             'organisation. Where we are not confident we say "unidentified" '
             'rather than guess, so that column has gaps on purpose.'),
@@ -182,8 +194,9 @@ T = {
   'n4': 'How to know if your password was leaked',
   'dish': 'We report, we do not accuse',
   'dis1': ('Every case on this page comes from what a criminal group published '
-           'on its own leak site, or from a breach verified by Have I Been '
-           'Pwned. A company appearing here means <b>someone claimed an '
+           'on its own leak site, as recorded by public trackers, from a breach '
+           'verified by Have I Been Pwned, or from the press. A company '
+           'appearing here means <b>someone claimed an '
            'attack</b>: it is not a verdict, it does not prove the company did '
            'anything wrong, and it does not prove your data is circulating.'),
   'dis2': ('We do not independently verify any of those claims, we do not host '
@@ -191,6 +204,11 @@ T = {
            'Every row states its status and links to its source so you can '
            'check it yourself.'),
   'src': 'Sources', 'under': 'under',
+  'trendh': 'Victims per day', 'trendp': 'Last {d} days.',
+  'countryh': 'By country', 'countryp': 'The {n} countries with the most cases in the last {d} days.',
+  'grouph': 'Most active groups', 'groupp': 'The {n} groups with the most victims posted in the last {d} days.',
+  'srcnote': ('Data gathered from public leak-site trackers, Have I Been Pwned '
+              'and the press. Every row links to its original source.'),
   'foot': 'Guillermo Carlin, Lima.',
   'fcheck': 'Check my email', 'fcases': 'Settlements', 'ffaq': 'FAQ',
   'fmail': 'If your email leaked', 'fpw': 'If your password leaked',
@@ -212,9 +230,20 @@ ENLACES = {
 E = html.escape
 
 
-# Esta pagina enlaza a sus dos fuentes y a nada mas. Todo lo demas que sale
-# en un href esta escrito a mano en la plantilla, no pasa por aqui.
-HOSTS = {'www.ransomlook.io', 'ransomlook.io', 'haveibeenpwned.com'}
+# Las filas enlazan a su fuente: rastreadores, HIBP o una nota de prensa. Ya no
+# hay lista cerrada de hosts porque el Radar trae prensa de cualquier medio; lo
+# que se exige es http(s), un host con dominio, sin puerto y sin credenciales.
+
+# Donde se enlaza cada fuente en el pie, por nombre.
+FUENTE_URL = {
+    'ransomlook': ('https://www.ransomlook.io/', 'CC BY 4.0'),
+    'have i been pwned': ('https://haveibeenpwned.com/', 'CC BY 4.0'),
+    'ransomware.live': ('https://www.ransomware.live/', ''),
+    'brandefense atlas': ('https://atlas.brandefense.io/', ''),
+    'socradar': ('https://socradar.io/', ''),
+    'ransom-db': ('https://www.ransom-db.com/', ''),
+    'dupin': ('https://noticias.dupin.com.ar/', ''),
+}
 
 
 def etiquetas_movil(t):
@@ -239,11 +268,36 @@ def href(url):
         return ''
     try:
         p = urlsplit(u)
-        if p.scheme in ('http', 'https') and p.hostname in HOSTS and not p.port:
+        if (p.scheme in ('http', 'https') and p.hostname and '.' in p.hostname
+                and not p.port and not p.username):
             return u
     except ValueError:
         pass
     return ''
+
+
+def pie_fuentes(datos, t):
+    """Todas las fuentes que aportaron filas, con su enlace y, si la tiene, su
+    licencia. Las que no tienen enlace conocido (un medio de prensa) van con el
+    nombre solo: cada fila ya enlaza la nota."""
+    nombres = datos.get('all_sources') or [f['nombre'] for f in datos['sources']]
+    partes = []
+    for n in nombres:
+        url, lic = next(((u, l) for k, (u, l) in FUENTE_URL.items()
+                         if n.lower().startswith(k)), ('', ''))
+        txt = (f'<a href="{E(url)}" target="_blank" rel="noopener">{E(n)}</a>'
+               if url else E(n))
+        if lic:
+            txt += (f' {E(t["under"])} <a href="https://creativecommons.org/licenses/by/4.0/" '
+                    f'target="_blank" rel="noopener license">{E(lic)}</a>')
+        partes.append(txt)
+    return ' · '.join(partes)
+
+
+def W(c):
+    """Cuantas victimas cuenta una fila: una, salvo las agrupadas del Radar
+    ("Grupo Soul: 24 victimas")."""
+    return int(c.get('victims') or 1)
 
 
 def fecha(iso, idioma):
@@ -349,6 +403,13 @@ tr[hidden]{display:none}
 .bar .tr{height:10px;background:var(--accent-soft);border-radius:3px;overflow:hidden}
 .bar .tr i{display:block;height:100%;background:var(--accent);border-radius:3px}
 .bar .c{font-size:13.5px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.trend{display:flex;align-items:flex-end;gap:3px;height:120px;margin:6px 0 4px;
+ border-bottom:1px solid var(--line)}
+.trend span{flex:1;height:100%;display:flex;align-items:flex-end}
+.trend i{display:block;width:100%;background:var(--alert);border-radius:2px 2px 0 0;min-height:0}
+.trendax{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);margin-bottom:22px}
+.sources{font-size:12px;line-height:1.5;color:var(--muted)}
+.sources a{color:inherit}
 .disclaimer{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--alert);
  border-radius:10px;padding:16px 18px;margin:0 0 20px}
 .disclaimer h2{font-size:16px;margin:0 0 7px;color:var(--ink)}
@@ -462,16 +523,17 @@ def pagina(idioma, datos, hoy):
     # media tarde la pagina dijera que hoy es manana y que hay tres casos.
     corte_24 = (dt.datetime.now(dt.timezone.utc)
                 - dt.timedelta(hours=24)).isoformat(timespec='seconds')
-    n_hoy = sum(1 for c in items if (c.get('seen') or '') >= corte_24)
+    n_hoy = sum(W(c) for c in items if (c.get('seen') or '') >= corte_24)
     if not n_hoy:                      # archivo sin sellos todavia
-        n_hoy = sum(1 for c in items if c['day'] == ultimo)
-    n_total = len(semana)
-    verificados = sum(1 for c in semana if c['status'] == 'verificado')
-    grupos = len({c['group'] for c in semana if c['group'] != '—'})
+        n_hoy = sum(W(c) for c in items if c['day'] == ultimo)
+    n_total = sum(W(c) for c in semana)
+    verificados = sum(W(c) for c in semana
+                      if c['status'] in ('verificado', 'confirmado', 'parcial'))
+    grupos = len({c['group'].lower() for c in semana if c['group'] != '—'})
     if idioma == 'es':
-        foco = sum(1 for c in semana if region(c['country'], 'es') in ('peru', 'latam'))
+        foco = sum(W(c) for c in semana if region(c['country'], 'es') in ('peru', 'latam'))
     else:
-        foco = sum(1 for c in semana if c['country'] == 'US')
+        foco = sum(W(c) for c in semana if c['country'] == 'US')
 
     # La fecha que se muestra es la de esta corrida. La del ultimo caso es de
     # otro huso y adelanta.
@@ -518,12 +580,14 @@ def pagina(idioma, datos, hoy):
         'description': t['desc'],
         'url': f'{DOM}{RUTAS[idioma]}',
         'inLanguage': idioma,
-        'license': 'https://creativecommons.org/licenses/by/4.0/',
         'dateModified': datos['generated'][:10],
         'isAccessibleForFree': True,
         'creator': {'@type': 'Person', 'name': 'Guillermo Carlin',
                     'url': 'https://www.am-i-exposed.com/'},
-        'isBasedOn': [f['url'] for f in datos['sources']],
+        'isBasedOn': sorted({u for n in (datos.get('all_sources') or [])
+                             for k, (u, _) in FUENTE_URL.items()
+                             if n.lower().startswith(k)}
+                            | {f['url'] for f in datos['sources']}),
         'variableMeasured': ['victim', 'country', 'industry', 'group', 'status'],
     }
     w('    <script type="application/ld+json">')
@@ -608,6 +672,70 @@ def pagina(idioma, datos, hoy):
     w(f'        <p class="fine">{E(t["ctaf"])}</p>')
     w('    </section>')
     w('')
+    # Las graficas van antes de las tablas, en el orden del Dashboard del
+    # Radar: tendencia, industria, pais y grupo.
+    def barras(cuenta, nombre):
+        tope = cuenta.most_common(1)[0][1]
+        w('    <div class="bars">')
+        for k, n in cuenta.most_common():
+            ancho = max(3, round(n / tope * 100))
+            w(f'        <div class="bar"><span class="lab">{E(nombre(k))}</span>'
+              f'<span class="tr"><i style="width:{ancho}%"></i></span>'
+              f'<span class="c">{n}</span></div>')
+        w('    </div>')
+
+    # Tendencia: un mes, una columna por dia. Mismo corte que el Dashboard.
+    corte_t = (dt.date.fromisoformat(ultimo)
+               - dt.timedelta(days=DIAS_TENDENCIA - 1))
+    por_dia = Counter()
+    for c in items:
+        if c['day'] >= corte_t.isoformat():
+            por_dia[c['day']] += W(c)
+    if por_dia:
+        tope = max(por_dia.values())
+        w(f'    <h2>{E(t["trendh"])}</h2>')
+        w(f'    <p>{E(t["trendp"].format(d=DIAS_TENDENCIA))}</p>')
+        w('    <div class="trend" role="img" aria-label="'
+          f'{E(t["trendh"])}">')
+        for k in range(DIAS_TENDENCIA):
+            d = (corte_t + dt.timedelta(days=k)).isoformat()
+            n = por_dia.get(d, 0)
+            alto = round(n / tope * 100) if n else 0
+            w(f'        <span title="{fecha(d, idioma)}: {n}"><i style="height:{alto}%"></i></span>')
+        w('    </div>')
+        w(f'    <div class="trendax"><span>{fecha(corte_t.isoformat(), idioma)}</span>'
+          f'<span>{fecha(ultimo, idioma)}</span></div>')
+
+    cuenta = Counter()
+    for c in semana:
+        if c['sector'] != 'otros':
+            cuenta[c['sector']] += W(c)
+    if cuenta:
+        w(f'    <h2>{E(t["sectorh"])}</h2>')
+        w(f'    <p>{E(t["sectorp"])}</p>')
+        barras(cuenta, lambda k: etiqueta(SECTORES, k, idioma))
+
+    cuenta = Counter()
+    for c in semana:
+        if c['country']:
+            cuenta[c['country']] += W(c)
+    if cuenta:
+        cuenta = Counter(dict(cuenta.most_common(TOPE_BARRAS)))
+        w(f'    <h2>{E(t["countryh"])}</h2>')
+        w(f'    <p>{E(t["countryp"].format(n=len(cuenta), d=DIAS_PAGINA))}</p>')
+        barras(cuenta, lambda k: pais(k, idioma))
+
+    cuenta, nombres = Counter(), {}
+    for c in semana:
+        if c['group'] != '—':
+            cuenta[c['group'].lower()] += W(c)
+            nombres.setdefault(c['group'].lower(), c['group'])
+    if cuenta:
+        cuenta = Counter(dict(cuenta.most_common(TOPE_BARRAS)))
+        w(f'    <h2>{E(t["grouph"])}</h2>')
+        w(f'    <p>{E(t["groupp"].format(n=len(cuenta), d=DIAS_PAGINA))}</p>')
+        barras(cuenta, lambda k: nombres[k])
+    w('')
     # Los paises salen del archivo entero, no de la semana. Una semana sin
     # victimas peruanas dejaba a Peru fuera del desplegable, y entonces el
     # lector no puede ni preguntar: no es lo mismo "no hay casos" que "no
@@ -663,9 +791,10 @@ def pagina(idioma, datos, hoy):
         filas = [c for c in semana if region(c['country'], idioma) == clave]
         if not filas:
             continue
+        nf = sum(W(c) for c in filas)
         w(f'    <section class="region" id="r-{clave}">')
-        w(f'        <h2>{E(titulo)} <span class="c">{len(filas)} '
-          f'{E(t["cases"] if len(filas) != 1 else t["case"])}</span></h2>')
+        w(f'        <h2>{E(titulo)} <span class="c">{nf} '
+          f'{E(t["cases"] if nf != 1 else t["case"])}</span></h2>')
         w('        <div class="tablewrap"><table>')
         # Seis columnas, no siete: la fuente vive dentro de la de estado,
         # porque el nombre de la victima ya es su enlace.
@@ -710,19 +839,6 @@ def pagina(idioma, datos, hoy):
               f'{E(t["more"])}</button></div>')
         w('    </section>')
     w('')
-    cuenta = Counter(c['sector'] for c in semana if c['sector'] != 'otros')
-    if cuenta:
-        tope = cuenta.most_common(1)[0][1]
-        w(f'    <h2>{E(t["sectorh"])}</h2>')
-        w(f'    <p>{E(t["sectorp"])}</p>')
-        w('    <div class="bars">')
-        for s, n in cuenta.most_common():
-            ancho = max(3, round(n / tope * 100))
-            w(f'        <div class="bar"><span class="lab">'
-              f'{E(etiqueta(SECTORES, s, idioma))}</span>'
-              f'<span class="tr"><i style="width:{ancho}%"></i></span>'
-              f'<span class="c">{n}</span></div>')
-        w('    </div>')
     w('')
     w(f'    <h2>{E(t["readh"])}</h2>')
     w(f'    <p>{t["read1"].format(c=n_total - verificados, t=n_total, v=verificados)}</p>')
@@ -744,12 +860,7 @@ def pagina(idioma, datos, hoy):
     w(f'            <p>{t["dis1"]}</p>')
     w(f'            <p>{t["dis2"]}</p>')
     w('        </div>')
-    fuentes = ' · '.join(
-        f'<a href="{E(f["url"])}" target="_blank" rel="noopener">{E(f["nombre"])}</a> '
-        f'{E(t["under"])} <a href="https://creativecommons.org/licenses/by/4.0/" '
-        f'target="_blank" rel="noopener license">{E(f["licencia"])}</a>'
-        for f in datos['sources'])
-    w(f'        <p class="sources">{E(t["src"])}: {fuentes}</p>')
+    w(f'        <p class="sources">{E(t["srcnote"])} {E(t["src"])}: {pie_fuentes(datos, t)}</p>')
     w('        <nav class="foot-links">')
     w(f'            <a href="{L["home"]}">{E(t["fcheck"])}</a>')
     w(f'            <a href="{L["cases"]}">{E(t["fcases"])}</a>')
@@ -778,8 +889,47 @@ def ahora_lima():
     return dt.datetime.now(LIMA)
 
 
+def cifras(datos, hoy, n_hoy, n_total):
+    """Las cifras que usa la Alerta Selentic, calculadas igual que la pagina:
+    las mismas filas, la misma semana, el mismo peso por fila."""
+    items = datos['items']
+    ultimo = max((c['day'] for c in items), default=hoy)
+    corte = (dt.date.fromisoformat(ultimo)
+             - dt.timedelta(days=DIAS_PAGINA - 1)).isoformat()
+    semana = [c for c in items if c['day'] >= corte]
+    lat = [c for c in semana if region(c['country'], 'es') in ('peru', 'latam')]
+    paises_lat = Counter()
+    for c in lat:
+        paises_lat[pais(c['country'], 'es')] += W(c)
+    sect = Counter()
+    for c in semana:
+        if c['sector'] != 'otros':
+            sect[etiqueta(SECTORES, c['sector'], 'es')] += W(c)
+    grupos = Counter()
+    for c in semana:
+        if c['group'] != '—':
+            grupos[c['group']] += W(c)
+    return {
+        'date': hoy, 'new': n_hoy, 'week': n_total,
+        'from': corte, 'to': ultimo,
+        'latam': sum(W(c) for c in lat),
+        'latam_countries': [[k, v] for k, v in paises_lat.most_common()],
+        'peru': [c['victim'] for c in semana if c['country'] == 'PE'],
+        'us': sum(W(c) for c in semana if c['country'] == 'US'),
+        'groups': len({c['group'].lower() for c in semana if c['group'] != '—'}),
+        'top_groups': [[k, v] for k, v in grupos.most_common(5)],
+        'top_sectors': [[k, v] for k, v in sect.most_common(5)],
+        'gov': sum(W(c) for c in semana if c['sector'] == 'gobierno'),
+        'sources': datos.get('all_sources') or [f['nombre'] for f in datos['sources']],
+    }
+
+
 def main():
-    datos = json.load(open(os.path.join(ROOT, 'data', 'radar.json'), encoding='utf-8'))
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--data', default=os.path.join(ROOT, 'data', 'radar.json'),
+                    help='registro combinado de tools/merge-radar.py')
+    datos = json.load(open(ap.parse_args().data, encoding='utf-8'))
     # Fecha de Lima, no la del runner (UTC): la corrida cae de madrugada en
     # Lima y despues de las 19:00 de Lima ya seria manana en UTC.
     hoy = ahora_lima().date().isoformat()
@@ -790,7 +940,7 @@ def main():
         os.makedirs(carpeta, exist_ok=True)
         open(os.path.join(carpeta, 'index.html'), 'w', encoding='utf-8').write(texto)
         print(f'{SALIDA[idioma]}/index.html: {len(texto) // 1024} KB')
-        resumen = {'date': hoy, 'new': n_hoy, 'week': n_total}
+        resumen = cifras(datos, hoy, n_hoy, n_total)
 
     # El script de los filtros, fuera de la pagina para que el CSP no tenga
     # que permitir scripts en linea. Uno solo para las dos paginas.

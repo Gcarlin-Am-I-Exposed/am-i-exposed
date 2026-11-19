@@ -12,3 +12,6 @@ __pycache__/
 
 # Internal code map (graphify) - keep local, never commit
 graphify-out/
+
+# Registro combinado del Radar: nunca al repo (es publico).
+data/combinado*.json
