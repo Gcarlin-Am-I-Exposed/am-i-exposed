@@ -1,11 +1,15 @@
 name: Daily Hack
 
-# Diario, 11:00 UTC = 06:00 en Lima. Peru no cambia de hora, asi que no hay
-# horario de verano que corra la cita media hora dos veces al ano.
+# Diario, 03:07 UTC = 22:07 en Lima del dia anterior. Peru no cambia de hora,
+# asi que no hay horario de verano que corra la cita dos veces al ano.
 #
-# El cron de GitHub es "best effort": en horas pico puede arrancar unos
-# minutos tarde. Para una pagina que dice "actualizado cada manana" eso da
-# igual, y a cambio no hace falta ningun servidor nuestro.
+# El cron de GitHub es "best effort" y en este repo arranca con 6 a 10 horas
+# de retraso (con 11:00 UTC la pagina salia entre las 12:00 y las 16:00 de
+# Lima). Programado a las 22:07, cae entre las 04:00 y las 08:00 de Lima y
+# queda listo antes de las 8:52, cuando la tarea del Radar de Ataques y la
+# Alerta Selentic leen esta pagina. El minuto 07 evita la cola de las horas en
+# punto. La fecha de la pagina es la de Lima (tools/build-daily-hack.py), asi
+# que una corrida despues de medianoche sale con la fecha del dia.
 #
 # Por que aqui y no en un cron de Vercel: la pagina es estatica y se genera de
 # data/radar.json. Una funcion de Vercel no puede escribir el repositorio ni
@@ -14,7 +18,7 @@ name: Daily Hack
 
 on:
   schedule:
-    - cron: '0 11 * * *'
+    - cron: '7 3 * * *'
   workflow_dispatch:
     inputs:
       dry_run:
