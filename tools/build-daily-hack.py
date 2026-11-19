@@ -57,7 +57,7 @@ T = {
   'tag': 'Hackeos del día',
   'barmsg': '<b>{n} víctimas nuevas</b> publicadas por grupos de ransomware',
   'barnone': 'Sin casos nuevos en la última corrida',
-  'barwhen': 'Actualizado <b>{d}</b> · 06:00 Lima',
+  'barwhen': 'Actualizado <b>{d}</b> · {h} Lima',
   'stale': ('Los datos tienen más de 48 horas: la actualización automática no '
             'corrió. Lo que ves es del {d}.'),
   'h1': 'Quién fue hackeado hoy',
@@ -133,7 +133,7 @@ T = {
   'tag': 'Daily Hack',
   'barmsg': '<b>{n} new victims</b> posted by ransomware groups',
   'barnone': 'No new cases in the last run',
-  'barwhen': 'Updated <b>{d}</b> · 06:00 Lima',
+  'barwhen': 'Updated <b>{d}</b> · {h} Lima',
   'stale': ('This data is more than 48 hours old: the automatic update did not '
             'run. What you see is from {d}.'),
   'h1': 'Who got hacked today',
@@ -553,7 +553,7 @@ def pagina(idioma, datos, hoy):
     w(f'        <span class="tag"><span class="dot"></span>{E(t["tag"])}</span>')
     msg = t['barmsg'].format(n=n_hoy) if n_hoy else t['barnone']
     w(f'        <span class="msg">{msg}</span>')
-    w(f'        <span class="when">{t["barwhen"].format(d=fecha(hoy, idioma))}</span>')
+    w(f'        <span class="when">{t["barwhen"].format(d=fecha(hoy, idioma), h=ahora_lima().strftime("%H:%M"))}</span>')
     w('    </div>')
     w('</div>')
     w('')
@@ -771,9 +771,18 @@ def pagina(idioma, datos, hoy):
     return '\n'.join(o) + '\n', n_hoy, ultimo, n_total
 
 
+LIMA = dt.timezone(dt.timedelta(hours=-5))  # Peru no tiene horario de verano
+
+
+def ahora_lima():
+    return dt.datetime.now(LIMA)
+
+
 def main():
     datos = json.load(open(os.path.join(ROOT, 'data', 'radar.json'), encoding='utf-8'))
-    hoy = dt.date.today().isoformat()
+    # Fecha de Lima, no la del runner (UTC): la corrida cae de madrugada en
+    # Lima y despues de las 19:00 de Lima ya seria manana en UTC.
+    hoy = ahora_lima().date().isoformat()
     resumen = None
     for idioma in ('en', 'es'):
         texto, n_hoy, ultimo, n_total = pagina(idioma, datos, hoy)
