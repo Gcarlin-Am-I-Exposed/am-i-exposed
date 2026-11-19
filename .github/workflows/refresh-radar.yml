@@ -11,6 +11,14 @@ name: Daily Hack
 # punto. La fecha de la pagina es la de Lima (tools/build-daily-hack.py), asi
 # que una corrida despues de medianoche sale con la fecha del dia.
 #
+# Desde el 19/11/2026 este trabajo YA NO genera las paginas del Daily Hack.
+# Solo baja y clasifica data/radar.json. La pagina la publica la tarea diaria
+# "Radar de Ataques + Alerta Selentic" (8:52 de Lima): une este archivo con el
+# Radar (tools/merge-radar.py), corre tools/build-daily-hack.py --data con el
+# resultado y confirma solo el HTML. Asi la web, el Dashboard del Radar y la
+# Alerta muestran las mismas cifras. Si esto volviera a generar las paginas,
+# las pisaria cada noche con la version de una sola fuente.
+#
 # Por que aqui y no en un cron de Vercel: la pagina es estatica y se genera de
 # data/radar.json. Una funcion de Vercel no puede escribir el repositorio ni
 # provocar el redespliegue. Esto descarga, clasifica, regenera, confirma, y el
@@ -114,30 +122,22 @@ jobs:
       - name: Bajar y clasificar
         run: python3 tools/refresh-radar.py ${{ inputs.dry_run && '--dry-run' || '' }}
 
-      - name: Generar las paginas y el sitemap
+      - name: Generar el sitemap
         if: ${{ !inputs.dry_run }}
-        run: |
-          python3 tools/build-daily-hack.py
-          python3 tools/build-sitemap.py
+        run: python3 tools/build-sitemap.py
 
       # Una fuente caida devuelve pocos casos sin romper el paso anterior.
       # Confirmar eso publicaria una pagina vacia que se despliega sola.
-      - name: Comprobar que la pagina no quedo vacia
+      - name: Comprobar que el archivo no quedo vacio
         if: ${{ !inputs.dry_run }}
         run: |
           python3 - <<'PY'
-          import json, sys, os
+          import json, sys
           d = json.load(open('data/radar.json', encoding='utf-8'))
           casos = d['items']
           print(f"{len(casos)} casos en el archivo")
           if len(casos) < 40:
               sys.exit(f'solo {len(casos)} casos: la fuente fallo, no se confirma')
-          for p in ('daily-hack/index.html', 'es/daily-hack/index.html'):
-              html = open(p, encoding='utf-8').read()
-              filas = html.count('<tr data-r')
-              print(f'{p}: {filas} filas, {len(html)//1024} KB')
-              if filas < 20:
-                  sys.exit(f'{p} salio con {filas} filas: no se confirma')
           PY
 
       - name: Confirmar y empujar
@@ -145,13 +145,12 @@ jobs:
         run: |
           git config user.name  'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add -A data/radar.json daily-hack es/daily-hack daily-hack.json sitemap.xml
+          git add -A data/radar.json sitemap.xml
           if git diff --cached --quiet; then
             echo 'sin casos nuevos hoy'
             exit 0
           fi
-          NUEVOS=$(python3 -c "import json;print(json.load(open('daily-hack.json'))['new'])")
-          git commit -m "Daily Hack: ${NUEVOS} new victims" \
+          git commit -m "Daily Hack: datos de RansomLook y HIBP" \
                      -m "Automated daily run of tools/refresh-radar.py."
           # Entre que empezo esta corrida y este push, main pudo moverse: el
           # trabajo semanal de los acuerdos empuja al mismo sitio, y una

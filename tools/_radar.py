@@ -38,12 +38,16 @@ SECTORES = {
 TIPOS = {
     'ransomware': ('Ransomware',            'Ransomware'),
     'filtracion': ('Filtración de datos',   'Data leak'),
+    'prensa':     ('Ataque reportado en prensa', 'Attack reported in the press'),
 }
 
 ESTADOS = {
     'reclamado':  ('Reclamado por el grupo',        'Claimed by the group'),
     'confirmado': ('Confirmado por la víctima',     'Confirmed by the victim'),
     'verificado': ('Brecha verificada por HIBP',    'Breach verified by HIBP'),
+    'parcial':    ('Confirmado parcialmente por la víctima', 'Partly confirmed by the victim'),
+    'investigacion': ('En investigación',           'Under investigation'),
+    'publicado':  ('Datos publicados por el grupo', 'Data published by the group'),
 }
 
 # La version corta, para la insignia de la tabla. La larga se parte en tres
@@ -53,6 +57,9 @@ ESTADOS_CORTO = {
     'reclamado':  ('Reclamado',   'Claimed'),
     'confirmado': ('Confirmado',  'Confirmed'),
     'verificado': ('Verificado',  'Verified'),
+    'parcial':    ('Confirmado',  'Confirmed'),
+    'investigacion': ('En investigación', 'Investigating'),
+    'publicado':  ('Publicado',   'Published'),
 }
 
 # Paises que aparecen de verdad en los sitios de filtracion. No es la ISO
