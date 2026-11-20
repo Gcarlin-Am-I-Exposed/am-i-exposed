@@ -1,0 +1,49 @@
+{
+"date": "2026-11-14",
+"generatedAt": "2026-11-19T14:50:00-05:00",
+"items": [
+{
+"victim": "Claro Dominicana",
+"country": "República Dominicana",
+"region": "Caribe",
+"sector": "Telecomunicaciones",
+"group": "—",
+"type": "Filtración de datos",
+"date": "2026-11-14",
+"status": "Confirmado por la víctima",
+"source": "DUPIN Noticias",
+"sourceUrl": "https://noticias.dupin.com.ar/2026/11/claro-dominicana-notifica-a-clientes-tras-filtracion-de-datos-y-refuerza-controles",
+"prospect": true,
+"prospectNote": "Operación relevante en Perú: diagnóstico de exposición y accesos de terceros.",
+"attackDate": "2026-09"
+},
+{
+"victim": "Hospital Clínico de la Universidad de Chile",
+"country": "Chile",
+"region": "Latinoamérica",
+"sector": "Salud",
+"group": "—",
+"type": "Ataque reportado en prensa",
+"date": "2026-11-14",
+"status": "Confirmado por la víctima",
+"source": "T13",
+"sourceUrl": "https://www.t13.cl/noticia/nacional/hospital-clinico-universidad-chile-denuncia-ciberataque-presenta-dificultades-p-16-11-2026",
+"prospect": true,
+"prospectNote": "Datos sensibles de pacientes: diagnóstico de exposición y SOC/SIEM gestionado."
+},
+{
+"victim": "Contabo",
+"country": "Alemania",
+"region": "Europa",
+"sector": "Tecnología",
+"group": "—",
+"type": "Ataque reportado en prensa",
+"date": "2026-11-14",
+"status": "Confirmado por la víctima",
+"source": "FrenchBreaches",
+"sourceUrl": "https://frenchbreaches.com/blog/contabo-victime-dune-cyberattaque-lhebergeur-allemand-confirme-une-intrusion-dans-ses-systemes",
+"prospect": false
+}
+],
+"export": "compacto: campos de fusión y Dashboard; casos de RansomLook ya presentes en data/radar.json no se repiten"
+}

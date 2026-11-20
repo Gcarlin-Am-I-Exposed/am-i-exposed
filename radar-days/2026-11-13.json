@@ -1,0 +1,74 @@
+{
+"date": "2026-11-13",
+"generatedAt": "2026-11-19T14:50:00-05:00",
+"items": [
+{
+"victim": "Smart Sampa (vigilancia de São Paulo)",
+"country": "Brasil",
+"region": "Latinoamérica",
+"sector": "Gobierno y Defensa",
+"group": "—",
+"type": "Filtración de datos",
+"date": "2026-11-13",
+"status": "En investigación",
+"source": "DUPIN Noticias",
+"sourceUrl": "https://noticias.dupin.com.ar/2026/11/investigan-en-brasil-filtracion-de-credenciales-del-sistema-de-vigilancia-smart-sampa",
+"prospect": true,
+"prospectNote": "Entidad pública: diagnóstico de exposición y SOC/SIEM gestionado; referencia para licitaciones."
+},
+{
+"victim": "Hotmart",
+"country": "Brasil",
+"region": "Latinoamérica",
+"sector": "Tecnología",
+"group": "—",
+"type": "Filtración de datos",
+"date": "2026-11-13",
+"status": "Confirmado por la víctima",
+"source": "DUPIN Noticias",
+"sourceUrl": "https://noticias.dupin.com.ar/2026/11/hotmart-notifica-a-usuarios-de-brasil-una-filtracion-de-datos-detectada-el-12-de-octubre",
+"prospect": true,
+"prospectNote": "Proveedor tecnológico: accesos de terceros, ITDR y pentesting con IA."
+},
+{
+"victim": "Buró laboral no revelado (México)",
+"country": "México",
+"region": "Latinoamérica",
+"sector": "Servicios Profesionales",
+"group": "Eternal",
+"type": "Filtración de datos",
+"date": "2026-11-13",
+"status": "Reclamado por el grupo",
+"source": "DUPIN Noticias",
+"sourceUrl": "https://noticias.dupin.com.ar/2026/11/presunto-hackeo-a-un-buro-laboral-en-mexico-el-grupo-eternal-afirma-haber-vendido-2-4",
+"prospect": false
+},
+{
+"victim": "CastleRAT (operación policial Europol)",
+"country": "Sin identificar",
+"region": "Sin identificar",
+"sector": "Otros / Sin identificar",
+"group": "—",
+"type": "Filtración (HIBP)",
+"date": "2026-11-13",
+"status": "Brecha verificada por HIBP",
+"source": "Have I Been Pwned",
+"sourceUrl": "https://haveibeenpwned.com/Breach/CastleRAT",
+"prospect": false
+},
+{
+"victim": "Univerzita Karlova",
+"country": "Chequia",
+"region": "Europa",
+"sector": "Educación",
+"group": "—",
+"type": "Ataque reportado en prensa",
+"date": "2026-11-13",
+"status": "Confirmado por la víctima",
+"source": "ransomware.live (cyberattacks)",
+"sourceUrl": "https://www.ceskenoviny.cz/zpravy/univerzita-karlova-resi-kyberneticky-utok-utocnik-ziskal-osobni-udaje/2901579",
+"prospect": false
+}
+],
+"export": "compacto: campos de fusión y Dashboard; casos de RansomLook ya presentes en data/radar.json no se repiten"
+}

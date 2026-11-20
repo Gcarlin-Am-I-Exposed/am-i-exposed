@@ -1,0 +1,49 @@
+{
+"date": "2026-10-11",
+"generatedAt": "2026-10-19T17:30:00-05:00",
+"items": [
+{
+"victim": "Interseguro",
+"country": "Perú",
+"region": "Perú",
+"sector": "Servicios Financieros y Seguros",
+"group": "Direwolf",
+"type": "Filtración de datos",
+"date": "2026-10-11",
+"status": "Confirmado parcialmente por la víctima",
+"source": "Infobae Perú",
+"sourceUrl": "https://www.infobae.com/peru/2026/10/13/interseguro-enfrenta-una-alerta-por-presunta-filtracion-de-datos-reportan-dni-informacion-financiera-y-archivos-internos-en-la-dark-web/?outputType=amp-type",
+"prospect": true,
+"prospectNote": "Sector regulado: SOC/SIEM gestionado, ITDR y diagnóstico de exposición."
+},
+{
+"victim": "The Foschini Group (división Reino Unido)",
+"country": "Sudáfrica",
+"region": "Medio Oriente y África",
+"sector": "Retail y Consumo",
+"group": "—",
+"type": "Ataque reportado en prensa",
+"date": "2026-10-11",
+"status": "Confirmado por la víctima",
+"source": "Euronext",
+"sourceUrl": "https://live.euronext.com/en/financial-news/south-african-fashion-retailer-foschini-groups-uk-arm-hit-cyber-incident",
+"prospect": false
+},
+{
+"victim": "TQC Tecnología Química Comercio S. A.",
+"country": "Perú",
+"region": "Perú",
+"sector": "Manufactura",
+"group": "DragonForce",
+"type": "Ransomware",
+"date": "2026-10-11",
+"status": "Histórico SOCRadar · fecha aproximada",
+"source": "SOCRadar (Perú)",
+"sourceUrl": "https://socradar.io/free-tools/ransomware-intelligence/countries/peru",
+"prospect": true,
+"prospectNote": "Diagnóstico de exposición, pentesting con IA y SOC/SIEM gestionado.",
+"historical": true
+}
+],
+"export": "compacto: campos de fusión y Dashboard; casos de RansomLook ya presentes en data/radar.json no se repiten"
+}

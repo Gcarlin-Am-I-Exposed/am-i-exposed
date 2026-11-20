@@ -1,0 +1,83 @@
+{
+"date": "2026-08-19",
+"generatedAt": "2026-10-19T17:40:00-05:00",
+"items": [
+{
+"victim": "Italtel Perú",
+"country": "Perú",
+"region": "Perú",
+"sector": "Tecnología",
+"group": "Everest",
+"type": "Ransomware",
+"date": "2026-08-19",
+"status": "Histórico SOCRadar · fecha aproximada",
+"source": "SOCRadar (Perú)",
+"sourceUrl": "https://socradar.io/free-tools/ransomware-intelligence/countries/peru",
+"prospect": true,
+"prospectNote": "Integrador TI: posible socio o cliente para SIEM gestionado.",
+"historical": true
+},
+{
+"victim": "Global Go",
+"country": "Perú",
+"region": "Perú",
+"sector": "Transporte y Logística",
+"group": "KillSec",
+"type": "Ransomware",
+"date": "2026-08-19",
+"status": "Histórico SOCRadar · fecha aproximada",
+"source": "SOCRadar (Perú)",
+"sourceUrl": "https://socradar.io/free-tools/ransomware-intelligence/countries/peru",
+"prospect": true,
+"prospectNote": "Diagnóstico de exposición, pentesting con IA y SOC/SIEM gestionado.",
+"historical": true
+},
+{
+"victim": "Lexacaucho",
+"country": "Perú",
+"region": "Perú",
+"sector": "Manufactura",
+"group": "The Gentlemen",
+"type": "Ransomware",
+"date": "2026-08-19",
+"status": "Histórico SOCRadar · fecha aproximada",
+"source": "SOCRadar (Perú)",
+"sourceUrl": "https://socradar.io/free-tools/ransomware-intelligence/countries/peru",
+"prospect": true,
+"prospectNote": "Diagnóstico de exposición, pentesting con IA y SOC/SIEM gestionado.",
+"historical": true
+},
+{
+"victim": "Movitecnica",
+"country": "Perú",
+"region": "Perú",
+"sector": "Manufactura",
+"group": "Qilin",
+"type": "Ransomware",
+"date": "2026-08-19",
+"status": "Histórico SOCRadar · fecha aproximada",
+"source": "SOCRadar (Perú)",
+"sourceUrl": "https://socradar.io/free-tools/ransomware-intelligence/countries/peru",
+"prospect": true,
+"prospectNote": "Diagnóstico de exposición, pentesting con IA y SOC/SIEM gestionado.",
+"historical": true
+},
+{
+"victim": "Grupo Diestra",
+"country": "Perú",
+"region": "Perú",
+"sector": "Manufactura",
+"group": "Qilin",
+"type": "Ransomware",
+"date": "2026-08-19",
+"status": "Histórico SOCRadar · fecha aproximada",
+"source": "SOCRadar (Perú)",
+"sourceUrl": "https://socradar.io/free-tools/ransomware-intelligence/countries/peru",
+"prospect": true,
+"prospectNote": "Diagnóstico de exposición, pentesting con IA y SOC/SIEM gestionado.",
+"historical": true
+}
+],
+"export": "compacto: campos de fusión y Dashboard; casos de RansomLook ya presentes en data/radar.json no se repiten",
+"historical": true
+}

@@ -1,0 +1,23 @@
+{
+"date": "2026-09-21",
+"generatedAt": "2026-10-19T17:40:00-05:00",
+"items": [
+{
+"victim": "Summa Gold",
+"country": "Perú",
+"region": "Perú",
+"sector": "Minería e Hidrocarburos",
+"group": "Anubis",
+"type": "Ransomware",
+"date": "2026-09-21",
+"status": "Histórico SOCRadar · fecha aproximada",
+"source": "SOCRadar (Perú)",
+"sourceUrl": "https://socradar.io/free-tools/ransomware-intelligence/countries/peru",
+"prospect": true,
+"prospectNote": "Diagnóstico de exposición, pentesting con IA y SOC/SIEM gestionado.",
+"historical": true
+}
+],
+"export": "compacto: campos de fusión y Dashboard; casos de RansomLook ya presentes en data/radar.json no se repiten",
+"historical": true
+}

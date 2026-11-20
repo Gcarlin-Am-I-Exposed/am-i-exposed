@@ -1,0 +1,59 @@
+{
+"date": "2026-10-12",
+"generatedAt": "2026-10-19T17:30:00-05:00",
+"items": [
+{
+"victim": "Ahold Delhaize (Mega Image y Profi)",
+"country": "Rumania",
+"region": "Europa",
+"sector": "Retail y Consumo",
+"group": "—",
+"type": "Ataque reportado en prensa",
+"date": "2026-10-12",
+"status": "Confirmado por la víctima",
+"source": "Economica",
+"sourceUrl": "https://www.economica.net/atac-cibernetic-la-ahold-delhaize-proprietarul-lanurilor-mega-image-si-profi_984656.html",
+"prospect": false
+},
+{
+"victim": "Intermarché y Super U (vía Danfoss)",
+"country": "Francia",
+"region": "Europa",
+"sector": "Retail y Consumo",
+"group": "—",
+"type": "Ataque reportado en prensa",
+"date": "2026-10-12",
+"status": "Confirmado por la víctima",
+"source": "La Provence",
+"sourceUrl": "https://www.laprovence.com/article/economie/23395706628068/cyberattaque-inedite-et-inacceptable-intermarche-et-super-u-vises-la-chaine-du-froid-brisee",
+"prospect": false
+},
+{
+"victim": "Femern Link Contractors",
+"country": "Dinamarca",
+"region": "Europa",
+"sector": "Construcción e Inmobiliaria",
+"group": "—",
+"type": "Ataque reportado en prensa",
+"date": "2026-10-12",
+"status": "Confirmado por la víctima",
+"source": "News Øresund",
+"sourceUrl": "https://www.newsoresund.se/fehmarn-balt-bygget-drabbat-av-cyberattack/",
+"prospect": false
+},
+{
+"victim": "Sharecare",
+"country": "EE.UU.",
+"region": "Norteamérica",
+"sector": "Salud",
+"group": "—",
+"type": "Filtración (HIBP)",
+"date": "2026-10-12",
+"status": "Brecha verificada por HIBP",
+"source": "Have I Been Pwned",
+"sourceUrl": "https://haveibeenpwned.com/pwnedWebsites",
+"prospect": false
+}
+],
+"export": "compacto: campos de fusión y Dashboard; casos de RansomLook ya presentes en data/radar.json no se repiten"
+}

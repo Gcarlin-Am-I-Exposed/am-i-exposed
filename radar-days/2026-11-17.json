@@ -1,0 +1,89 @@
+{
+"date": "2026-11-17",
+"generatedAt": "2026-11-19T14:50:00-05:00",
+"items": [
+{
+"victim": "DIRECTV Latin America (directvla.com)",
+"country": "Argentina",
+"region": "Latinoamérica",
+"sector": "Telecomunicaciones",
+"group": "The Gentlemen",
+"type": "Ransomware",
+"date": "2026-11-17",
+"status": "Reclamado por el grupo",
+"source": "DUPIN Noticias",
+"sourceUrl": "https://noticias.dupin.com.ar/2026/11/the-gentlemen-reivindica-un-ciberataque-con-ransomware-contra-directv-latin-america",
+"prospect": true,
+"prospectNote": "Operación relevante en Perú: diagnóstico de exposición y accesos de terceros."
+},
+{
+"victim": "Mutual Ser EPS",
+"country": "Colombia",
+"region": "Latinoamérica",
+"sector": "Salud",
+"group": "stealthy",
+"type": "Filtración de datos",
+"date": "2026-11-17",
+"status": "Reclamado por el grupo",
+"source": "DUPIN Noticias",
+"sourceUrl": "https://noticias.dupin.com.ar/2026/11/presunto-hackeo-a-mutual-ser-un-actor-de-amenazas-afirma-tener-datos-de-2-6-millones-de",
+"prospect": true,
+"prospectNote": "Datos sensibles de pacientes: diagnóstico de exposición y SOC/SIEM gestionado."
+},
+{
+"victim": "Consejo Nacional Electoral (CNE) de Honduras",
+"country": "Honduras",
+"region": "Latinoamérica",
+"sector": "Gobierno y Defensa",
+"group": "—",
+"type": "Filtración de datos",
+"date": "2026-11-17",
+"status": "Reclamado por el grupo",
+"source": "DUPIN Noticias",
+"sourceUrl": "https://noticias.dupin.com.ar/2026/11/presunto-hackeo-al-consejo-nacional-electoral-de-honduras-un-actor-afirma-haber",
+"prospect": true,
+"prospectNote": "Entidad pública: diagnóstico de exposición y SOC/SIEM gestionado; referencia para licitaciones."
+},
+{
+"victim": "Banco Carrefour",
+"country": "Brasil",
+"region": "Latinoamérica",
+"sector": "Servicios Financieros y Seguros",
+"group": "—",
+"type": "Filtración de datos",
+"date": "2026-11-17",
+"status": "En investigación",
+"source": "DUPIN Noticias",
+"sourceUrl": "https://noticias.dupin.com.ar/radar/2026-11-17",
+"prospect": true,
+"prospectNote": "Sector regulado: SOC/SIEM gestionado, ITDR y diagnóstico de exposición."
+},
+{
+"victim": "Superhosting",
+"country": "Bulgaria",
+"region": "Europa",
+"sector": "Tecnología",
+"group": "—",
+"type": "Ataque reportado en prensa",
+"date": "2026-11-17",
+"status": "Confirmado por la víctima",
+"source": "money.bg",
+"sourceUrl": "https://money.bg/internet-it/hakeri-udariha-superhosting.html",
+"prospect": false
+},
+{
+"victim": "Equinor",
+"country": "Noruega",
+"region": "Europa",
+"sector": "Minería e Hidrocarburos",
+"group": "—",
+"type": "Ataque reportado en prensa",
+"date": "2026-11-17",
+"status": "Confirmado por la víctima",
+"source": "DN",
+"sourceUrl": "https://www.dn.no/jus/equinor/equinor-bekrefter-pagaende-cyberangrep-rettet-mot-it-systemer/2-1-2075578",
+"prospect": false
+}
+],
+"export": "compacto: campos de fusión y Dashboard; casos de RansomLook ya presentes en data/radar.json no se repiten"
+}

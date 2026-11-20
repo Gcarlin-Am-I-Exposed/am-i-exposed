@@ -1,0 +1,59 @@
+{
+"date": "2026-10-13",
+"generatedAt": "2026-10-19T17:30:00-05:00",
+"items": [
+{
+"victim": "Colegio Oficial de Médicos de Tenerife",
+"country": "España",
+"region": "Europa",
+"sector": "Salud",
+"group": "—",
+"type": "Ataque reportado en prensa",
+"date": "2026-10-13",
+"status": "Confirmado por la víctima",
+"source": "Atlántico Hoy",
+"sourceUrl": "https://www.atlanticohoy.com/tenerife/colegio-medicos-tenerife-sufre-ciberataque-analiza-posible-robo-datos_1568532_102.html",
+"prospect": false
+},
+{
+"victim": "Ayuntamiento de Eichstätt",
+"country": "Alemania",
+"region": "Europa",
+"sector": "Gobierno y Defensa",
+"group": "—",
+"type": "Ataque reportado en prensa",
+"date": "2026-10-13",
+"status": "Confirmado por la víctima",
+"source": "Merkur",
+"sourceUrl": "https://www.merkur.de/bayern/cyberangriff-legt-stadtverwaltung-lahm-notfallhotline-eingerichtet-94538064.html",
+"prospect": false
+},
+{
+"victim": "Municipio de Tangerhütte",
+"country": "Alemania",
+"region": "Europa",
+"sector": "Gobierno y Defensa",
+"group": "—",
+"type": "Ataque reportado en prensa",
+"date": "2026-10-13",
+"status": "Confirmado por la víctima",
+"source": "MDR",
+"sourceUrl": "https://www.mdr.de/nachrichten/deutschland/politik/hacker-in-sachsen-anhalt-offenbar-erster,ki-angriff-100.html",
+"prospect": false
+},
+{
+"victim": "TNMSC (puerto de Le Havre)",
+"country": "Francia",
+"region": "Europa",
+"sector": "Transporte y Logística",
+"group": "—",
+"type": "Ataque reportado en prensa",
+"date": "2026-10-13",
+"status": "En investigación",
+"source": "Tendance Ouest",
+"sourceUrl": "https://www.tendanceouest.com/actualite-443369-le-havre-l-activite-portuaire-en-partie-a-l-arret-en-raison-d-un-probleme-informatique",
+"prospect": false
+}
+],
+"export": "compacto: campos de fusión y Dashboard; casos de RansomLook ya presentes en data/radar.json no se repiten"
+}

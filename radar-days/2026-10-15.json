@@ -1,0 +1,46 @@
+{
+"date": "2026-10-15",
+"generatedAt": "2026-10-19T17:30:00-05:00",
+"items": [
+{
+"victim": "Maruki Ikashikai",
+"country": "Japón",
+"region": "Asia-Pacífico",
+"sector": "Salud",
+"group": "—",
+"type": "Ataque reportado en prensa",
+"date": "2026-10-15",
+"status": "Confirmado por la víctima",
+"source": "Rocket Boys",
+"sourceUrl": "https://rocket-boys.co.jp/security-measures-lab/maruki-medical-cyberattack-order-shipping-suspension-20261015/",
+"prospect": false
+},
+{
+"victim": "Heber City",
+"country": "EE.UU.",
+"region": "Norteamérica",
+"sector": "Gobierno y Defensa",
+"group": "—",
+"type": "Ataque reportado en prensa",
+"date": "2026-10-15",
+"status": "Confirmado por la víctima",
+"source": "Dysruption Hub",
+"sourceUrl": "https://dysruptionhub.com/heber-city-utah-cyberattack/",
+"prospect": false
+},
+{
+"victim": "Mampf (proveedor de comedores escolares)",
+"country": "Alemania",
+"region": "Europa",
+"sector": "Tecnología",
+"group": "—",
+"type": "Ataque reportado en prensa",
+"date": "2026-10-15",
+"status": "Confirmado por la víctima",
+"source": "Freie Presse",
+"sourceUrl": "https://www.freiepresse.de/mittelsachsen/floeha/frankenberg-oederan-und-euba-cyberangriff-trifft-schulspeisung-artikel14447620",
+"prospect": false
+}
+],
+"export": "compacto: campos de fusión y Dashboard; casos de RansomLook ya presentes en data/radar.json no se repiten"
+}

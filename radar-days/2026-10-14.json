@@ -1,0 +1,59 @@
+{
+"date": "2026-10-14",
+"generatedAt": "2026-10-19T17:30:00-05:00",
+"items": [
+{
+"victim": "Colmobil",
+"country": "Israel",
+"region": "Medio Oriente y África",
+"sector": "Retail y Consumo",
+"group": "—",
+"type": "Ataque reportado en prensa",
+"date": "2026-10-14",
+"status": "Confirmado por la víctima",
+"source": "Calcalist",
+"sourceUrl": "https://www.calcalistech.com/ctechnews/article/skw40vpsfl",
+"prospect": false
+},
+{
+"victim": "Fukuda Hospital",
+"country": "Japón",
+"region": "Asia-Pacífico",
+"sector": "Salud",
+"group": "—",
+"type": "Ataque reportado en prensa",
+"date": "2026-10-14",
+"status": "En investigación",
+"source": "Yahoo Japón",
+"sourceUrl": "https://news.yahoo.co.jp/articles/c51ead2c0a07b2d6b21c680791456e087a11f543",
+"prospect": false
+},
+{
+"victim": "Southville Primary School",
+"country": "Reino Unido",
+"region": "Europa",
+"sector": "Educación",
+"group": "—",
+"type": "Ataque reportado en prensa",
+"date": "2026-10-14",
+"status": "Confirmado por la víctima",
+"source": "BBC",
+"sourceUrl": "https://www.bbc.com/news/articles/cwe8r2p98vleo",
+"prospect": false
+},
+{
+"victim": "Crunchbase",
+"country": "EE.UU.",
+"region": "Norteamérica",
+"sector": "Tecnología",
+"group": "—",
+"type": "Filtración (HIBP)",
+"date": "2026-10-14",
+"status": "Brecha verificada por HIBP",
+"source": "Have I Been Pwned",
+"sourceUrl": "https://haveibeenpwned.com/pwnedWebsites",
+"prospect": false
+}
+],
+"export": "compacto: campos de fusión y Dashboard; casos de RansomLook ya presentes en data/radar.json no se repiten"
+}
