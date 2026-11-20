@@ -155,7 +155,7 @@ function start(d){DATA=d;document.getElementById('app').style.display='';documen
     Object.entries(secs).sort((a,b)=>a[1].localeCompare(b[1])).map(([k,v])=>`<option value="${esc(k)}">${esc(v)}</option>`).join('');
   wire();render();}
 
-document.getElementById('foot').textContent='Generado 2026-11-20T11:58-05:00 (hora de Lima). Fuente: RansomLook y Have I Been Pwned.';
+document.getElementById('foot').textContent='Generado 2026-11-20T12:15-05:00 (hora de Lima). Fuente: RansomLook y Have I Been Pwned.';
 
 document.getElementById('go').onclick=async()=>{
   const pw=document.getElementById('pw').value;const err=document.getElementById('gerr');
