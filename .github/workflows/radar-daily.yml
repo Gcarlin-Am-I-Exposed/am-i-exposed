@@ -1,0 +1,249 @@
+name: Radar diario
+
+# UNA sola tarea diaria hace todo el lado publicador, con el token de GitHub
+# Actions (que nunca da 403). Reemplaza a refresh-radar.yml y a
+# publish-daily-hack.yml.
+#
+# Reparto de trabajo (desde el 20/11/2026):
+#   - La tarea cloud "Radar de Ataques" (claude.ai) investiga de noche las
+#     fuentes regionales (SOCRadar Peru, DUPIN, prensa, y las bloqueadas por
+#     Cloudflare via los extractores de la Mac) y hace UPSERT de sus day-docs
+#     curados a Supabase (tabla radar_days). NO toca git: por eso ya no hay 403.
+#   - ESTA tarea (Actions) baja RansomLook/HIBP, lee lo curado de Supabase,
+#     los fusiona, y publica: la pagina publica /daily-hack, el dashboard
+#     interno (snapshot en Supabase, servido con contrasena) y la tarjeta de
+#     LinkedIn, que ademas te llega por correo.
+#
+# El cron de GitHub arranca con 6-10 h de retraso en este repo; a las 03:07 UTC
+# cae en la manana de Lima. La tarea cloud corre antes (de noche), asi que lo
+# curado ya esta cuando esta tarea publica. Si la tarea cloud no corrio, se
+# publica igual con lo ultimo que haya + RansomLook/HIBP fresco (degrada, no se
+# congela).
+
+on:
+  schedule:
+    - cron: '7 3 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Baja, fusiona y arma sin subir, confirmar ni enviar'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  id-token: write
+
+concurrency:
+  group: radar-daily
+  cancel-in-progress: false
+
+env:
+  SUPABASE_URL: https://morosdhhoznicppmrqyr.supabase.co
+
+jobs:
+  radar:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependencias
+        run: |
+          pip install --quiet 'anthropic>=1.0' cairosvg
+          # cairosvg necesita las libs de cairo/pango para el texto de la tarjeta.
+          sudo apt-get update -qq && sudo apt-get install -y -qq libcairo2 libpango-1.0-0 libpangocairo-1.0-0 fonts-dejavu-core
+
+      # Identidad federada o ANTHROPIC_API_KEY, para clasificar pais/industria.
+      # Sin credencial no falla: los casos nuevos quedan sin clasificar.
+      - name: Preparar la credencial de Claude
+        env:
+          CLAVE: ${{ secrets.ANTHROPIC_API_KEY }}
+          REGLA: ${{ vars.ANTHROPIC_FEDERATION_RULE_ID }}
+          ORG: ${{ vars.ANTHROPIC_ORGANIZATION_ID }}
+          CUENTA: ${{ vars.ANTHROPIC_SERVICE_ACCOUNT_ID }}
+          ESPACIO: ${{ vars.ANTHROPIC_WORKSPACE_ID }}
+        run: |
+          if [ -n "$CLAVE" ]; then
+            echo "ANTHROPIC_API_KEY=$CLAVE" >> "$GITHUB_ENV"
+            echo 'credencial: clave estatica'
+            exit 0
+          fi
+          if [ -z "$REGLA" ] || [ -z "$ORG" ] || [ -z "$CUENTA" ]; then
+            echo 'sin credencial configurada: los casos nuevos quedaran sin clasificar'
+            exit 0
+          fi
+          curl -sS -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=https://api.anthropic.com" \
+            | jq -r .value > "$RUNNER_TEMP/anthropic-jwt"
+          if [ ! -s "$RUNNER_TEMP/anthropic-jwt" ] || \
+             [ "$(cat "$RUNNER_TEMP/anthropic-jwt")" = 'null' ]; then
+            echo 'GitHub no devolvio token de identidad; se sigue sin clasificar'
+            exit 0
+          fi
+          {
+            echo "ANTHROPIC_IDENTITY_TOKEN_FILE=$RUNNER_TEMP/anthropic-jwt"
+            echo "ANTHROPIC_FEDERATION_RULE_ID=$REGLA"
+            echo "ANTHROPIC_ORGANIZATION_ID=$ORG"
+            echo "ANTHROPIC_SERVICE_ACCOUNT_ID=$CUENTA"
+          } >> "$GITHUB_ENV"
+          if [ -n "$ESPACIO" ]; then
+            echo "ANTHROPIC_WORKSPACE_ID=$ESPACIO" >> "$GITHUB_ENV"
+          fi
+          echo 'credencial: identidad federada'
+
+      - name: Bajar y clasificar (RansomLook + HIBP)
+        run: python3 tools/refresh-radar.py
+
+      - name: Traer los casos curados del Radar (Supabase)
+        env:
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python3 tools/radar-pull-curated.py /tmp/radar-days
+
+      - name: Fusionar las dos fuentes
+        run: |
+          python3 -I tools/merge-radar.py \
+            --radar-days /tmp/radar-days \
+            --site data/radar.json \
+            --public /tmp/combinado.json \
+            --dashboard /tmp/incidentes.json
+
+      - name: Armar la pagina publica y el sitemap
+        run: |
+          python3 -I tools/build-daily-hack.py --data /tmp/combinado.json
+          python3 tools/build-sitemap.py
+
+      - name: Armar el dashboard interno (cascaron + vista)
+        run: |
+          python3 tools/build-dashboard.py \
+            --data /tmp/incidentes.json \
+            --out dashboard/index.html \
+            --view-json /tmp/dashboard-view.json
+
+      - name: Armar la tarjeta de LinkedIn + el texto de la Alerta
+        run: |
+          python3 tools/build-linkedin-card.py \
+            --data daily-hack.json \
+            --out-png linkedin/alerta.png \
+            --out-txt linkedin/alerta.txt
+
+      - name: Comprobar que la pagina no quedo vacia
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          d = json.load(open('/tmp/combinado.json', encoding='utf-8'))
+          casos = d['items']
+          print(f"{len(casos)} casos en la fusion")
+          if len(casos) < 40:
+              sys.exit(f'solo {len(casos)} casos: una fuente fallo, no se publica')
+          for p in ('daily-hack/index.html', 'es/daily-hack/index.html'):
+              html = open(p, encoding='utf-8').read()
+              filas = html.count('<tr data-r')
+              print(f'{p}: {filas} filas')
+              if filas < 20:
+                  sys.exit(f'{p} salio con {filas} filas: no se publica')
+          PY
+
+      - name: Subir el snapshot del dashboard a Supabase
+        if: ${{ !inputs.dry_run }}
+        env:
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python3 tools/radar-push-snapshot.py /tmp/dashboard-view.json
+
+      - name: Confirmar y empujar (solo el HTML y la tarjeta)
+        if: ${{ !inputs.dry_run }}
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          # Nunca /tmp/combinado.json ni /tmp/incidentes.json: son datos crudos de
+          # terceros y el repo es publico. Solo el HTML generado + la tarjeta.
+          git add -A data/radar.json sitemap.xml daily-hack es/daily-hack \
+            daily-hack.json daily-hack.js dashboard/index.html \
+            linkedin/alerta.png linkedin/alerta.txt
+          if git diff --cached --quiet; then
+            echo 'sin cambios en la pagina hoy'
+            exit 0
+          fi
+          NUEVOS=$(python3 -c "import json;print(json.load(open('daily-hack.json'))['new'])")
+          git commit -m "Radar diario: ${NUEVOS} new victims" \
+                     -m "Publicado por .github/workflows/radar-daily.yml (RansomLook/HIBP + Radar curado)."
+          git fetch origin main
+          if ! git rebase origin/main; then
+            git rebase --abort || true
+            echo '::error::main cambio y el reordenado choca; esta corrida no se empuja'
+            exit 1
+          fi
+          git push origin HEAD:main
+
+      - name: Avisar a IndexNow
+        if: ${{ !inputs.dry_run }}
+        run: python3 tools/ping-indexnow.py --daily-hack
+
+      # El correo diario para el dueno: la tarjeta de LinkedIn adjunta (PNG) y el
+      # texto de la Alerta. Autenticado con CRON_SECRET. Best-effort: un fallo
+      # aqui no invalida la publicacion.
+      - name: Enviarte el Radar por correo (tarjeta + texto)
+        if: ${{ !inputs.dry_run }}
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          if [ -z "${CRON_SECRET}" ]; then
+            echo '::warning::CRON_SECRET ausente; no se envia el correo del Radar'
+            exit 0
+          fi
+          jq -n \
+            --arg date "$(jq -r .date daily-hack.json)" \
+            --arg text "$(cat linkedin/alerta.txt)" \
+            --arg png "$(base64 -w0 linkedin/alerta.png)" \
+            '{date:$date, text:$text, pngBase64:$png}' > /tmp/mail.json
+          code=$(curl -sS -o /tmp/mail.out -w '%{http_code}' -X POST \
+            -H "Authorization: Bearer ${CRON_SECRET}" \
+            -H 'Content-Type: application/json' \
+            --data @/tmp/mail.json \
+            'https://www.am-i-exposed.com/api/monitor?op=daily-radar' || echo 000)
+          echo "daily-radar -> HTTP ${code}"; cat /tmp/mail.out || true; echo
+          if [ "${code}" != "200" ]; then
+            echo "::warning::el correo del Radar devolvio HTTP ${code}"
+          fi
+
+      - name: Disparar alertas de brechas
+        if: ${{ !inputs.dry_run }}
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          if [ -z "${CRON_SECRET}" ]; then
+            echo '::warning::CRON_SECRET ausente; no se dispara el job de brechas'
+            exit 0
+          fi
+          code=$(curl -sS -o /tmp/ba.out -w '%{http_code}' -X POST \
+            -H "Authorization: Bearer ${CRON_SECRET}" \
+            https://www.am-i-exposed.com/api/run-breach-alerts || echo 000)
+          echo "run-breach-alerts -> HTTP ${code}"; cat /tmp/ba.out || true; echo
+          if [ "${code}" != "200" ]; then
+            echo "::warning::run-breach-alerts devolvio HTTP ${code} (esperado 200)"
+          fi
+
+      - name: Disparar alertas de settlements
+        if: ${{ !inputs.dry_run }}
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          if [ -z "${CRON_SECRET}" ]; then
+            echo '::warning::CRON_SECRET ausente; no se dispara el job de settlements'
+            exit 0
+          fi
+          code=$(curl -sS -o /tmp/sa.out -w '%{http_code}' -X POST \
+            -H "Authorization: Bearer ${CRON_SECRET}" \
+            https://www.am-i-exposed.com/api/run-settlement-alerts || echo 000)
+          echo "run-settlement-alerts -> HTTP ${code}"; cat /tmp/sa.out || true; echo
+          if [ "${code}" != "200" ]; then
+            echo "::warning::run-settlement-alerts devolvio HTTP ${code} (esperado 200)"
+          fi

@@ -1,0 +1,33 @@
+Alerta Am I Exposed · 20/11/2026
+
+81 empresas y entidades aparecieron en sitios de filtración de ransomware en las últimas 24 horas.
+322 en los últimos 7 días.
+11 en Latinoamérica: México, Colombia, Argentina, Brasil, Ecuador.
+48 grupos criminales activos.
+Salud, el sector más golpeado de la semana: 52 casos.
+
+Lista completa por país, industria y grupo, actualizada cada día:
+am-i-exposed.com/es/daily-hack
+
+Fuentes: Have I Been Pwned, RansomLook
+
+========================================
+
+Alerta Am I Exposed · 20/11/2026
+
+322 empresas y entidades en siete días. Esa es la cuenta de los sitios de filtración de ransomware de la última semana.
+
+Un sitio de filtración es la página donde un grupo criminal publica a quién dice haber atacado, para presionar el pago. Aparecer ahí no prueba qué se llevaron: es el reclamo del grupo hasta que la víctima confirme.
+
+La semana en cifras:
+48 grupos activos.
+157 casos en Estados Unidos.
+11 en Latinoamérica: México 4, Colombia 2, Argentina 2, Brasil 2, Ecuador 1.
+6 entidades de gobierno.
+Los sectores más golpeados: Salud (52); Manufactura (51); Servicios Profesionales (37); Retail y Consumo (36); Servicios Financieros y Seguros (33).
+
+
+¿Qué es mejor para tu empresa: enterarte por tu propio monitoreo o por una lista como esta?
+
+Lista completa: am-i-exposed.com/es/daily-hack
+Fuentes: Have I Been Pwned, RansomLook

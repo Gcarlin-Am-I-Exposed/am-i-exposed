@@ -147,7 +147,7 @@ const COPY = {
     },
 };
 
-async function send({ to, subject, html }) {
+async function send({ to, subject, html, attachments }) {
     const apiKey = process.env.BREVO_API_KEY;
     const from = sender();
     if (!apiKey || !from || !to) {
@@ -166,6 +166,9 @@ async function send({ to, subject, html }) {
                 subject,
                 htmlContent: html,
                 textContent: stripHtml(html),
+                // Un adjunto (la tarjeta de LinkedIn) solo cuando el llamador lo pasa;
+                // Brevo acepta [{ content: base64, name }]. El resto de correos no lo usan.
+                ...(Array.isArray(attachments) && attachments.length ? { attachment: attachments } : {}),
             }),
             signal: AbortSignal.timeout(8000),
         });
@@ -239,6 +242,13 @@ export async function sendRefundNotice({ to, lang, amount, currency, paidAt }) {
 // layout.
 export async function sendOpsAlert({ to, subject, html }) {
     return send({ to, subject, html });
+}
+
+// El resumen diario del Radar de Ataques para el dueño: el texto de la Alerta
+// (corta y larga) y la tarjeta de LinkedIn como adjunto. El HTML y los adjuntos
+// los arma _daily-radar.mjs. Mismo contrato: false en fallo, nunca lanza.
+export async function sendDailyRadar({ to, subject, html, attachments }) {
+    return send({ to, subject, html, attachments });
 }
 
 // Settlement digest. The subject/html are built by _settlement-alerts.mjs
