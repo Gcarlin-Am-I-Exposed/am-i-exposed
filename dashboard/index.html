@@ -59,6 +59,7 @@ tr:hover td{background:var(--surface)}
   <h1 style="font-size:22px">Radar de Ataques</h1>
   <p class="muted">Panel interno · Am I Exposed</p>
   <input id="pw" type="password" placeholder="Contraseña" autocomplete="current-password">
+  <label style="display:flex;align-items:center;gap:8px;justify-content:center;margin:0 0 12px;color:var(--muted);font-size:13px;cursor:pointer"><input type="checkbox" id="showpw"> Mostrar contraseña</label>
   <button id="go">Entrar</button>
   <p class="err" id="gerr"></p>
 </div>
@@ -155,7 +156,7 @@ function start(d){DATA=d;document.getElementById('app').style.display='';documen
     Object.entries(secs).sort((a,b)=>a[1].localeCompare(b[1])).map(([k,v])=>`<option value="${esc(k)}">${esc(v)}</option>`).join('');
   wire();render();}
 
-document.getElementById('foot').textContent='Generado 2026-11-20T12:15-05:00 (hora de Lima). Fuente: RansomLook y Have I Been Pwned.';
+document.getElementById('foot').textContent='Generado 2026-11-20T12:54-05:00 (hora de Lima). Fuente: RansomLook y Have I Been Pwned.';
 
 document.getElementById('go').onclick=async()=>{
   const pw=document.getElementById('pw').value;const err=document.getElementById('gerr');
@@ -167,5 +168,6 @@ document.getElementById('go').onclick=async()=>{
   }catch(e){err.textContent='Error de red.';}
 };
 document.getElementById('pw').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('go').click();});
+document.getElementById('showpw').addEventListener('change',e=>{document.getElementById('pw').type=e.target.checked?'text':'password';});
 
 </script></body></html>
