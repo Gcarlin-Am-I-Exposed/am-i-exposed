@@ -212,6 +212,7 @@ SHELL = """
   <h1 style="font-size:22px">Radar de Ataques</h1>
   <p class="muted">Panel interno · Am I Exposed</p>
   <input id="pw" type="password" placeholder="Contraseña" autocomplete="current-password">
+  <label style="display:flex;align-items:center;gap:8px;justify-content:center;margin:0 0 12px;color:var(--muted);font-size:13px;cursor:pointer"><input type="checkbox" id="showpw"> Mostrar contraseña</label>
   <button id="go">Entrar</button>
   <p class="err" id="gerr"></p>
 </div>
@@ -251,6 +252,7 @@ document.getElementById('go').onclick=async()=>{
   }catch(e){err.textContent='Error de red.';}
 };
 document.getElementById('pw').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('go').click();});
+document.getElementById('showpw').addEventListener('change',e=>{document.getElementById('pw').type=e.target.checked?'text':'password';});
 """)
     gen = E(vista.get('generatedAt', ''))
     return f"""<!doctype html><html lang="es"><head>
