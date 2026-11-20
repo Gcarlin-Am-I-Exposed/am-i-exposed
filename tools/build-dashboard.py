@@ -138,7 +138,7 @@ tr:hover td{background:var(--surface)}
 JS_RENDER = """
 const fmt=n=>n.toLocaleString('es-PE');
 const WIN={'7':7,'30':30,'all':99999};
-let state={win:'30',q:'',sector:'',region:''};
+let state={win:'30',q:'',sector:'',region:'',year:'',quarter:''};
 let DATA=null;
 
 function inWindow(it,days){
@@ -148,7 +148,14 @@ function inWindow(it,days){
   const dl=new Date(last+'T00:00:00'), dd=new Date(d+'T00:00:00');
   return (dl-dd)/86400000 < days;
 }
+function inCal(it){
+  if(state.year && (!it.day||it.day.slice(0,4)!==state.year)) return false;
+  if(state.quarter){ if(!it.day) return false; var m=parseInt(it.day.slice(5,7),10); if(Math.ceil(m/3)!==parseInt(state.quarter,10)) return false; }
+  return true;
+}
 function pool(){
+  // Si hay año o trimestre elegido, manda el filtro de calendario (ignora la ventana).
+  if(state.year||state.quarter) return DATA.items.filter(inCal);
   return DATA.items.filter(it=>inWindow(it,WIN[state.win]));
 }
 function render(){
@@ -165,7 +172,9 @@ function render(){
   // subtitle
   const grp={};xs.forEach(x=>{if(x.group&&x.group!=='—')grp[x.group]=(grp[x.group]||0)+1});
   const top=Object.entries(grp).sort((a,b)=>b[1]-a[1])[0];
-  const win=state.win==='all'?'todo el periodo':`los últimos ${state.win} días`;
+  const win=(state.year||state.quarter)
+    ? ((state.quarter?'Q'+state.quarter+' ':'')+(state.year||'todos los años'))
+    : (state.win==='all'?'todo el periodo':`los últimos ${state.win} días`);
   document.getElementById('sub').innerHTML=
     `<b>${fmt(xs.length)}</b> víctimas publicadas en ${win} (al ${fmtDay(DATA.lastDay)}); `+
     `<b>${fmt(xs.filter(x=>x.latam).length)}</b> en Perú, LatAm o el Caribe.`+
@@ -198,12 +207,18 @@ function wire(){
   document.getElementById('q').oninput=e=>{state.q=e.target.value;render();};
   document.getElementById('fs').onchange=e=>{state.sector=e.target.value;render();};
   document.getElementById('fr').onchange=e=>{state.region=e.target.value;render();};
+  document.getElementById('fy').onchange=e=>{state.year=e.target.value;render();};
+  document.getElementById('fq').onchange=e=>{state.quarter=e.target.value;render();};
 }
 function start(d){DATA=d;document.getElementById('app').style.display='';document.getElementById('gate').style.display='none';
   // sector options
   const secs={};DATA.items.forEach(x=>{if(x.sectorKey)secs[x.sectorKey]=x.sector});
   document.getElementById('fs').innerHTML='<option value="">Todos los sectores</option>'+
     Object.entries(secs).sort((a,b)=>a[1].localeCompare(b[1])).map(([k,v])=>`<option value="${esc(k)}">${esc(v)}</option>`).join('');
+  // años disponibles (para el filtro por año/trimestre)
+  var years={};DATA.items.forEach(x=>{if(x.day)years[x.day.slice(0,4)]=1});
+  document.getElementById('fy').innerHTML='<option value="">Todos los años</option>'+
+    Object.keys(years).sort().reverse().map(y=>`<option value="${esc(y)}">${esc(y)}</option>`).join('');
   wire();render();}
 """
 
@@ -229,6 +244,8 @@ SHELL = """
     <input id="q" placeholder="Buscar víctima, grupo, país...">
     <select id="fr"><option value="">Toda región</option><option value="peru">Perú</option><option value="latam">Perú/LatAm/Caribe</option><option value="resto">Resto del mundo</option></select>
     <select id="fs"></select>
+    <select id="fy"></select>
+    <select id="fq"><option value="">Todo el año</option><option value="1">Q1</option><option value="2">Q2</option><option value="3">Q3</option><option value="4">Q4</option></select>
     <span class="count" id="count"></span>
   </div>
   <table><thead><tr><th>Víctima</th><th>País</th><th>Sector</th><th>Grupo</th><th>Estado</th><th>Fecha</th></tr></thead>
