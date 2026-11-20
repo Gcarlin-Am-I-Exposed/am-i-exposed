@@ -192,7 +192,7 @@ function render(){
   document.querySelectorAll('[data-win]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.win===state.win));
 }
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-function fmtDay(d){if(!d)return '';const[y,m,da]=d.split('-');return `${da}/${m}/${y}`;}
+function fmtDay(d){if(!/^\\d{4}-\\d{2}-\\d{2}$/.test(String(d==null?'':d)))return '';const[y,m,da]=d.split('-');return `${da}/${m}/${y}`;}
 function wire(){
   document.querySelectorAll('[data-win]').forEach(b=>b.onclick=()=>{state.win=b.dataset.win;render();});
   document.getElementById('q').oninput=e=>{state.q=e.target.value;render();};
