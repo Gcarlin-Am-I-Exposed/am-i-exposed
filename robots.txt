@@ -6,6 +6,8 @@
 
 User-agent: *
 Allow: /
+# Panel interno con contrasena (ademas lleva meta noindex); no es para indexar.
+Disallow: /dashboard
 
 # Search and answer engines that train or cite.
 User-agent: GPTBot

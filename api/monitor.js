@@ -4,6 +4,8 @@ import { handleUnsubscribe } from './_unsubscribe.mjs';
 import { handleRun } from './_run-alerts.mjs';
 import { handleRunSettlements } from './_run-settlements.mjs';
 import { handleConfig } from './_alerts-config.mjs';
+import { handleDashboard } from './_dashboard.mjs';
+import { handleDailyRadar } from './_daily-radar.mjs';
 
 // maxDuration covers the op=run breach job (paced HIBP lookups); harmless to the fast ops.
 export const config = { maxDuration: 60 };
@@ -17,6 +19,8 @@ export default async function handler(req, res) {
         case 'run':         return handleRun(req, res);
         case 'run-settlements': return handleRunSettlements(req, res);
         case 'config':      return handleConfig(req, res);
+        case 'dashboard':   return handleDashboard(req, res);
+        case 'daily-radar': return handleDailyRadar(req, res);
         default:            return res.status(404).json({ error: 'Not found' });
     }
 }
