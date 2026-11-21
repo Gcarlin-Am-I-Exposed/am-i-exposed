@@ -36,6 +36,10 @@ Actions lee de Supabase + RansomLook/HIBP y publica todo con su token.
 1. Recrear la tarea cloud una última vez con el prompt nuevo que te doy. ESTA VEZ NO necesita
    el repo (cero git), solo el conector de Supabase apuntando al proyecto morosdhhoznicppmrqyr.
    Por eso el 403 desaparece de raíz.
+   Estado 21/11/2026: NO se había hecho. La rutina seguía con el prompt viejo (push a
+   radar-data, 403) y radar_days quedó vacía en el primer ciclo. Rutina reprogramada a
+   00:30 Lima y cron de radar-daily.yml movido a 06:30 UTC (después de la rutina).
+   Falta pegar el prompt nuevo (sección B = UPSERT a radar_days, con relleno de 40 días).
 2. Poner `DASHBOARD_PASSWORD` en Vercel (tú eliges la clave).
 3. OK para crear 2 tablas en tu Supabase morosdhhoznicppmrqyr.
 

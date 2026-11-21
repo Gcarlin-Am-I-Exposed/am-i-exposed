@@ -14,15 +14,17 @@ name: Radar diario
 #     interno (snapshot en Supabase, servido con contrasena) y la tarjeta de
 #     LinkedIn, que ademas te llega por correo.
 #
-# El cron de GitHub arranca con 6-10 h de retraso en este repo; a las 03:07 UTC
-# cae en la manana de Lima. La tarea cloud corre antes (de noche), asi que lo
-# curado ya esta cuando esta tarea publica. Si la tarea cloud no corrio, se
-# publica igual con lo ultimo que haya + RansomLook/HIBP fresco (degrada, no se
-# congela).
+# Orden: la tarea cloud corre a las 00:30 Lima (05:30 UTC) y tarda ~5 min. Este
+# cron va a las 06:30 UTC (01:30 Lima), una hora despues, para que lo curado ya
+# este en Supabase aun si GitHub lo lanza a tiempo. En este repo el cron suele
+# arrancar 6-10 h tarde, asi que en la practica cae en la manana de Lima. Antes
+# estaba a las 03:07 UTC, que en papel era ANTES de la tarea cloud. Si la tarea
+# cloud no corrio, se publica igual con lo ultimo que haya + RansomLook/HIBP
+# fresco (degrada, no se congela).
 
 on:
   schedule:
-    - cron: '7 3 * * *'
+    - cron: '30 6 * * *'
   workflow_dispatch:
     inputs:
       dry_run:
