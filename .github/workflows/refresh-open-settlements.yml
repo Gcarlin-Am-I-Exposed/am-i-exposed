@@ -73,8 +73,16 @@ jobs:
           python3 tools/build-settlement-pages.py
           python3 tools/build-sitemap.py
 
-      # Una fuente caida devuelve cero sin fallar el paso anterior. Confirmar
-      # eso borraria el catalogo y se desplegaria solo.
+      # Dos chequeos, distinta severidad a proposito (cambio del 22/11/2026):
+      #   - El catalogo grande (>=800 casos) sigue siendo corte DURO: una fuente
+      #     caida devuelve cero sin fallar el paso anterior, y confirmarlo
+      #     borraria el catalogo y se desplegaria solo.
+      #   - El cruce HIBP (settlements.json) ya NO bloquea por ser bajo. Un cruce
+      #     escaso suele ser dato legitimo: la tanda de acuerdos abiertos es de
+      #     empresas que HIBP no lista, asi que de 19 abiertos a veces solo 4
+      #     cruzan. El piso de 10 estaba congelando el push de los abiertos y de
+      #     la FTC desde octubre. Ahora solo un cruce VACIO (0) corta, porque eso
+      #     si vaciaria la tarjeta del sitio; 1-9 avisa y se publica igual.
       - name: Comprobar que el catalogo no se vacio
         if: ${{ !inputs.dry_run }}
         run: |
@@ -87,8 +95,12 @@ jobs:
           print(f'casos {len(casos)}, abiertos {len(abiertos)}, tarjeta {len(tarjeta)}')
           if len(casos) < 800:
               sys.exit(f'solo {len(casos)} casos: la fuente fallo, no se confirma')
+          if len(tarjeta) == 0:
+              sys.exit('cruce vacio (0 filas): el cruce fallo, no se confirma')
           if len(tarjeta) < 10:
-              sys.exit(f'solo {len(tarjeta)} filas cruzadas: el cruce fallo, no se confirma')
+              print(f'::warning::cruce bajo ({len(tarjeta)} filas cruzadas por '
+                    'HIBP); se publica igual porque los abiertos y la FTC si '
+                    'pudieron cambiar')
           PY
 
       - name: Confirmar y empujar
