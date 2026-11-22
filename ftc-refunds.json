@@ -1,8 +1,35 @@
 {
   "source": "https://www.ftc.gov/enforcement/refunds",
-  "generated": "2026-11-05T20:56:38Z",
+  "generated": "2026-11-22T17:29:35Z",
   "count": 79,
   "programs": [
+    {
+      "name": "FloatMe Refunds",
+      "url": "https://www.ftc.gov/enforcement/refunds/floatme-refunds",
+      "products": null,
+      "date": "November 2026",
+      "date_sort": "2026-11",
+      "administrator": "Rust Consulting, Inc.",
+      "phone": "1-833-637-4344"
+    },
+    {
+      "name": "Pure Green Coffee Refunds",
+      "url": "https://www.ftc.gov/enforcement/refunds/pure-green-coffee-refunds",
+      "products": null,
+      "date": "November 2026",
+      "date_sort": "2026-11",
+      "administrator": "Epiq Systems",
+      "phone": "1-877-839-1696"
+    },
+    {
+      "name": "Consumer Health Benefits Association Refunds",
+      "url": "https://www.ftc.gov/enforcement/refunds/consumer-health-benefits-association-refunds",
+      "products": null,
+      "date": "November 2026",
+      "date_sort": "2026-11",
+      "administrator": "Epiq Systems",
+      "phone": "1-888-350-1458"
+    },
     {
       "name": "Ed Napleton Automotive Group Refunds",
       "url": "https://www.ftc.gov/enforcement/refunds/ed-napleton-automotive-group-refunds",
@@ -40,6 +67,15 @@
       "phone": "1-833-472-1990"
     },
     {
+      "name": "Cleo AI Refunds",
+      "url": "https://www.ftc.gov/enforcement/refunds/cleo-ai-refunds",
+      "products": null,
+      "date": "October 2026",
+      "date_sort": "2026-10",
+      "administrator": "Rust Consulting, Inc.",
+      "phone": "1-877-788-4958"
+    },
+    {
       "name": "Avast Settlement",
       "url": "https://www.ftc.gov/enforcement/refunds/avast-settlement",
       "products": null,
@@ -56,15 +92,6 @@
       "date_sort": "2026-10",
       "administrator": "Analytics Consulting, LLC",
       "phone": "1-855-744-1802"
-    },
-    {
-      "name": "Cleo AI Refunds",
-      "url": "https://www.ftc.gov/enforcement/refunds/cleo-ai-refunds",
-      "products": null,
-      "date": "October 2026",
-      "date_sort": "2026-10",
-      "administrator": "Rust Consulting, Inc.",
-      "phone": "1-877-788-4958"
     },
     {
       "name": "GOAT Refunds",
@@ -175,15 +202,6 @@
       "phone": "1-833-889-7400"
     },
     {
-      "name": "Golden Home Services Settlement",
-      "url": "https://www.ftc.gov/enforcement/refunds/golden-home-services-settlement",
-      "products": null,
-      "date": "June 2026",
-      "date_sort": "2026-06",
-      "administrator": "JND Legal Administration",
-      "phone": "1-833-674-0067"
-    },
-    {
       "name": "Yellowstone Capital Refunds",
       "url": "https://www.ftc.gov/enforcement/refunds/yellowstone-capital-refunds",
       "products": null,
@@ -191,6 +209,15 @@
       "date_sort": "2026-06",
       "administrator": "Epiq Systems",
       "phone": "1-855-604-1861"
+    },
+    {
+      "name": "Golden Home Services Settlement",
+      "url": "https://www.ftc.gov/enforcement/refunds/golden-home-services-settlement",
+      "products": null,
+      "date": "June 2026",
+      "date_sort": "2026-06",
+      "administrator": "JND Legal Administration",
+      "phone": "1-833-674-0067"
     },
     {
       "name": "Brigit Refunds",
@@ -211,15 +238,6 @@
       "phone": "1-844-804-3922"
     },
     {
-      "name": "National Landmark Refunds",
-      "url": "https://www.ftc.gov/enforcement/refunds/national-landmark-refunds",
-      "products": null,
-      "date": "May 2026",
-      "date_sort": "2026-05",
-      "administrator": "Simpluris",
-      "phone": "1-844-804-5497"
-    },
-    {
       "name": "Coulter Motor Company Settlement",
       "url": "https://www.ftc.gov/enforcement/refunds/coulter-motor-company-settlement",
       "products": null,
@@ -227,6 +245,15 @@
       "date_sort": "2026-05",
       "administrator": "JND Legal Administration",
       "phone": "1-866-910-0913"
+    },
+    {
+      "name": "National Landmark Refunds",
+      "url": "https://www.ftc.gov/enforcement/refunds/national-landmark-refunds",
+      "products": null,
+      "date": "May 2026",
+      "date_sort": "2026-05",
+      "administrator": "Simpluris",
+      "phone": "1-844-804-5497"
     },
     {
       "name": "SuperGoodDeals.com Refunds",
@@ -263,15 +290,6 @@
       "date_sort": "2026-04",
       "administrator": "Rust Consulting, Inc.",
       "phone": "1-800-351-7161"
-    },
-    {
-      "name": "FloatMe Refunds",
-      "url": "https://www.ftc.gov/enforcement/refunds/floatme-refunds",
-      "products": null,
-      "date": "April 2026",
-      "date_sort": "2026-04",
-      "administrator": "Rust Consulting, Inc.",
-      "phone": "1-833-637-4344"
     },
     {
       "name": "Hey Dude Refunds",
@@ -389,15 +407,6 @@
       "date_sort": "2025-08",
       "administrator": "Epiq Systems",
       "phone": "1-888-998-8059"
-    },
-    {
-      "name": "Consumer Health Benefits Association Refunds",
-      "url": "https://www.ftc.gov/enforcement/refunds/consumer-health-benefits-association-refunds",
-      "products": null,
-      "date": "August 2025",
-      "date_sort": "2025-08",
-      "administrator": "Epiq Systems",
-      "phone": "1-888-350-1458"
     },
     {
       "name": "BCO Consulting Refunds",
@@ -553,15 +562,6 @@
       "phone": "1-855-678-0558"
     },
     {
-      "name": "Pure Green Coffee Refunds",
-      "url": "https://www.ftc.gov/enforcement/refunds/pure-green-coffee-refunds",
-      "products": null,
-      "date": "March 2025",
-      "date_sort": "2025-03",
-      "administrator": "Epiq Systems",
-      "phone": "1-877-839-1696"
-    },
-    {
       "name": "T-Mobile Refunds",
       "url": "https://www.ftc.gov/enforcement/refunds/t-mobile-refunds",
       "products": null,
@@ -598,15 +598,6 @@
       "phone": "1-833-472-1996"
     },
     {
-      "name": "Warrior Trading Refunds",
-      "url": "https://www.ftc.gov/enforcement/refunds/warrior-trading-refunds",
-      "products": null,
-      "date": "November 2024",
-      "date_sort": "2024-11",
-      "administrator": "JND Legal Administration",
-      "phone": "1-844-633-0694"
-    },
-    {
       "name": "MyScore Refunds",
       "url": "https://www.ftc.gov/enforcement/refunds/myscore-refunds",
       "products": null,
@@ -614,6 +605,15 @@
       "date_sort": "2024-11",
       "administrator": "Simpluris",
       "phone": "1-844-804-5464"
+    },
+    {
+      "name": "Warrior Trading Refunds",
+      "url": "https://www.ftc.gov/enforcement/refunds/warrior-trading-refunds",
+      "products": null,
+      "date": "November 2024",
+      "date_sort": "2024-11",
+      "administrator": "JND Legal Administration",
+      "phone": "1-844-633-0694"
     },
     {
       "name": "Rejuvica Refunds",
