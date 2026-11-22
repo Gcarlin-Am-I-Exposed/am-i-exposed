@@ -1,10 +1,10 @@
-Alerta Am I Exposed · 21/11/2026
+Alerta Am I Exposed · 22/11/2026
 
-63 empresas y entidades aparecieron en sitios de filtración de ransomware en las últimas 24 horas.
-351 en los últimos 7 días.
-13 en Latinoamérica: Colombia, México, Argentina, Brasil, Ecuador.
-50 grupos criminales activos.
-Salud, el sector más golpeado de la semana: 54 casos.
+21 empresas y entidades aparecieron en sitios de filtración de ransomware en las últimas 24 horas.
+352 en los últimos 7 días.
+16 en Latinoamérica: Colombia, México, Argentina, Brasil, República Dominicana, Venezuela, Ecuador.
+51 grupos criminales activos.
+Manufactura, el sector más golpeado de la semana: 54 casos.
 
 Lista completa por país, industria y grupo, actualizada cada día:
 am-i-exposed.com/es/daily-hack
@@ -13,18 +13,18 @@ Fuentes: Have I Been Pwned, RansomLook
 
 ========================================
 
-Alerta Am I Exposed · 21/11/2026
+Alerta Am I Exposed · 22/11/2026
 
-351 empresas y entidades en siete días. Esa es la cuenta de los sitios de filtración de ransomware de la última semana.
+352 empresas y entidades en siete días. Esa es la cuenta de los sitios de filtración de ransomware de la última semana.
 
 Un sitio de filtración es la página donde un grupo criminal publica a quién dice haber atacado, para presionar el pago. Aparecer ahí no prueba qué se llevaron: es el reclamo del grupo hasta que la víctima confirme.
 
 La semana en cifras:
-50 grupos activos.
-162 casos en Estados Unidos.
-13 en Latinoamérica: Colombia 4, México 4, Argentina 2, Brasil 2, Ecuador 1.
-7 entidades de gobierno.
-Los sectores más golpeados: Salud (54); Manufactura (54); Servicios Profesionales (41); Retail y Consumo (38); Servicios Financieros y Seguros (34).
+51 grupos activos.
+159 casos en Estados Unidos.
+16 en Latinoamérica: Colombia 4, México 4, Argentina 3, Brasil 2, República Dominicana 1, Venezuela 1, Ecuador 1.
+9 entidades de gobierno.
+Los sectores más golpeados: Manufactura (54); Salud (54); Servicios Profesionales (41); Servicios Financieros y Seguros (34); Retail y Consumo (34).
 
 
 ¿Qué es mejor para tu empresa: enterarte por tu propio monitoreo o por una lista como esta?
