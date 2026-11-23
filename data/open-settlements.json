@@ -1,5 +1,41 @@
 [
  {
+  "empresa": "La Jolla Group",
+  "nombre": "La Jolla Group - Data Breach Class Action Settlement",
+  "cubre": "This settlement covers employees whose personal information was exposed in the November 2023 La Jolla Group data breach.",
+  "plazo": "2026-11-23",
+  "plazo_texto": "11/23/26",
+  "pago_por_persona": 2000,
+  "pago_texto": "$45 - $2,000",
+  "fondo": null,
+  "comprobante": "no",
+  "sitio_reclamo": "ljgdatasettlement.com",
+  "caso": "N/A",
+  "filtracion": true,
+  "fuente": "classaction.org",
+  "visto": "2026-11-23",
+  "visto_primero": "2026-11-23",
+  "en_tribunal": false
+ },
+ {
+  "empresa": "Laboratory Corporation of America",
+  "nombre": "Laboratory Corporation of America - Data Privacy Class Action Settlement",
+  "cubre": "You may be included in this settlement if you live in California or Pennsylvania and conducted search queries on Labcorp’s website between May 1, 2021 and April 1, 2026.",
+  "plazo": "2026-11-23",
+  "plazo_texto": "11/23/26",
+  "pago_por_persona": null,
+  "pago_texto": "N/A",
+  "fondo": null,
+  "comprobante": "n/a",
+  "sitio_reclamo": "www.laboratorycorporationwebsitesettlement.com",
+  "caso": "N/A",
+  "filtracion": true,
+  "fuente": "classaction.org",
+  "visto": "2026-11-23",
+  "visto_primero": "2026-11-23",
+  "en_tribunal": false
+ },
+ {
   "empresa": "Mullinax Ford of Central Florida Inc.",
   "nombre": "Mullinax Ford of Central Florida Data Breach Settlement",
   "cubre": "Individuals whose personal information was compromised in the Mullinax Ford data breach.",
@@ -15,6 +51,43 @@
   "fuente": "claimdepot",
   "visto": "2026-11-22",
   "visto_primero": "2026-11-22",
+  "en_tribunal": false,
+  "revisto": false
+ },
+ {
+  "empresa": "Laboratory Services Cooperative",
+  "nombre": "Laboratory Services Cooperative - Data Breach Class Action Settlement",
+  "cubre": "You may be included in this settlement if your personal information was exposed in the Laboratory Services Cooperative data breach discovered in October 2024.",
+  "plazo": "2026-11-24",
+  "plazo_texto": "11/24/26",
+  "pago_por_persona": 6000,
+  "pago_texto": "Up to $6,000",
+  "fondo": null,
+  "comprobante": "no",
+  "sitio_reclamo": "www.lscdatasettlement.com",
+  "caso": "N/A",
+  "filtracion": true,
+  "fuente": "classaction.org",
+  "visto": "2026-11-23",
+  "visto_primero": "2026-11-23",
+  "en_tribunal": false
+ },
+ {
+  "empresa": "Fujifilm Diosynth Biotechnologies",
+  "nombre": "Fujifilm Diosynth Biotechnologies - Data Breach Class Action Settlement",
+  "cubre": "You may be included in this settlement if your private information was accessed in the Fujifilm Diosynth Biotechnologies data breach that took place in the summer of 2025.",
+  "plazo": "2026-11-25",
+  "plazo_texto": "11/25/26",
+  "pago_por_persona": 2500,
+  "pago_texto": "$50 - $2,500",
+  "fondo": null,
+  "comprobante": "no",
+  "sitio_reclamo": "flbdatasettlement.com",
+  "caso": "N/A",
+  "filtracion": true,
+  "fuente": "classaction.org",
+  "visto": "2026-11-23",
+  "visto_primero": "2026-11-23",
   "en_tribunal": false
  },
  {
@@ -39,19 +112,37 @@
  {
   "empresa": "Ben E. Keith Co.",
   "nombre": "Ben E. Keith Co. $1.2M Data Breach Class Action Settlement",
-  "cubre": "Individuals who received a notice from Ben E. Keith Co. about the 2023 data breach may be eligible to claim up to $5,400.",
+  "cubre": "Individuals who received a notice from Ben E. Keith Co. about the 2023 data breach may be eligible to claim up to $5,400 from a class action settlement.",
   "plazo": "2026-11-26",
   "plazo_texto": "November 26, 2026",
   "pago_por_persona": 5400,
-  "pago_texto": "Up to $5,400",
-  "fondo": 1170000,
+  "pago_texto": "up to $5,400",
+  "fondo": 1200000,
   "comprobante": "yes",
   "sitio_reclamo": "www.bekdataincidentsettlement.com/submit-claim",
-  "caso": "Ben E. Keith Data Security Incident",
+  "caso": "Ben E. Keith Data Security Incident Case",
   "filtracion": true,
   "fuente": "claimdepot",
-  "visto": "2026-11-22",
+  "visto": "2026-11-23",
   "visto_primero": "2026-11-22",
+  "en_tribunal": false
+ },
+ {
+  "empresa": "CPAP Medical Supplies and Services",
+  "nombre": "CPAP Medical Supplies and Services - Data Breach Class Action Settlement",
+  "cubre": "If your private information was compromised in the December 2024 CPAP Medical Supplies and Services data breach, you may be included in this settlement.",
+  "plazo": "2026-11-26",
+  "plazo_texto": "11/26/26",
+  "pago_por_persona": 5000,
+  "pago_texto": "Up to $5,000",
+  "fondo": null,
+  "comprobante": "no",
+  "sitio_reclamo": "cpapdataincidentsettlement.com",
+  "caso": "N/A",
+  "filtracion": true,
+  "fuente": "classaction.org",
+  "visto": "2026-11-23",
+  "visto_primero": "2026-11-23",
   "en_tribunal": false
  },
  {
@@ -70,7 +161,8 @@
   "fuente": "claimdepot",
   "visto": "2026-11-22",
   "visto_primero": "2026-11-22",
-  "en_tribunal": false
+  "en_tribunal": false,
+  "revisto": false
  },
  {
   "empresa": "ITS Technologies & Logistics LLC",
@@ -94,18 +186,18 @@
  {
   "empresa": "Google LLC",
   "nombre": "Google $350 Million Android Cellular Data Settlement",
-  "cubre": "California residents who used a Google-licensed Android phone with a cellular plan since Aug. 9, 2016, may be eligible to receive compensation.",
+  "cubre": "California residents who used a Google-licensed Android phone with a cellular plan since Aug. 9, 2016.",
   "plazo": "2026-12-05",
   "plazo_texto": "December 5, 2026",
   "pago_por_persona": 100,
-  "pago_texto": "Up to $100",
+  "pago_texto": "$100",
   "fondo": 350000000,
   "comprobante": "no",
   "sitio_reclamo": "www.cellulardataclassaction.com/payment-election",
-  "caso": "Google LLC class action lawsuit",
+  "caso": "Android Cellular Data Class Action",
   "filtracion": true,
   "fuente": "claimdepot",
-  "visto": "2026-11-22",
+  "visto": "2026-11-23",
   "visto_primero": "2026-11-22",
   "en_tribunal": false
  },
@@ -148,20 +240,20 @@
   "revisto": false
  },
  {
-  "empresa": "Benworth Capital Partners LLC",
+  "empresa": "Benworth Capital Partners",
   "nombre": "Benworth Capital data breach class action settlement",
-  "cubre": "Individuals who received a data breach notice from Benworth Capital Partners.",
+  "cubre": "Individuals who received a data breach notice from Benworth Capital Partners informing them that their information may have been compromised in a data breach on May 18, 2025.",
   "plazo": "2026-12-21",
   "plazo_texto": "Dec. 21, 2026",
   "pago_por_persona": 5000,
   "pago_texto": "$5,000 for documented losses or $50 for undocumented losses",
   "fondo": null,
   "comprobante": "yes",
-  "sitio_reclamo": "benworthdatasettlement.com/form/claim",
+  "sitio_reclamo": "benworthdatasettlement.com",
   "caso": "Arreola, et al. v. Benworth Capital Partners LLC, Case No. CACE-26-012064, in the Circuit Court of the 17th Judicial Circuit in and for Broward County, Florida",
   "filtracion": true,
   "fuente": "topclassactions",
-  "visto": "2026-11-22",
+  "visto": "2026-11-23",
   "visto_primero": "2026-11-22",
   "en_tribunal": false
  },
@@ -219,7 +311,8 @@
   "fuente": "claimdepot",
   "visto": "2026-11-22",
   "visto_primero": "2026-11-22",
-  "en_tribunal": false
+  "en_tribunal": false,
+  "revisto": false
  },
  {
   "empresa": "Kelly & Associates Insurance Group",
@@ -254,8 +347,26 @@
   "caso": "In re: Park Dental Data Breach Litigation, Case No. 27-cv-24-12335, in the Minnesota District Court for Hennepin County",
   "filtracion": true,
   "fuente": "topclassactions",
-  "visto": "2026-11-22",
+  "visto": "2026-11-23",
   "visto_primero": "2026-11-22",
+  "en_tribunal": false
+ },
+ {
+  "empresa": "Sirva Relocation LLC",
+  "nombre": "$260,000 Sirva Relocation data breach class action settlement",
+  "cubre": "Anyone whose private information was potentially compromised in the September 2023 data breach.",
+  "plazo": "2026-12-29",
+  "plazo_texto": "Dec. 29, 2026",
+  "pago_por_persona": 4000,
+  "pago_texto": "up to $4,000",
+  "fondo": 260000,
+  "comprobante": "yes",
+  "sitio_reclamo": "sirvadatasettlement.com",
+  "caso": "Rivera, et al. v. Sirva Relocation LLC, Case No. 2026CH000111, in the Circuit Court of Illinois, DuPage County",
+  "filtracion": true,
+  "fuente": "topclassactions",
+  "visto": "2026-11-23",
+  "visto_primero": "2026-11-23",
   "en_tribunal": false
  },
  {
@@ -299,18 +410,18 @@
  {
   "empresa": "Lake Regional Health System",
   "nombre": "Lake Regional Health System Patient Privacy Settlement",
-  "cubre": "Patients who logged into the patient portal between Jan. 9, 2020, and Nov. 2, 2022, are covered.",
+  "cubre": "Patients at Lake Regional Health System who used the patient portal between 2020 and 2022 may qualify to claim $25.",
   "plazo": "2027-01-08",
   "plazo_texto": "January 8, 2027",
   "pago_por_persona": 25,
-  "pago_texto": "$25 plus Privacy Shield Pro",
+  "pago_texto": "$25",
   "fondo": null,
   "comprobante": "yes",
   "sitio_reclamo": "www.lakeregionalsettlement.com/doe-v-lake-claim-form-login/",
   "caso": "Doe v. Lake Regional Health System",
   "filtracion": true,
   "fuente": "claimdepot",
-  "visto": "2026-11-22",
+  "visto": "2026-11-23",
   "visto_primero": "2026-11-22",
   "en_tribunal": false
  },
@@ -349,7 +460,8 @@
   "fuente": "claimdepot",
   "visto": "2026-11-22",
   "visto_primero": "2026-11-22",
-  "en_tribunal": false
+  "en_tribunal": false,
+  "revisto": false
  },
  {
   "empresa": "Renkim Corp.",
@@ -367,23 +479,24 @@
   "fuente": "claimdepot",
   "visto": "2026-11-22",
   "visto_primero": "2026-11-22",
-  "en_tribunal": false
+  "en_tribunal": false,
+  "revisto": false
  },
  {
   "empresa": "Retina Consultants of America",
   "nombre": "Retina Consultants of America $4.5M class action settlement",
-  "cubre": "Individuals who accessed Retina Consultants of America websites or patient portals between 2019 and 2025 may qualify.",
+  "cubre": "Individuals who used a Retina Consultants of America website or patient portal between 2019 and 2025 may qualify for a payment.",
   "plazo": "2027-01-15",
   "plazo_texto": "January 15, 2027",
   "pago_por_persona": null,
   "pago_texto": "Pro rata payment plus credit monitoring",
   "fondo": 4500000,
-  "comprobante": "no",
+  "comprobante": "yes",
   "sitio_reclamo": "retinasettlement.pnclassaction.com",
   "caso": "Goodman v. RCA",
   "filtracion": true,
   "fuente": "claimdepot",
-  "visto": "2026-11-22",
+  "visto": "2026-11-23",
   "visto_primero": "2026-11-22",
   "en_tribunal": false
  },
@@ -403,7 +516,8 @@
   "fuente": "claimdepot",
   "visto": "2026-11-22",
   "visto_primero": "2026-11-22",
-  "en_tribunal": false
+  "en_tribunal": false,
+  "revisto": false
  },
  {
   "empresa": "Cornwell Quality Tools",
@@ -421,6 +535,25 @@
   "fuente": "claimdepot",
   "visto": "2026-11-22",
   "visto_primero": "2026-11-22",
+  "en_tribunal": false,
+  "revisto": false
+ },
+ {
+  "empresa": "Dental Intelligence",
+  "nombre": "$5.75M Dental Intelligence data sharing class action settlement",
+  "cubre": "Individuals in the United States who used the LocalMed portal between March 2022 and June 2025.",
+  "plazo": "2027-01-25",
+  "plazo_texto": "01/25/2027",
+  "pago_por_persona": null,
+  "pago_texto": "TBD",
+  "fondo": 5750000,
+  "comprobante": "no",
+  "sitio_reclamo": "disettlement.com/form/claim",
+  "caso": "Grivetti, et al. v. Dental Intelligence Inc., Case No. 1:25-cv-02464, in the U.S. District Court for the Northern District of Illinois",
+  "filtracion": true,
+  "fuente": "topclassactions",
+  "visto": "2026-11-23",
+  "visto_primero": "2026-11-23",
   "en_tribunal": false
  },
  {
@@ -439,12 +572,13 @@
   "fuente": "claimdepot",
   "visto": "2026-11-22",
   "visto_primero": "2026-11-22",
-  "en_tribunal": false
+  "en_tribunal": false,
+  "revisto": false
  },
  {
   "empresa": "Pediatric Otolaryngology Head & Neck Surgery Associates",
   "nombre": "Pediatric Otolaryngology Head & Neck Data Breach Settlement",
-  "cubre": "Individuals whose private information was compromised in a data breach.",
+  "cubre": "Individuals whose private information was compromised in a data breach in February 2025.",
   "plazo": "2027-01-27",
   "plazo_texto": "January 27, 2027",
   "pago_por_persona": 2000,
@@ -455,7 +589,7 @@
   "caso": "Pediatric Otolaryngology Head & Neck Data Breach Settlement",
   "filtracion": true,
   "fuente": "claimdepot",
-  "visto": "2026-11-22",
+  "visto": "2026-11-23",
   "visto_primero": "2026-11-22",
   "en_tribunal": false
  },
@@ -475,7 +609,8 @@
   "fuente": "claimdepot",
   "visto": "2026-11-22",
   "visto_primero": "2026-11-22",
-  "en_tribunal": false
+  "en_tribunal": false,
+  "revisto": false
  },
  {
   "empresa": "Lakeside Pediatric & Adolescent Medicine",
@@ -493,7 +628,8 @@
   "fuente": "claimdepot",
   "visto": "2026-11-22",
   "visto_primero": "2026-11-22",
-  "en_tribunal": false
+  "en_tribunal": false,
+  "revisto": false
  },
  {
   "empresa": "Johnson Controls Inc.",
@@ -511,7 +647,8 @@
   "fuente": "claimdepot",
   "visto": "2026-11-22",
   "visto_primero": "2026-11-22",
-  "en_tribunal": false
+  "en_tribunal": false,
+  "revisto": false
  },
  {
   "empresa": "Tenet Healthcare",
@@ -529,7 +666,8 @@
   "fuente": "topclassactions",
   "visto": "2026-11-22",
   "visto_primero": "2026-11-22",
-  "en_tribunal": false
+  "en_tribunal": false,
+  "revisto": false
  },
  {
   "empresa": "Hyundai, Kia",
@@ -552,19 +690,19 @@
  },
  {
   "empresa": "23andMe",
-  "nombre": "23andMe Holdings Co. (Chrome Holding Co.)",
-  "cubre": "Covered individuals include those who provided personal information to 23andMe.",
+  "nombre": "23andMe Holding Co.",
+  "cubre": "Covers participants affected by privacy violations.",
   "plazo": null,
-  "plazo_texto": "Deadline to file claims has not been specified",
+  "plazo_texto": "TBD",
   "pago_por_persona": null,
-  "pago_texto": "unknown",
+  "pago_texto": "Unknown",
   "fondo": null,
-  "comprobante": "no",
+  "comprobante": "unknown",
   "sitio_reclamo": "restructuring.ra.kroll.com/23andme",
-  "caso": "N/A",
+  "caso": "23andMe Holding Co.",
   "filtracion": true,
   "fuente": "kroll",
-  "visto": "2026-11-22",
+  "visto": "2026-11-23",
   "visto_primero": "2026-10-13",
   "en_tribunal": false
  },
@@ -584,25 +722,25 @@
   "fuente": "kroll",
   "visto": "2026-11-22",
   "visto_primero": "2026-10-13",
-  "en_tribunal": false
+  "en_tribunal": false,
+  "revisto": false
  },
  {
   "empresa": "Equifax",
   "nombre": "Equifax Data Breach Settlement",
-  "cubre": "Consumers affected by the data breach.",
+  "cubre": "Consumers affected by the Equifax data breach.",
   "plazo": null,
   "plazo_texto": "November 2024",
   "pago_por_persona": null,
   "pago_texto": "unknown",
   "fondo": null,
-  "comprobante": "unknown",
+  "comprobante": "yes",
   "sitio_reclamo": "www.ftc.gov/enforcement/refunds/equifax-data-breach-settlement",
-  "caso": "Equifax Data Breach Settlement",
+  "caso": "Equifax Data Breach",
   "filtracion": true,
   "fuente": "ftc",
-  "visto": "2026-10-19",
+  "visto": "2026-11-23",
   "visto_primero": "2026-10-13",
-  "en_tribunal": false,
-  "revisto": false
+  "en_tribunal": false
  }
 ]

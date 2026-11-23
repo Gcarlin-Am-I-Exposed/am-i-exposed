@@ -1,8 +1,17 @@
 {
   "source": "https://www.ftc.gov/enforcement/refunds",
-  "generated": "2026-11-22T17:29:35Z",
+  "generated": "2026-11-23T21:01:37Z",
   "count": 79,
   "programs": [
+    {
+      "name": "Herbalife Refunds",
+      "url": "https://www.ftc.gov/enforcement/refunds/herbalife-refunds",
+      "products": null,
+      "date": "November 2026",
+      "date_sort": "2026-11",
+      "administrator": "Analytics Consulting, LLC",
+      "phone": "1-844-322-8146"
+    },
     {
       "name": "FloatMe Refunds",
       "url": "https://www.ftc.gov/enforcement/refunds/floatme-refunds",
@@ -67,6 +76,15 @@
       "phone": "1-833-472-1990"
     },
     {
+      "name": "AdvoCare Refunds",
+      "url": "https://www.ftc.gov/enforcement/refunds/advocare-refunds",
+      "products": null,
+      "date": "October 2026",
+      "date_sort": "2026-10",
+      "administrator": "Analytics Consulting, LLC",
+      "phone": "1-855-744-1802"
+    },
+    {
       "name": "Cleo AI Refunds",
       "url": "https://www.ftc.gov/enforcement/refunds/cleo-ai-refunds",
       "products": null,
@@ -83,15 +101,6 @@
       "date_sort": "2026-10",
       "administrator": "Rust Consulting, Inc.",
       "phone": "1-866-290-0165"
-    },
-    {
-      "name": "AdvoCare Refunds",
-      "url": "https://www.ftc.gov/enforcement/refunds/advocare-refunds",
-      "products": null,
-      "date": "October 2026",
-      "date_sort": "2026-10",
-      "administrator": "Analytics Consulting, LLC",
-      "phone": "1-855-744-1802"
     },
     {
       "name": "GOAT Refunds",
@@ -166,15 +175,6 @@
       "phone": "1-833-711-0291"
     },
     {
-      "name": "The Sales Mentor Refunds",
-      "url": "https://www.ftc.gov/enforcement/refunds/sales-mentor-refunds",
-      "products": null,
-      "date": "July 2026",
-      "date_sort": "2026-07",
-      "administrator": "JND Legal Administration",
-      "phone": "1-877-930-1733"
-    },
-    {
       "name": "Handy Technologies Settlement",
       "url": "https://www.ftc.gov/enforcement/refunds/handy-technologies-settlement",
       "products": null,
@@ -182,6 +182,15 @@
       "date_sort": "2026-07",
       "administrator": "Simpluris",
       "phone": "1-833-647-9063"
+    },
+    {
+      "name": "The Sales Mentor Refunds",
+      "url": "https://www.ftc.gov/enforcement/refunds/sales-mentor-refunds",
+      "products": null,
+      "date": "July 2026",
+      "date_sort": "2026-07",
+      "administrator": "JND Legal Administration",
+      "phone": "1-877-930-1733"
     },
     {
       "name": "Zurixx Refunds",
@@ -274,15 +283,6 @@
       "phone": "1-877-753-2846"
     },
     {
-      "name": "Credit Karma Settlement",
-      "url": "https://www.ftc.gov/enforcement/refunds/credit-karma-settlement",
-      "products": null,
-      "date": "April 2026",
-      "date_sort": "2026-04",
-      "administrator": "JND Legal Administration",
-      "phone": "1-866-848-0871"
-    },
-    {
       "name": "NGL Settlement",
       "url": "https://www.ftc.gov/enforcement/refunds/ngl-settlement",
       "products": null,
@@ -290,6 +290,15 @@
       "date_sort": "2026-04",
       "administrator": "Rust Consulting, Inc.",
       "phone": "1-800-351-7161"
+    },
+    {
+      "name": "Credit Karma Settlement",
+      "url": "https://www.ftc.gov/enforcement/refunds/credit-karma-settlement",
+      "products": null,
+      "date": "April 2026",
+      "date_sort": "2026-04",
+      "administrator": "JND Legal Administration",
+      "phone": "1-866-848-0871"
     },
     {
       "name": "Hey Dude Refunds",
@@ -463,15 +472,6 @@
       "phone": "1-833-296-0723"
     },
     {
-      "name": "Care.com Refunds",
-      "url": "https://www.ftc.gov/enforcement/refunds/carecom-refunds",
-      "products": null,
-      "date": "June 2025",
-      "date_sort": "2025-06",
-      "administrator": "Epiq Systems",
-      "phone": "1-888-867-6151"
-    },
-    {
       "name": "Nexway Refunds",
       "url": "https://www.ftc.gov/enforcement/refunds/nexway-refunds",
       "products": null,
@@ -479,6 +479,15 @@
       "date_sort": "2025-06",
       "administrator": "JND Legal Administration",
       "phone": "1-888-995-0315"
+    },
+    {
+      "name": "Care.com Refunds",
+      "url": "https://www.ftc.gov/enforcement/refunds/carecom-refunds",
+      "products": null,
+      "date": "June 2025",
+      "date_sort": "2025-06",
+      "administrator": "Epiq Systems",
+      "phone": "1-888-867-6151"
     },
     {
       "name": "John Beck Amazing Profits Refunds",
@@ -686,15 +695,6 @@
       "date_sort": "2023-09",
       "administrator": null,
       "phone": "1-844-319-2124"
-    },
-    {
-      "name": "Herbalife Refunds",
-      "url": "https://www.ftc.gov/enforcement/refunds/herbalife-refunds",
-      "products": null,
-      "date": "March 2023",
-      "date_sort": "2023-03",
-      "administrator": "Analytics Consulting, LLC",
-      "phone": "1-844-322-8146"
     },
     {
       "name": "AMG Services Refunds",
