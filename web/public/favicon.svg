@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Am I Exposed?">
+  <defs>
+    <linearGradient id="coin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F2CD75"/>
+      <stop offset=".55" stop-color="#D59E5D"/>
+      <stop offset="1" stop-color="#8A5A1C"/>
+    </linearGradient>
+    <linearGradient id="sweep" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#F2CD75" stop-opacity="0"/>
+      <stop offset="1" stop-color="#F2CD75" stop-opacity=".55"/>
+    </linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="48" fill="url(#coin)"/>
+  <circle cx="50" cy="50" r="40" fill="#0B0907"/>
+  <g fill="none" stroke="#C09A6D" stroke-width="1.6" stroke-opacity=".55">
+    <circle cx="50" cy="50" r="29"/>
+    <circle cx="50" cy="50" r="18"/>
+  </g>
+  <path d="M50 50 L50 13 A37 37 0 0 1 82.04 31.5 Z" fill="url(#sweep)"/>
+  <line x1="50" y1="50" x2="82.04" y2="31.5" stroke="#F2CD75" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="64.1" cy="33.2" r="5" fill="#F2CD75"/>
+  <circle cx="50" cy="50" r="3.6" fill="#F2CD75"/>
+</svg>

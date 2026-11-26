@@ -27,6 +27,9 @@ const jsonldStr = jsonld ? JSON.stringify(jsonld).replace(/</g, '\\u003c') : nul
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <meta name="theme-color" content="#FBF8F2" />
     <link rel="canonical" href={canonical} />
     {hreflang && (
       <>
