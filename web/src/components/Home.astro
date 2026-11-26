@@ -1,5 +1,6 @@
 ---
 import type { HomeStrings, Lang } from '../i18n/strings';
+import ScanForm from './ScanForm.astro';
 
 interface Props {
   t: HomeStrings;
@@ -43,11 +44,7 @@ const homeHref = lang === 'es' ? '/es/' : '/';
   <div class="wrap">
     <h1>{t.heroTitle}</h1>
     <p class="sub">{t.heroSub}</p>
-    <form class="searchbar" method="post" action="/api/check-email">
-      <input type="email" name="email" placeholder={t.emailPh} aria-label={t.heroCta} required />
-      <button class="btn primary" type="submit">{t.heroCta}</button>
-    </form>
-    <p class="trust">{t.heroTrust}</p>
+    <ScanForm t={t} lang={lang} />
   </div>
 </section>
 

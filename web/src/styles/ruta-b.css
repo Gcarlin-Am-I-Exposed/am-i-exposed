@@ -73,7 +73,7 @@ a { color: var(--link); }
 .sum .amt { font-family: var(--font-display); font-weight: 600; font-size: 46px; line-height: 1.05; letter-spacing: -.02em; margin: 8px 0 0; font-variant-numeric: tabular-nums; }
 .sum .amtlab { font: 500 12px var(--font-num); color: var(--gold-deep); letter-spacing: .02em; display: block; margin-top: 2px; text-transform: uppercase; }
 .sum .max { font-size: 13px; margin: 8px 0 0; color: var(--muted); }
-.items { list-style: none; margin: 12px 0 0; padding: 0 14px; display: flex; flex-direction: column; }
+.items { list-style: none; margin: 12px 0 0; padding: 0 14px; display: flex; flex-direction: column; text-align: left; }
 .items li { background: var(--surface); border: 1px solid var(--rule); border-top: 0; padding: 11px 12px; display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 3px 10px; align-items: baseline; }
 .items li:first-child { border-top: 1px solid var(--rule); border-radius: 10px 10px 0 0; }
 .items li:last-child { border-radius: 0 0 10px 10px; }
