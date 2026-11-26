@@ -9,7 +9,7 @@ const t = es
   ? {
       title: 'Que no se te pase ni un acuerdo más.',
       sub: 'Activa el monitoreo y te enviamos un correo apenas una nueva filtración incluya tu email, o se abra un nuevo acuerdo para el que podrías calificar.',
-      feats: ['Cada nueva filtración que incluya tu email', 'Cada nuevo acuerdo para el que podrías calificar', 'Alertas de filtraciones y acuerdos en una sola suscripción', 'Prueba gratis de 14 días, cancela en un clic'],
+      feats: ['Cada nuevo acuerdo para el que podrías calificar', 'Cada nueva filtración que incluya tu email', 'Alertas de filtraciones y acuerdos en una sola suscripción', 'Prueba gratis de 14 días, cancela en un clic'],
       monthly: 'Mensual', yearly: 'Anual', perMo: '/mes', perYr: '/año',
       emailPh: 'tu@email.com',
       consent: 'Acepto que usen mi nombre y estado para cruzarlos con los casos activos y avisarme. Puedo darme de baja cuando quiera.',
@@ -19,7 +19,7 @@ const t = es
   : {
       title: 'Never miss a settlement again.',
       sub: 'Turn on monitoring and we email you the moment a new breach includes your address, or a new settlement opens that you may qualify for.',
-      feats: ['Every new breach that includes your email', 'Every new settlement you may qualify for', 'Breach and settlement alerts in one subscription', '14-day free trial, cancel in one click'],
+      feats: ['Every new settlement you may qualify for', 'Every new breach that includes your email', 'Breach and settlement alerts in one subscription', '14-day free trial, cancel in one click'],
       monthly: 'Monthly', yearly: 'Yearly', perMo: '/mo', perYr: '/yr',
       emailPh: 'you@email.com',
       consent: 'I agree that my name and state may be used to match me against active cases and alert me. I can unsubscribe at any time.',
@@ -35,7 +35,7 @@ const rs = es
   <h2>{t.title}</h2>
   <p class="lede">{t.sub}</p>
   <ul class="feats">
-    {t.feats.map((f) => <li><Fragment set:html={check} /><span>{f}</span></li>)}
+    {t.feats.map((f, i) => <li class={i === 0 ? 'lead' : undefined}><Fragment set:html={check} /><span>{f}</span></li>)}
   </ul>
 
   <div class="seg" role="group" aria-label="Billing interval">
