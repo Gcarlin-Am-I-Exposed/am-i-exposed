@@ -233,9 +233,15 @@ ul.exposed li { margin: 3px 0; }
 .mchip.open { background: var(--ok-bg); color: var(--money); border-color: transparent; }
 .mchip.closed { background: var(--paper); color: var(--muted); }
 .seclabel { font-size: 13px; color: var(--muted); text-align: center; margin: 14px 16px 0; line-height: 1.4; }
-.claim { margin: 14px 14px 2px; padding: 12px 14px; border-radius: 12px; background: var(--ok-bg); }
-.claim .claim-k { margin: 0; font: 600 14.5px var(--font-ui); color: var(--money); line-height: 1.42; text-align: center; }
+.claim { margin: 14px 14px 2px; padding: 13px 14px; border-radius: 12px; background: var(--ok-bg); }
+.claim .claim-k { margin: 0; font: 600 14px var(--font-ui); color: var(--money); line-height: 1.42; text-align: center; }
 .claim .mchips { padding: 9px 0 0; }
+.claim-amt { margin: 0 0 4px; font: 600 32px var(--font-display); letter-spacing: -.01em; text-align: center; color: var(--money); font-variant-numeric: tabular-nums; line-height: 1.05; }
+.claim-lead { margin: 0 0 2px; text-align: center; font: 600 11px var(--font-ui); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.claim-cta { margin: 11px 0 0; text-align: center; font: 700 13px var(--font-ui); color: var(--gold-deep); line-height: 1.35; }
+.claim.missed { background: var(--chk-bg); }
+.claim.missed .claim-k { color: var(--gold-deep); }
+.claim.missed .claim-amt { color: var(--gold-deep); }
 .claim.nomatch { background: var(--paper); border: 1px solid var(--rule); }
 .claim.nomatch .claim-k { color: var(--muted); font-weight: 500; }
 .ctas .btn { white-space: normal; line-height: 1.2; text-align: center; min-height: 52px; }
