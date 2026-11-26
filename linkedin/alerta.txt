@@ -1,33 +1,33 @@
-Alerta Am I Exposed · 25/11/2026
+Alerta Am I Exposed · 26/11/2026
 
-138 empresas y entidades aparecieron en sitios de filtración de ransomware en las últimas 24 horas.
-392 en los últimos 7 días.
-35 en Latinoamérica: México, Colombia, Brasil, Perú, Chile, Argentina, Venezuela, República Dominicana, Bolivia, Uruguay.
-53 grupos criminales activos.
-Manufactura, el sector más golpeado de la semana: 47 casos.
+191 empresas y entidades aparecieron en sitios de filtración de ransomware en las últimas 24 horas.
+469 en los últimos 7 días.
+42 en Latinoamérica: México, Brasil, Colombia, Chile, Perú, Argentina, Venezuela, República Dominicana, Costa Rica, Bolivia, Uruguay.
+54 grupos criminales activos.
+Tecnología, el sector más golpeado de la semana: 45 casos.
 
 Lista completa por país, industria y grupo, actualizada cada día:
 am-i-exposed.com/es/daily-hack
 
-Fuentes: Brandefense ATLAS, DUPIN Noticias, DysruptionHub, Emol, Have I Been Pwned, Jornal Económico, La Política Online / DUPIN Noticias, Ransom-DB (vía extractor), RansomLook, ransomware.live, ransomware.live (prensa), RNZ, TechCrunch, Ville de Quimper
+Fuentes: Brandefense, Brandefense ATLAS, Brandefense y ransomware.live, DUPIN Noticias, DUPIN Noticias (radar 25/11), DUPIN Noticias (radar 25/11) y Brandefense, DUPIN Noticias (radar 26/11), DysruptionHub, Emol, Have I Been Pwned, Jornal Económico, La Política Online / DUPIN Noticias, Ransom-DB (vía extractor), RansomLook, ransomware.live, ransomware.live (prensa), ransomware.live y Brandefense, RNZ, TechCrunch, Ville de Quimper
 
 ========================================
 
-Alerta Am I Exposed · 25/11/2026
+Alerta Am I Exposed · 26/11/2026
 
-392 empresas y entidades en siete días. Esa es la cuenta de los sitios de filtración de ransomware de la última semana.
+469 empresas y entidades en siete días. Esa es la cuenta de los sitios de filtración de ransomware de la última semana.
 
 Un sitio de filtración es la página donde un grupo criminal publica a quién dice haber atacado, para presionar el pago. Aparecer ahí no prueba qué se llevaron: es el reclamo del grupo hasta que la víctima confirme.
 
 La semana en cifras:
-53 grupos activos.
-131 casos en Estados Unidos.
-35 en Latinoamérica: México 7, Colombia 7, Brasil 6, Perú 3, Chile 3, Argentina 3, Venezuela 2, República Dominicana 2, Bolivia 1, Uruguay 1.
-23 entidades de gobierno.
-Los sectores más golpeados: Manufactura (47); Servicios Profesionales (46); Salud (45); Tecnología (35); Gobierno y Defensa (23).
+54 grupos activos.
+146 casos en Estados Unidos.
+42 en Latinoamérica: México 9, Brasil 8, Colombia 8, Chile 4, Perú 3, Argentina 3, Venezuela 2, República Dominicana 2, Costa Rica 1, Bolivia 1, Uruguay 1.
+26 entidades de gobierno.
+Los sectores más golpeados: Tecnología (45); Manufactura (45); Salud (45); Servicios Profesionales (42); Retail y Consumo (31).
 En Perú la semana tuvo 3 caso(s): COMEXPERU SOCIEDAD DE COMERCIO EXTERIOR DEL PERÚ, Sistema consular del Perú (Ministerio de Relaciones Exteriores), COMEXPERU – Sociedad de Comercio Exterior del Perú (comexperu.org.pe).
 
 ¿Qué es mejor para tu empresa: enterarte por tu propio monitoreo o por una lista como esta?
 
 Lista completa: am-i-exposed.com/es/daily-hack
-Fuentes: Brandefense ATLAS, DUPIN Noticias, DysruptionHub, Emol, Have I Been Pwned, Jornal Económico, La Política Online / DUPIN Noticias, Ransom-DB (vía extractor), RansomLook, ransomware.live, ransomware.live (prensa), RNZ, TechCrunch, Ville de Quimper
+Fuentes: Brandefense, Brandefense ATLAS, Brandefense y ransomware.live, DUPIN Noticias, DUPIN Noticias (radar 25/11), DUPIN Noticias (radar 25/11) y Brandefense, DUPIN Noticias (radar 26/11), DysruptionHub, Emol, Have I Been Pwned, Jornal Económico, La Política Online / DUPIN Noticias, Ransom-DB (vía extractor), RansomLook, ransomware.live, ransomware.live (prensa), ransomware.live y Brandefense, RNZ, TechCrunch, Ville de Quimper
