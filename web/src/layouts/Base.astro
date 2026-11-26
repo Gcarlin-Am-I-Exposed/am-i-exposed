@@ -1,0 +1,39 @@
+---
+import '../styles/ruta-b.css';
+import RadarDefs from '../components/RadarDefs.astro';
+import type { HomeStrings } from '../i18n/strings';
+
+interface Props {
+  t: HomeStrings;
+  canonical: string;
+}
+const { t, canonical } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang={t.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{t.title}</title>
+    <meta name="description" content={t.metaDesc} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href="https://www.am-i-exposed.com/" />
+    <link rel="alternate" hreflang="es" href="https://www.am-i-exposed.com/es/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.am-i-exposed.com/" />
+    <meta property="og:title" content={t.title} />
+    <meta property="og:description" content={t.metaDesc} />
+    <meta property="og:locale" content={t.ogLocale} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@500&family=Public+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <RadarDefs />
+    <slot />
+  </body>
+</html>

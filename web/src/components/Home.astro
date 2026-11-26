@@ -1,0 +1,140 @@
+---
+import type { HomeStrings, Lang } from '../i18n/strings';
+
+interface Props {
+  t: HomeStrings;
+  lang: Lang;
+}
+const { t, lang } = Astro.props;
+
+// Example result rows. Verbatim ranges per settlement, never summed.
+const items =
+  lang === 'es'
+    ? [
+        { co: 'Northwind Telecom', v: '$40–$300', chip: t.chipOk, cls: 'ok', meta: 'Filtración 2024 · si calificas · Cierra 14 ene' },
+        { co: 'Acme Health Network', v: '$30–$2,000', chip: t.chipChk, cls: 'chk', meta: 'Filtración 2023 · si calificas · Cierra 2 feb' },
+        { co: 'Bluepeak Bank', v: '$15–$150', chip: t.chipOk, cls: 'ok', meta: 'Filtración 2024 · si calificas · Cierra 20 mar' },
+      ]
+    : [
+        { co: 'Northwind Telecom', v: '$40–$300', chip: t.chipOk, cls: 'ok', meta: '2024 breach · if eligible · Closes Jan 14' },
+        { co: 'Acme Health Network', v: '$30–$2,000', chip: t.chipChk, cls: 'chk', meta: '2023 breach · if eligible · Closes Feb 2' },
+        { co: 'Bluepeak Bank', v: '$15–$150', chip: t.chipOk, cls: 'ok', meta: '2024 breach · if eligible · Closes Mar 20' },
+      ];
+
+const homeHref = lang === 'es' ? '/es/' : '/';
+---
+<header class="head">
+  <div class="wrap">
+    <a class="brand" href={homeHref}><svg aria-hidden="true"><use href="#m2a" /></svg><span>Am I Exposed?</span></a>
+    <nav>
+      <a href={`${homeHref}#how`}>{t.navHow}</a>
+      <a href={`${homeHref}#open`}>{t.navSettle}</a>
+      <a href={`${homeHref}#price`}>{t.navPrice}</a>
+      <span class="lang">
+        <a href="/" aria-current={lang === 'en' ? 'true' : 'false'}>EN</a>
+        <a href="/es/" aria-current={lang === 'es' ? 'true' : 'false'}>ES</a>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO: full width, message + only the email bar, no pills -->
+<section class="hero full">
+  <div class="wrap">
+    <h1>{t.heroTitle}</h1>
+    <p class="sub">{t.heroSub}</p>
+    <form class="searchbar" method="post" action="/api/check-email">
+      <input type="email" name="email" placeholder={t.emailPh} aria-label={t.heroCta} required />
+      <button class="btn primary" type="submit">{t.heroCta}</button>
+    </form>
+    <p class="trust">{t.heroTrust}</p>
+  </div>
+</section>
+
+<!-- RESULT (inline, Ruta B) -->
+<section class="band" id="how">
+  <div class="wrap">
+    <span class="eyebrow">{t.resEyebrow}</span>
+    <h2>{t.resH}</h2>
+    <p class="lede">{t.resLede}</p>
+
+    <div class="result" role="group" aria-label={t.exLabel}>
+      <div class="tophead"><svg aria-hidden="true"><use href="#m2a" /></svg><span>Am I Exposed?</span><span class="exlabel">{t.exLabel}</span></div>
+      <div class="sum">
+        <p class="k">{t.resCount}</p>
+        <p class="amt">$5,050<span class="amtlab">{t.amtLab}</span></p>
+        <p class="max">{t.resMax}</p>
+      </div>
+      <ul class="items">
+        {items.map((i) => (
+          <li>
+            <b>{i.co}</b><span class="v">{i.v}</span>
+            <span class="meta"><span class={`chip ${i.cls}`}>{i.chip}</span><span>{i.meta}</span></span>
+          </li>
+        ))}
+      </ul>
+      <div class="ctas">
+        <button class="btn primary" type="button">{t.ctaReport}</button>
+        <button class="btn gold" type="button">{t.ctaAlerts}</button>
+      </div>
+      <p class="note">{t.ctaNote}</p>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN SETTLEMENTS (was "Money Pool") -->
+<section class="band" id="open">
+  <div class="wrap">
+    <span class="eyebrow">{t.openTag}</span>
+    <h2>{t.openH}</h2>
+    <p class="lede">{t.openLede}</p>
+    <div class="stats">
+      <div class="stat"><div class="n">14</div><div class="l">{t.statOpen}</div></div>
+      <div class="stat"><div class="n">1,081</div><div class="l">{t.statTracked}</div></div>
+      <div class="stat"><div class="n">$5,050</div><div class="l">{t.statMax}</div></div>
+    </div>
+    <div class="chips">
+      <span class="pchip">Northwind Telecom <span>$40–$300</span></span>
+      <span class="pchip">Acme Health <span>$30–$2,000</span></span>
+      <span class="pchip">Bluepeak Bank <span>$15–$150</span></span>
+      <span class="pchip">Vertex Retail <span>$25–$500</span></span>
+    </div>
+    <div class="browse"><a class="btn ghost" href="/settlements/">{t.browse}</a></div>
+  </div>
+</section>
+
+<!-- PRICING TEASER -->
+<section class="band" id="price">
+  <div class="wrap">
+    <span class="eyebrow">{t.priceTag}</span>
+    <h2>{t.priceH}</h2>
+    <div class="price">
+      <div class="pcard">
+        <h3>{t.p1t}</h3>
+        <div class="p">$5 <small>{t.p1p}</small></div>
+        <ul>
+          <li>{t.p1a}</li>
+          <li>{t.p1b}</li>
+          <li>{t.p1c}</li>
+        </ul>
+        <button class="btn primary" type="button">{t.p1cta}</button>
+      </div>
+      <div class="pcard feat">
+        <h3>{t.p2t}</h3>
+        <div class="p">$7.99 <small>{t.p2p}</small></div>
+        <ul>
+          <li>{t.p2a}</li>
+          <li>{t.p2b}</li>
+          <li>{t.p2c}</li>
+        </ul>
+        <button class="btn gold" type="button">{t.p2cta}</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="dis">{t.disc}</p>
+  </div>
+</footer>

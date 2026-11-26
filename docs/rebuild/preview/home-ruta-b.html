@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Am I Exposed? — Ruta B preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Ruta B — "estado de cuenta". Light paper, ink text, gold accents, moneda radar. */
+:root{
+  --paper:#FBF8F2; --surface:#FFFFFF; --rule:#E4DCCF;
+  --ink:#16120E; --muted:#5E554B;
+  --coin:#D59E5D; --gold-deep:#8A5A1C; --link:#7A4E14;
+  --money:#1F7A4D; --alert:#B42318;
+  --obsidian:#0B0907; --glow:#F2CD75;
+  --ok-bg:#E3F1E9; --chk-bg:#F5EADB;
+  --radius:12px; --pill:999px;
+  --font-display:"Fraunces",Georgia,serif;
+  --font-ui:"Public Sans",system-ui,sans-serif;
+  --font-num:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;min-width:0}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font:17px/1.55 var(--font-ui);overflow-x:clip}
+h1,h2,h3{font-family:var(--font-display);font-weight:600;letter-spacing:-.02em;line-height:1.05;margin:0}
+a{color:var(--link)}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:max(5vw,16px)}
+.full{width:100%}
+
+/* header */
+.head{border-bottom:1px solid var(--rule);background:var(--paper);position:sticky;top:0;z-index:5}
+.head .wrap{display:flex;align-items:center;gap:14px;min-height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:600;font-size:20px}
+.brand svg{width:30px;height:30px;flex:none}
+.head nav{margin-left:auto;display:flex;align-items:center;gap:8px 20px;flex-wrap:wrap}
+.head nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:15px}
+.head nav a:hover{color:var(--gold-deep)}
+.lang{display:inline-flex;border:1px solid var(--rule);border-radius:var(--pill);overflow:hidden;font-weight:600;font-size:13px}
+.lang button{border:0;background:transparent;color:var(--muted);padding:7px 13px;cursor:pointer;font:inherit;min-height:34px}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+
+/* hero — full width */
+.hero{border-bottom:1px solid var(--rule);background:
+  radial-gradient(120% 80% at 50% -10%, #fff 0%, var(--paper) 60%)}
+.hero .wrap{padding-block:clamp(48px,8vw,96px);text-align:center;display:flex;flex-direction:column;align-items:center}
+.hero h1{font-size:clamp(34px,5.2vw,56px);max-width:16ch;text-wrap:balance}
+.hero p.sub{color:var(--muted);font-size:clamp(17px,2.2vw,20px);max-width:52ch;margin:16px 0 0}
+.searchbar{display:flex;gap:10px;width:100%;max-width:560px;margin:32px auto 0}
+.searchbar input{flex:1;min-width:0;border:1px solid var(--rule);background:var(--surface);border-radius:var(--pill);
+  padding:0 20px;min-height:56px;font:16px var(--font-ui);color:var(--ink)}
+.searchbar input:focus{outline:3px solid var(--gold-deep);outline-offset:2px;border-color:var(--gold-deep)}
+.btn{border:0;border-radius:var(--pill);font:700 15px var(--font-ui);cursor:pointer;min-height:56px;padding:0 26px;
+  transition:transform .12s ease;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap}
+.btn:active{transform:scale(.98)}
+.btn:focus-visible{outline:3px solid var(--gold-deep);outline-offset:3px}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn.gold{background:var(--coin);color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--rule)}
+.trust{color:var(--muted);font-size:14px;margin:16px 0 0}
+
+/* section shell */
+.band{padding-block:clamp(40px,6vw,72px)}
+.band + .band{border-top:1px solid var(--rule)}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--gold-deep)}
+.band h2{font-size:clamp(26px,3.4vw,36px);margin-top:8px;max-width:20ch}
+.lede{color:var(--muted);max-width:60ch;margin:12px 0 0;font-size:17px}
+
+/* result card (Ruta B statement) */
+.result{max-width:420px;margin:28px auto 0;background:var(--surface);border:1px solid var(--rule);border-radius:18px;overflow:hidden;box-shadow:0 1px 0 rgba(0,0,0,.03),0 18px 40px -28px rgba(22,18,14,.5)}
+.result .tophead{display:flex;align-items:center;gap:8px;padding:14px 18px 10px;border-bottom:1px solid var(--rule);font-family:var(--font-display);font-weight:600;font-size:16px}
+.result .tophead svg{width:24px;height:24px}
+.result .exlabel{margin-left:auto;font:600 11px var(--font-ui);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--paper);border:1px solid var(--rule);border-radius:var(--pill);padding:3px 9px}
+.sum{padding:16px 18px 6px;text-align:center}
+.sum .k{font-size:14px;margin:0;color:var(--muted)}
+.sum .amt{font-family:var(--font-display);font-weight:600;font-size:46px;line-height:1.05;letter-spacing:-.02em;margin:8px 0 0;font-variant-numeric:tabular-nums}
+.sum .amtlab{font:500 12px var(--font-num);color:var(--gold-deep);letter-spacing:.02em;display:block;margin-top:2px;text-transform:uppercase}
+.sum .max{font-size:13px;margin:8px 0 0;color:var(--muted)}
+.items{list-style:none;margin:12px 0 0;padding:0 14px;display:flex;flex-direction:column}
+.items li{background:var(--surface);border:1px solid var(--rule);border-top:0;padding:11px 12px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 10px;align-items:baseline}
+.items li:first-child{border-top:1px solid var(--rule);border-radius:10px 10px 0 0}
+.items li:last-child{border-radius:0 0 10px 10px}
+.items b{font-size:14.5px}
+.items .v{font-family:var(--font-num);font-size:13.5px;text-align:right;white-space:nowrap;color:var(--ink);font-variant-numeric:tabular-nums}
+.items .meta{grid-column:1/-1;font-size:12.5px;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.chip{font-size:12px;font-weight:600;padding:2px 9px;border-radius:var(--pill);white-space:nowrap}
+.chip.ok{background:var(--ok-bg);color:var(--money)}
+.chip.chk{background:var(--chk-bg);color:var(--gold-deep)}
+.ctas{display:flex;flex-direction:column;gap:8px;padding:14px}
+.note{font-size:12px;text-align:center;color:var(--muted);margin:0 14px 16px}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+.stat{background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);padding:18px 16px;text-align:center}
+.stat .n{font-family:var(--font-display);font-weight:600;font-size:30px;font-variant-numeric:tabular-nums}
+.stat .l{color:var(--muted);font-size:13.5px;margin-top:4px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.pchip{border:1px solid var(--rule);background:var(--surface);border-radius:var(--pill);padding:8px 14px;font-size:14px;font-weight:600}
+.pchip span{color:var(--muted);font-weight:500;font-family:var(--font-num);margin-left:6px}
+.browse{margin-top:22px}
+
+/* pricing teaser */
+.price{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:24px}
+.pcard{background:var(--surface);border:1px solid var(--rule);border-radius:16px;padding:22px}
+.pcard.feat{border-color:var(--coin);box-shadow:0 0 0 1px var(--coin)}
+.pcard h3{font-size:20px}
+.pcard .p{font-family:var(--font-display);font-weight:600;font-size:34px;margin:8px 0 2px}
+.pcard .p small{font:500 14px var(--font-ui);color:var(--muted)}
+.pcard ul{margin:14px 0 18px;padding-left:18px;color:var(--muted);font-size:14.5px;line-height:1.7}
+
+/* footer */
+.foot{border-top:1px solid var(--rule);color:var(--muted);font-size:13px;padding-block:28px}
+.foot .dis{max-width:70ch}
+
+@media (max-width:760px){
+  .stats{grid-template-columns:1fr}
+  .price{grid-template-columns:1fr}
+  .searchbar{flex-direction:column}
+  .searchbar .btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){.sweep,.smil *{animation:none !important}}
+</style>
+</head>
+<body>
+
+<!-- SVG defs: moneda radar (m2 still / m2a animated) from the brand-board -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="coinG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F2CD75"/><stop offset=".55" stop-color="#D59E5D"/><stop offset="1" stop-color="#8A5A1C"/></linearGradient>
+  <linearGradient id="sweepG" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#F2CD75" stop-opacity="0"/><stop offset="1" stop-color="#F2CD75" stop-opacity=".55"/></linearGradient>
+  <symbol id="m2" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="47" fill="url(#coinG)"/>
+    <g id="reeds" stroke="#8A5A1C" stroke-width="1.3" stroke-opacity=".75"></g>
+    <circle cx="50" cy="50" r="40" fill="#0B0907"/>
+    <g fill="none" stroke="#C09A6D" stroke-width="1.4" stroke-opacity=".55"><circle cx="50" cy="50" r="29"/><circle cx="50" cy="50" r="18"/></g>
+    <path d="M50 50 L50 13 A37 37 0 0 1 82.04 31.5 Z" fill="url(#sweepG)"/>
+    <line x1="50" y1="50" x2="82.04" y2="31.5" stroke="#F2CD75" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="64.1" cy="33.2" r="9" fill="#F2CD75" fill-opacity=".22"/>
+    <circle cx="64.1" cy="33.2" r="4.6" fill="#F2CD75"/>
+    <circle cx="50" cy="50" r="3.4" fill="#F2CD75"/>
+  </symbol>
+  <symbol id="m2a" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="47" fill="url(#coinG)"/>
+    <use href="#reeds"/>
+    <circle cx="50" cy="50" r="40" fill="#0B0907"/>
+    <g fill="none" stroke="#C09A6D" stroke-width="1.4" stroke-opacity=".55"><circle cx="50" cy="50" r="29"/><circle cx="50" cy="50" r="18"/></g>
+    <g class="smil">
+      <circle cx="64.1" cy="33.2" r="9" fill="#F2CD75" fill-opacity=".22">
+        <animate attributeName="r" values="6;6;13;6" keyTimes="0;0.944;0.97;1" dur="3s" repeatCount="indefinite"/>
+        <animate attributeName="fill-opacity" values="0;0;.35;0" keyTimes="0;0.944;0.95;1" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="64.1" cy="33.2" r="4.6" fill="#F2CD75">
+        <animate attributeName="opacity" values="0.85;0.2;0.2;1;0.85" keyTimes="0;0.6;0.944;0.95;1" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <g>
+        <path d="M50 50 L50 13 A37 37 0 0 1 82.04 31.5 Z" fill="url(#sweepG)"/>
+        <line x1="50" y1="50" x2="82.04" y2="31.5" stroke="#F2CD75" stroke-width="3" stroke-linecap="round"/>
+        <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="3s" repeatCount="indefinite"/>
+      </g>
+    </g>
+    <circle cx="50" cy="50" r="3.4" fill="#F2CD75"/>
+  </symbol>
+</defs></svg>
+
+<header class="head">
+  <div class="wrap">
+    <span class="brand"><svg aria-hidden="true"><use href="#m2a"/></svg><span>Am I Exposed?</span></span>
+    <nav>
+      <a href="#" data-i18n="navHow">How it works</a>
+      <a href="#open" data-i18n="navSettle">Open settlements</a>
+      <a href="#price" data-i18n="navPrice">Pricing</a>
+      <span class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="es" aria-pressed="false">ES</button>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO: full width, message + only the email bar, no pills -->
+<section class="hero full">
+  <div class="wrap">
+    <h1 data-i18n="heroTitle">You may be owed money. Nobody told you.</h1>
+    <p class="sub" data-i18n="heroSub">Check your email against known data breaches and the settlements they led to.</p>
+    <form class="searchbar" onsubmit="return false">
+      <input type="email" data-i18n-ph="emailPh" placeholder="you@email.com" aria-label="Email">
+      <button class="btn primary" type="submit" data-i18n="heroCta">Check my email</button>
+    </form>
+    <p class="trust" data-i18n="heroTrust">Free · We don't store your email · Results in seconds</p>
+  </div>
+</section>
+
+<!-- RESULT (inline, Ruta B) -->
+<section class="band">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="resEyebrow">What a result looks like</span>
+    <h2 data-i18n="resH">Your money, itemized — not a vague promise.</h2>
+    <p class="lede" data-i18n="resLede">After you confirm it's your email, every line shows the real payout range and its source. We never add maximums together.</p>
+
+    <div class="result" role="group" aria-label="Example result">
+      <div class="tophead"><svg aria-hidden="true"><use href="#m2a"/></svg><span>Am I Exposed?</span><span class="exlabel" data-i18n="exLabel">Example</span></div>
+      <div class="sum">
+        <p class="k" data-i18n="resCount">You may qualify for 3 open settlements</p>
+        <p class="amt">$5,050<span class="amtlab" data-i18n="amtLab">top single-case payout</span></p>
+        <p class="max" data-i18n="resMax">Up to $5,000 more with documented losses</p>
+      </div>
+      <ul class="items">
+        <li><b>Northwind Telecom</b><span class="v">$40–$300</span><span class="meta"><span class="chip ok" data-i18n="chipOk">Likely eligible</span><span data-i18n="r1meta">2024 breach · if eligible · Closes Jan 14</span></span></li>
+        <li><b>Acme Health Network</b><span class="v">$30–$2,000</span><span class="meta"><span class="chip chk" data-i18n="chipChk">Check eligibility</span><span data-i18n="r2meta">2023 breach · if eligible · Closes Feb 2</span></span></li>
+        <li><b>Bluepeak Bank</b><span class="v">$15–$150</span><span class="meta"><span class="chip ok" data-i18n="chipOk2">Likely eligible</span><span data-i18n="r3meta">2024 breach · if eligible · Closes Mar 20</span></span></li>
+      </ul>
+      <div class="ctas">
+        <button class="btn primary" type="button" data-i18n="ctaReport">Unlock my Full Report — $5</button>
+        <button class="btn gold" type="button" data-i18n="ctaAlerts">Get breach alerts</button>
+      </div>
+      <p class="note" data-i18n="ctaNote">Claim links are always free.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN SETTLEMENTS (was "Money Pool") -->
+<section class="band" id="open">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="openTag">Open settlements</span>
+    <h2 data-i18n="openH">The settlements companies are paying right now.</h2>
+    <p class="lede" data-i18n="openLede">Companies that leak data settle class actions and pay the people affected. We track every open one. Search a company you've dealt with and see what they're paying.</p>
+    <div class="stats">
+      <div class="stat"><div class="n">14</div><div class="l" data-i18n="statOpen">open to claim now</div></div>
+      <div class="stat"><div class="n">1,081</div><div class="l" data-i18n="statTracked">settlements tracked</div></div>
+      <div class="stat"><div class="n">$5,050</div><div class="l" data-i18n="statMax">top single-case payout</div></div>
+    </div>
+    <div class="chips">
+      <span class="pchip">Northwind Telecom <span>$40–$300</span></span>
+      <span class="pchip">Acme Health <span>$30–$2,000</span></span>
+      <span class="pchip">Bluepeak Bank <span>$15–$150</span></span>
+      <span class="pchip">Vertex Retail <span>$25–$500</span></span>
+    </div>
+    <div class="browse"><a class="btn ghost" href="#" data-i18n="browse">Browse all settlements →</a></div>
+  </div>
+</section>
+
+<!-- PRICING TEASER -->
+<section class="band" id="price">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="priceTag">Pricing</span>
+    <h2 data-i18n="priceH">Free to check. $5 for the full picture.</h2>
+    <div class="price">
+      <div class="pcard">
+        <h3 data-i18n="p1t">Full Report</h3>
+        <div class="p">$5 <small data-i18n="p1p">one-time</small></div>
+        <ul>
+          <li data-i18n="p1a">Everything exposed, breach by breach</li>
+          <li data-i18n="p1b">Step-by-step plan to lock down your accounts</li>
+          <li data-i18n="p1c">Your settlement matches + free official claim links</li>
+        </ul>
+        <button class="btn primary" type="button" data-i18n="p1cta">Unlock my Full Report — $5</button>
+      </div>
+      <div class="pcard feat">
+        <h3 data-i18n="p2t">Monitoring</h3>
+        <div class="p">$7.99 <small data-i18n="p2p">/mo · or $39.99/yr</small></div>
+        <ul>
+          <li data-i18n="p2a">We re-scan and alert you on new breaches</li>
+          <li data-i18n="p2b">New settlements you may qualify for</li>
+          <li data-i18n="p2c">14-day free trial · cancel in one click</li>
+        </ul>
+        <button class="btn gold" type="button" data-i18n="p2cta">Start my 14-day free trial</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="dis" data-i18n="disc">We're not a law firm and we don't file claims for you. We're not affiliated with the court or the claims administrator. The administrator decides eligibility. Companies, amounts and dates shown above are example data.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // radar coin edge reeds (72 ticks), same as the brand-board
+  var reeds=document.getElementById('reeds'),r='';
+  for(var i=0;i<72;i++){var a=i/72*Math.PI*2,c=Math.cos(a),s=Math.sin(a);
+    r+='<line x1="'+(50+41.5*c).toFixed(2)+'" y1="'+(50+41.5*s).toFixed(2)+'" x2="'+(50+46.5*c).toFixed(2)+'" y2="'+(50+46.5*s).toFixed(2)+'"/>';}
+  reeds.innerHTML=r;
+
+  var dict={
+    en:{navHow:"How it works",navSettle:"Open settlements",navPrice:"Pricing",
+      heroTitle:"You may be owed money. Nobody told you.",
+      heroSub:"Check your email against known data breaches and the settlements they led to.",
+      heroCta:"Check my email",heroTrust:"Free · We don't store your email · Results in seconds",
+      emailPh:"you@email.com",
+      resEyebrow:"What a result looks like",resH:"Your money, itemized — not a vague promise.",
+      resLede:"After you confirm it's your email, every line shows the real payout range and its source. We never add maximums together.",
+      exLabel:"Example",resCount:"You may qualify for 3 open settlements",amtLab:"top single-case payout",
+      resMax:"Up to $5,000 more with documented losses",
+      chipOk:"Likely eligible",chipChk:"Check eligibility",chipOk2:"Likely eligible",
+      r1meta:"2024 breach · if eligible · Closes Jan 14",r2meta:"2023 breach · if eligible · Closes Feb 2",r3meta:"2024 breach · if eligible · Closes Mar 20",
+      ctaReport:"Unlock my Full Report — $5",ctaAlerts:"Get breach alerts",ctaNote:"Claim links are always free.",
+      openTag:"Open settlements",openH:"The settlements companies are paying right now.",
+      openLede:"Companies that leak data settle class actions and pay the people affected. We track every open one. Search a company you've dealt with and see what they're paying.",
+      statOpen:"open to claim now",statTracked:"settlements tracked",statMax:"top single-case payout",browse:"Browse all settlements →",
+      priceTag:"Pricing",priceH:"Free to check. $5 for the full picture.",
+      p1t:"Full Report",p1p:"one-time",p1a:"Everything exposed, breach by breach",p1b:"Step-by-step plan to lock down your accounts",p1c:"Your settlement matches + free official claim links",p1cta:"Unlock my Full Report — $5",
+      p2t:"Monitoring",p2p:"/mo · or $39.99/yr",p2a:"We re-scan and alert you on new breaches",p2b:"New settlements you may qualify for",p2c:"14-day free trial · cancel in one click",p2cta:"Start my 14-day free trial",
+      disc:"We're not a law firm and we don't file claims for you. We're not affiliated with the court or the claims administrator. The administrator decides eligibility. Companies, amounts and dates shown above are example data."},
+    es:{navHow:"Cómo funciona",navSettle:"Acuerdos abiertos",navPrice:"Precios",
+      heroTitle:"Puede que te deban dinero. Nadie te avisó.",
+      heroSub:"Revisa tu email en filtraciones conocidas y en los acuerdos que pagaron por ellas.",
+      heroCta:"Revisar mi email",heroTrust:"Gratis · No guardamos tu email · Resultado en segundos",
+      emailPh:"tu@email.com",
+      resEyebrow:"Así se ve un resultado",resH:"Tu dinero, detallado — no una promesa vaga.",
+      resLede:"Después de confirmar que es tu email, cada línea muestra el rango real de pago y su fuente. Nunca sumamos los máximos.",
+      exLabel:"Ejemplo",resCount:"Podrías calificar para 3 acuerdos abiertos",amtLab:"pago más alto en un caso",
+      resMax:"Hasta $5,000 más con pérdidas documentadas",
+      chipOk:"Probablemente elegible",chipChk:"Revisar elegibilidad",chipOk2:"Probablemente elegible",
+      r1meta:"Filtración 2024 · si calificas · Cierra 14 ene",r2meta:"Filtración 2023 · si calificas · Cierra 2 feb",r3meta:"Filtración 2024 · si calificas · Cierra 20 mar",
+      ctaReport:"Ver mi Full Report — $5",ctaAlerts:"Recibir alertas",ctaNote:"Los enlaces de reclamo siempre son gratis.",
+      openTag:"Acuerdos abiertos",openH:"Los acuerdos que las empresas están pagando ahora.",
+      openLede:"Las empresas que filtran datos cierran demandas colectivas y pagan a los afectados. Seguimos cada acuerdo abierto. Busca una empresa con la que trataste y mira lo que están pagando.",
+      statOpen:"abiertos para reclamar ahora",statTracked:"acuerdos en seguimiento",statMax:"pago más alto en un caso",browse:"Ver todos los acuerdos →",
+      priceTag:"Precios",priceH:"Gratis revisar. $5 por el panorama completo.",
+      p1t:"Full Report",p1p:"pago único",p1a:"Todo lo expuesto, filtración por filtración",p1b:"Plan paso a paso para asegurar tus cuentas",p1c:"Tus acuerdos + enlaces oficiales de reclamo gratis",p1cta:"Ver mi Full Report — $5",
+      p2t:"Monitoreo",p2p:"/mes · o $39.99/año",p2a:"Re-escaneamos y te avisamos de nuevas filtraciones",p2b:"Nuevos acuerdos para los que podrías calificar",p2c:"Prueba gratis de 14 días · cancela en un clic",p2cta:"Empezar mi prueba gratis de 14 días",
+      disc:"No somos un estudio de abogados y no presentamos reclamos por ti. No estamos afiliados al tribunal ni al administrador. El administrador decide la elegibilidad. Las empresas, montos y fechas de arriba son datos de ejemplo."}
+  };
+  function apply(lang){
+    var d=dict[lang];
+    document.documentElement.lang = (lang==='es'?'es':'en');
+    document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(d[k]!=null)el.textContent=d[k];});
+    document.querySelectorAll('[data-i18n-ph]').forEach(function(el){var k=el.getAttribute('data-i18n-ph');if(d[k]!=null)el.setAttribute('placeholder',d[k]);});
+    document.querySelectorAll('.lang button').forEach(function(b){b.setAttribute('aria-pressed', b.getAttribute('data-lang')===lang ? 'true':'false');});
+  }
+  document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){apply(b.getAttribute('data-lang'));});});
+  apply('en');
+})();
+</script>
+</body>
+</html>

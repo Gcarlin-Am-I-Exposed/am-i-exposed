@@ -1,0 +1,9 @@
+---
+import Base from '../../layouts/Base.astro';
+import Home from '../../components/Home.astro';
+import { strings } from '../../i18n/strings';
+const t = strings.es;
+---
+<Base t={t} canonical="https://www.am-i-exposed.com/es/">
+  <Home t={t} lang="es" />
+</Base>
