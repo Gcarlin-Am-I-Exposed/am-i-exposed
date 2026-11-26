@@ -17,14 +17,14 @@
   "title": "Se filtró mi correo: qué hacer, paso a paso | ¿Estoy expuesto?",
   "desc": "Tu correo apareció en una filtración de datos. Qué hacer primero, qué puede esperar y qué no sirve de nada, explicado en orden y sin tecnicismos.",
   "canonical": "https://www.am-i-exposed.com/es/que-hacer-si-se-filtro-mi-correo/",
-  "ogLocale": "es_PE",
+  "ogLocale": "es_US",
   "lang": "es"
  },
  "como-saber-si-mi-contrasena-fue-filtrada": {
   "title": "Cómo saber si tu contraseña fue filtrada | ¿Estoy expuesto?",
   "desc": "Se puede comprobar si una contraseña está en una filtración sin enviarla a nadie. Cómo funciona el truco, por qué es seguro y qué hacer con el resultado.",
   "canonical": "https://www.am-i-exposed.com/es/como-saber-si-mi-contrasena-fue-filtrada/",
-  "ogLocale": "es_PE",
+  "ogLocale": "es_US",
   "lang": "es"
  }
 }

@@ -33,9 +33,9 @@
  },
  "privacidad": {
   "title": "Política de privacidad | ¿Estoy expuesto?",
-  "desc": "Qué datos trata este servicio y cuáles no guarda, con quién se comparten, cuánto se conservan y cómo ejercer tus derechos bajo la Ley 29733.",
+  "desc": "Qué datos trata este servicio y cuáles no guarda, con quién se comparten, cuánto se conservan y cómo ejercer tus derechos.",
   "canonical": "https://www.am-i-exposed.com/es/privacidad/",
-  "ogLocale": "es_PE",
+  "ogLocale": "es_US",
   "lang": "es",
   "bytes": 8700
  },
@@ -43,7 +43,7 @@
   "title": "Términos y condiciones | ¿Estoy expuesto?",
   "desc": "Condiciones de uso del servicio: qué incluye la revisión gratuita, qué incluye el plan de acción de pago, devoluciones, responsabilidad y ley aplicable.",
   "canonical": "https://www.am-i-exposed.com/es/terminos/",
-  "ogLocale": "es_PE",
+  "ogLocale": "es_US",
   "lang": "es",
   "bytes": 6585
  },
@@ -51,7 +51,7 @@
   "title": "Aviso de privacidad para EE. UU. | ¿Estoy expuesto?",
   "desc": "Cómo tratamos los datos personales de residentes en Estados Unidos, los correos que enviamos, tu suscripción y los derechos que ofrecemos.",
   "canonical": "https://www.am-i-exposed.com/es/aviso-privacidad-eeuu/",
-  "ogLocale": "es_PE",
+  "ogLocale": "es_US",
   "lang": "es",
   "bytes": 9760
  },
@@ -59,7 +59,7 @@
   "title": "Preguntas frecuentes | ¿Estoy expuesto?",
   "desc": "Qué significa estar expuesto, si corre peligro tu dinero, si alguien puede ver tu cámara y qué hacer ahora mismo. Explicado sin tecnicismos.",
   "canonical": "https://www.am-i-exposed.com/es/preguntas-frecuentes/",
-  "ogLocale": "es_PE",
+  "ogLocale": "es_US",
   "lang": "es",
   "bytes": 13115
  }
