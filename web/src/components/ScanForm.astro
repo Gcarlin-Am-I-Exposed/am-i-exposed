@@ -19,9 +19,14 @@ const rs = es
       alertTitle: 'Tu email apareció en una filtración',
       breachOne: 'filtración conocida expuso tu email',
       breachMany: 'filtraciones conocidas expusieron tu email',
-      claimOne: 'Y en 1 podrías cobrar: un acuerdo abierto para el que podrías calificar.',
-      claimMany: 'Y en {n} podrías cobrar: acuerdos abiertos para los que podrías calificar.',
-      noMatch: 'Aún no hay un acuerdo colectivo abierto ligado a estas filtraciones. Activa las alertas y te avisamos apenas se abra uno.',
+      amtPre: 'hasta',
+      openOne: 'Aún podrías reclamarlo — un acuerdo abierto para el que calificas.',
+      openMany: 'Aún podrías reclamarlos — acuerdos abiertos para los que calificas.',
+      missedLead: 'Quizá dejaste dinero sobre la mesa:',
+      missedOne: 'Pudiste haberlo cobrado — pero el plazo del acuerdo ya venció.',
+      missedMany: 'Pudiste haberlos cobrado — pero sus plazos ya vencieron.',
+      missedCta: 'Activa el monitoreo para no perderte el próximo pago.',
+      noMatch: 'Aún no hay un acuerdo colectivo ligado a estas filtraciones. Activa las alertas y te avisamos apenas se abra uno.',
       sec: 'Ve cada filtración y cómo reclamar en tu reporte gratis.',
       cleanTitle: 'Buena noticia: tu email no está en ninguna filtración que seguimos.',
       cleanSub: 'Las filtraciones nuevas pasan todo el tiempo. Activa el monitoreo y te enteras primero.',
@@ -39,9 +44,14 @@ const rs = es
       alertTitle: 'Your Email Appeared in a Breach',
       breachOne: 'known breach exposed your email',
       breachMany: 'known breaches exposed your email',
-      claimOne: 'And in 1 you could get paid: an open settlement you may qualify for.',
-      claimMany: 'And in {n} you could get paid: open settlements you may qualify for.',
-      noMatch: 'No open class-action settlement matches these breaches yet. Turn on alerts and we tell you the moment one opens.',
+      amtPre: 'up to',
+      openOne: 'You may still be able to claim it — an open settlement you qualify for.',
+      openMany: 'You may still be able to claim them — open settlements you qualify for.',
+      missedLead: 'You may have left money on the table:',
+      missedOne: "You could have claimed this — but the settlement's deadline already passed.",
+      missedMany: 'You could have claimed these — but their deadlines already passed.',
+      missedCta: 'Turn on monitoring so you never miss the next payout.',
+      noMatch: 'No class-action settlement matches these breaches yet. Turn on alerts and we tell you the moment one opens.',
       sec: 'See every breach and how to claim in your free report.',
       cleanTitle: "Good news — your email isn't in any breach we track.",
       cleanSub: 'New breaches happen all the time. Turn on monitoring and you hear first.',
@@ -88,6 +98,7 @@ const rs = es
       + '<path d="M12 10v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
       + '<circle cx="12" cy="17.2" r="1.1" fill="currentColor"/></svg>';
     const year = (d: string) => (/\d{4}/.exec(d || '') || [''])[0];
+    const nfmt = (x: number) => Number(x).toLocaleString(lang === 'es' ? 'es-US' : 'en-US');
     const todayISO = new Date().toISOString().slice(0, 10);
 
     // Cross-check the HIBP breaches against real class-action settlements, in the
@@ -130,13 +141,30 @@ const rs = es
 
     function foundHtml(breaches: any[], matches: any) {
       const n = breaches.length;
-      const m = matches.items.length;
+      const items = (matches.items || []) as any[];
+      const open = items.filter((i) => i.status === 'open');
+      const closed = items.filter((i) => i.status !== 'open');
+      const maxPay = (arr: any[]) => arr.reduce((mx, it) => Math.max(mx, Number(it.porPersona) || 0), 0);
+      const chipHtml = (arr: any[]) => arr.slice(0, 8).map((it) =>
+        `<span class="mchip ${it.status === 'open' ? 'open' : 'closed'}">${esc(it.empresa)}</span>`).join('');
       let claim: string;
-      if (m > 0) {
-        const chips = matches.items.slice(0, 8).map((it: any) =>
-          `<span class="mchip ${it.status === 'open' ? 'open' : 'closed'}">${esc(it.empresa)}</span>`).join('');
-        const claimText = m === 1 ? S.claimOne : String(S.claimMany).replace('{n}', String(m));
-        claim = `<div class="claim"><p class="claim-k">${esc(claimText)}</p><div class="mchips">${chips}</div></div>`;
+      if (open.length) {
+        // Still claimable now — real money on the table.
+        const amt = maxPay(open);
+        const amtHtml = amt > 0 ? `<p class="claim-amt">${esc(S.amtPre)} $${esc(nfmt(amt))}</p>` : '';
+        const txt = open.length === 1 ? S.openOne : S.openMany;
+        claim = `<div class="claim open">${amtHtml}<p class="claim-k">${esc(txt)}</p>`
+          + `<div class="mchips">${chipHtml(open)}</div></div>`;
+      } else if (closed.length) {
+        // Matched, but the deadline passed — frame the missed payout, sell monitoring.
+        const amt = maxPay(closed);
+        const amtHtml = amt > 0
+          ? `<p class="claim-lead">${esc(S.missedLead)}</p><p class="claim-amt missed">${esc(S.amtPre)} $${esc(nfmt(amt))}</p>`
+          : '';
+        const txt = closed.length === 1 ? S.missedOne : S.missedMany;
+        claim = `<div class="claim missed">${amtHtml}<p class="claim-k">${esc(txt)}</p>`
+          + `<div class="mchips">${chipHtml(closed)}</div>`
+          + `<p class="claim-cta">${esc(S.missedCta)}</p></div>`;
       } else {
         claim = `<div class="claim nomatch"><p class="claim-k">${esc(S.noMatch)}</p></div>`;
       }
