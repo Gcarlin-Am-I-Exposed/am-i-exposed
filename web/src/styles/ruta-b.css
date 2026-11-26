@@ -184,10 +184,11 @@ ul.exposed li { margin: 3px 0; }
 .monitor-card h2 { margin-top: 0; }
 .monitor-card .lede { margin-top: 8px; }
 .seg { display: flex; gap: 8px; margin: 18px 0 14px; }
-.seg-btn { flex: 1; border: 1px solid var(--rule); background: var(--paper); border-radius: 12px; padding: 12px 10px; font: 600 14px var(--font-ui); cursor: pointer; color: var(--ink); display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.seg-btn { position: relative; flex: 1; border: 1px solid var(--rule); background: var(--paper); border-radius: 12px; padding: 12px 10px; font: 600 14px var(--font-ui); cursor: pointer; color: var(--ink); display: flex; flex-direction: column; align-items: center; gap: 2px; }
 .seg-btn b { font-family: var(--font-display); font-size: 20px; }
 .seg-btn small { color: var(--muted); }
 .seg-btn[aria-pressed="true"] { border-color: var(--coin); box-shadow: 0 0 0 1px var(--coin); background: var(--surface); }
+.seg-btn .save { position: absolute; top: -10px; right: 8px; background: var(--money); color: #fff; font: 700 10.5px var(--font-ui); letter-spacing: .02em; padding: 2px 8px; border-radius: var(--pill); white-space: nowrap; box-shadow: 0 1px 4px rgba(22,18,14,.25); }
 #monitorForm { display: flex; flex-direction: column; gap: 12px; }
 #monitorForm input[type="email"] { border: 1px solid var(--rule); background: var(--surface); border-radius: var(--pill); padding: 0 18px; min-height: 52px; font: 16px var(--font-ui); color: var(--ink); }
 #monitorForm input[type="email"]:focus { outline: 3px solid var(--gold-deep); outline-offset: 2px; border-color: var(--gold-deep); }

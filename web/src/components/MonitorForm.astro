@@ -10,7 +10,7 @@ const t = es
       title: 'Que no se te pase ni un acuerdo más.',
       sub: 'Activa el monitoreo y te enviamos un correo apenas una nueva filtración incluya tu email, o se abra un nuevo acuerdo para el que podrías calificar.',
       feats: ['Cada nuevo acuerdo para el que podrías calificar', 'Cada nueva filtración que incluya tu email', 'Alertas de filtraciones y acuerdos en una sola suscripción', 'Prueba gratis de 14 días, cancela en un clic'],
-      monthly: 'Mensual', yearly: 'Anual', perMo: '/mes', perYr: '/año',
+      monthly: 'Mensual', yearly: 'Anual', perMo: '/mes', perYr: '/año', save: 'Ahorra 58%',
       emailPh: 'tu@email.com',
       consent: 'Acepto que usen mi nombre y estado para cruzarlos con los casos activos y avisarme. Puedo darme de baja cuando quiera.',
       startTrial: 'Empezar prueba de 14 días',
@@ -20,7 +20,7 @@ const t = es
       title: 'Never miss a settlement again.',
       sub: 'Turn on monitoring and we email you the moment a new breach includes your address, or a new settlement opens that you may qualify for.',
       feats: ['Every new settlement you may qualify for', 'Every new breach that includes your email', 'Breach and settlement alerts in one subscription', '14-day free trial, cancel in one click'],
-      monthly: 'Monthly', yearly: 'Yearly', perMo: '/mo', perYr: '/yr',
+      monthly: 'Monthly', yearly: 'Yearly', perMo: '/mo', perYr: '/yr', save: 'Save 58%',
       emailPh: 'you@email.com',
       consent: 'I agree that my name and state may be used to match me against active cases and alert me. I can unsubscribe at any time.',
       startTrial: 'Start 14-day free trial',
@@ -40,7 +40,7 @@ const rs = es
 
   <div class="seg" role="group" aria-label="Billing interval">
     <button type="button" class="seg-btn" data-interval="month" aria-pressed="true">{t.monthly} · <b>$7.99</b><small>{t.perMo}</small></button>
-    <button type="button" class="seg-btn" data-interval="year" aria-pressed="false">{t.yearly} · <b>$39.99</b><small>{t.perYr}</small></button>
+    <button type="button" class="seg-btn" data-interval="year" aria-pressed="false"><span class="save">{t.save}</span>{t.yearly} · <b>$39.99</b><small>{t.perYr}</small></button>
   </div>
 
   <form id="monitorForm">
