@@ -50,6 +50,7 @@ export interface HomeStrings {
   p2b: string;
   p2c: string;
   p2cta: string;
+  save: string;
   disc: string;
   altHome: string;
 }
@@ -106,6 +107,7 @@ export const strings: Record<Lang, HomeStrings> = {
     p2b: 'New settlements you may qualify for',
     p2c: '14-day free trial · cancel in one click',
     p2cta: 'Start my 14-day free trial',
+    save: 'Save 58%',
     disc:
       "We're not a law firm and we don't file claims for you. We're not affiliated with the court or the claims administrator. The administrator decides eligibility. Companies, amounts and dates shown above are example data.",
     altHome: 'Am I Exposed? home',
@@ -161,6 +163,7 @@ export const strings: Record<Lang, HomeStrings> = {
     p2b: 'Nuevos acuerdos para los que podrías calificar',
     p2c: 'Prueba gratis de 14 días · cancela en un clic',
     p2cta: 'Empezar mi prueba gratis de 14 días',
+    save: 'Ahorra 58%',
     disc:
       'No somos un estudio de abogados y no presentamos reclamos por ti. No estamos afiliados al tribunal ni al administrador. El administrador decide la elegibilidad. Las empresas, montos y fechas de arriba son datos de ejemplo.',
     altHome: 'Inicio de Am I Exposed?',

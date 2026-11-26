@@ -22,6 +22,7 @@ const t = es
       ctaH: 'Empieza con la revisión gratis',
       ctaP: 'Ve qué quedó expuesto en segundos, gratis. Sin cuenta, sin tarjeta. Solo pagas si quieres la guía paso a paso o el monitoreo.',
       ctaBtn: 'Revisar mi email',
+      save: 'Ahorra 58%',
     }
   : {
       h1: 'Pricing',
@@ -37,6 +38,7 @@ const t = es
       ctaH: 'Start with the free check',
       ctaP: 'See what was exposed in seconds, free. No account, no card. You only pay if you want the step-by-step guide or monitoring.',
       ctaBtn: 'Check my email',
+      save: 'Save 58%',
     };
 ---
 <main class="wrap article" style="max-width:1120px">
@@ -46,6 +48,7 @@ const t = es
   <div class="price3">
     {t.tiers.map((tier, i) => (
       <div class={`pcard${tier.featured ? ' feat' : ''}`}>
+        {i === 2 && <span class="save">{t.save}</span>}
         <h3>{tier.title}</h3>
         <p class="psub">{tier.sub}</p>
         <ul class="feats">
