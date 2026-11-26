@@ -17,13 +17,12 @@ const rs = es
   ? {
       loading: 'Buscando en filtraciones conocidas…',
       alertTitle: 'Tu email apareció en una filtración',
-      settleLedOne: 'acuerdo real para el que podrías calificar',
-      settleLedMany: 'acuerdos reales para los que podrías calificar',
-      settleSub: 'Cruzamos tus filtraciones con demandas colectivas (class actions) reales de EE. UU.',
-      noMatchTitle: 'Tu email está expuesto en filtraciones conocidas.',
-      noMatchSub: 'Todavía no hay un acuerdo colectivo abierto ligado a estas filtraciones. Activa las alertas y te avisamos apenas se abra uno.',
-      breachSecOne: 'Apareció en 1 filtración conocida — la lista completa está en tu reporte gratis.',
-      breachSecMany: 'Apareció en {n} filtraciones conocidas — la lista completa está en tu reporte gratis.',
+      breachOne: 'filtración conocida expuso tu email',
+      breachMany: 'filtraciones conocidas expusieron tu email',
+      claimOne: 'Y en 1 podrías cobrar: hay un acuerdo abierto para el que podrías calificar.',
+      claimMany: 'Y en {n} podrías cobrar: hay acuerdos abiertos para los que podrías calificar.',
+      noMatch: 'Aún no hay un acuerdo colectivo abierto ligado a estas filtraciones. Activa las alertas y te avisamos apenas se abra uno.',
+      sec: 'Ve cada filtración y cómo reclamar en tu reporte gratis.',
       cleanTitle: 'Buena noticia: tu email no está en ninguna filtración que seguimos.',
       cleanSub: 'Las filtraciones nuevas pasan todo el tiempo. Activa el monitoreo y te enteras primero.',
       ctaFree: 'Ver mi reporte gratis',
@@ -38,13 +37,12 @@ const rs = es
   : {
       loading: 'Searching known breaches…',
       alertTitle: 'Your Email Appeared in a Breach',
-      settleLedOne: 'real settlement you may qualify for',
-      settleLedMany: 'real settlements you may qualify for',
-      settleSub: 'We cross-checked your breaches against real US class-action settlements.',
-      noMatchTitle: 'Your email is exposed in known breaches.',
-      noMatchSub: 'No open class-action settlement is keyed to these breaches yet. Turn on alerts and we tell you the moment one opens.',
-      breachSecOne: 'Found in 1 known breach — see the full list in your free report.',
-      breachSecMany: 'Found in {n} known breaches — see the full list in your free report.',
+      breachOne: 'known breach exposed your email',
+      breachMany: 'known breaches exposed your email',
+      claimOne: 'And 1 could pay you back: an open settlement you may qualify for.',
+      claimMany: 'And {n} could pay you back: open settlements you may qualify for.',
+      noMatch: 'No open class-action settlement matches these breaches yet. Turn on alerts and we tell you the moment one opens.',
+      sec: 'See every breach and how to claim in your free report.',
       cleanTitle: "Good news — your email isn't in any breach we track.",
       cleanSub: 'New breaches happen all the time. Turn on monitoring and you hear first.',
       ctaFree: 'See my free full report',
@@ -131,22 +129,23 @@ const rs = es
     }
 
     function foundHtml(breaches: any[], matches: any) {
-      const m = matches.items.length;
       const n = breaches.length;
-      let lead: string;
+      const m = matches.items.length;
+      let claim: string;
       if (m > 0) {
         const chips = matches.items.slice(0, 8).map((it: any) =>
           `<span class="mchip ${it.status === 'open' ? 'open' : 'closed'}">${esc(it.empresa)}</span>`).join('');
-        lead = `<div class="sum"><p class="amt">${m}</p>`
-          + `<p class="k">${esc(m === 1 ? S.settleLedOne : S.settleLedMany)}</p>`
-          + `<p class="max">${esc(S.settleSub)}</p></div>`
-          + `<div class="mchips">${chips}</div>`;
+        const claimText = m === 1 ? S.claimOne : String(S.claimMany).replace('{n}', String(m));
+        claim = `<div class="claim"><p class="claim-k">${esc(claimText)}</p><div class="mchips">${chips}</div></div>`;
       } else {
-        lead = `<div class="sum"><p class="k leadk">${esc(S.noMatchTitle)}</p>`
-          + `<p class="max">${esc(S.noMatchSub)}</p></div>`;
+        claim = `<div class="claim nomatch"><p class="claim-k">${esc(S.noMatch)}</p></div>`;
       }
-      const secLabel = n === 1 ? S.breachSecOne : String(S.breachSecMany).replace('{n}', String(n));
-      return alertCard(lead + `<p class="seclabel">${esc(secLabel)}</p>` + ctas());
+      return alertCard(
+        `<div class="sum"><p class="amt">${n}</p>`
+        + `<p class="k">${esc(n === 1 ? S.breachOne : S.breachMany)}</p></div>`
+        + claim
+        + `<p class="seclabel">${esc(S.sec)}</p>` + ctas()
+      );
     }
     function cleanHtml() {
       return calmCard(
