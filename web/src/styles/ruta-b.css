@@ -156,3 +156,15 @@ ul.exposed li { margin: 3px 0; }
 .settle-list .st { grid-column: 1 / -1; font-size: 12.5px; color: var(--muted); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .settle-sec { padding-block: clamp(28px, 4vw, 44px); }
 .settle-sec h2 { font-size: 26px; border-bottom: 1px solid var(--rule); padding-bottom: 6px; }
+
+/* ---- pricing page (3 tiers) ---- */
+.price3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; align-items: start; }
+.price3 .pcard { display: flex; flex-direction: column; height: 100%; }
+.pcard .psub { color: var(--muted); font-size: 14px; margin: 4px 0 0; }
+.pcard .feats { list-style: none; margin: 16px 0 18px; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.pcard .feats li { display: flex; gap: 9px; align-items: flex-start; font-size: 14.5px; }
+.pcard .feats svg { flex: none; margin-top: 3px; color: var(--money); }
+.pcard .buy { margin-top: auto; }
+.pcard .buy .btn { width: 100%; margin-top: 4px; }
+.plan-fine { color: var(--muted); font-size: 13px; margin-top: 18px; max-width: 70ch; }
+@media (max-width: 860px) { .price3 { grid-template-columns: 1fr; } }

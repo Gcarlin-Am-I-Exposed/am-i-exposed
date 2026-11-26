@@ -1,0 +1,69 @@
+---
+interface Props { lang?: 'en' | 'es'; }
+const { lang = 'en' } = Astro.props;
+const es = lang === 'es';
+const home = es ? '/es/' : '/';
+
+const check = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.5 4.5l-7 7-4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+const t = es
+  ? {
+      h1: 'Precios',
+      standfirst:
+        'Revisar tu email o una contraseña siempre es gratis, sin cuenta y sin tarjeta. Los planes pagados son un informe único y el monitoreo opcional: un precio fijo, que ves antes de pagar y puedes cancelar cuando quieras.',
+      tiers: [
+        { title: 'Revisión gratis', sub: 'Ve si tu email o una contraseña aparece en filtraciones conocidas.', feats: ['Tu email revisado contra filtraciones conocidas', 'Cualquier contraseña revisada en privado, en tu dispositivo', 'Sin cuenta, sin tarjeta, sin trampa', 'Resultado en segundos'], price: '$0', per: 'por revisar', cta: 'Revisar mi email', featured: false },
+        { title: 'Informe Completo', sub: 'Todo lo expuesto, un plan para arreglarlo, y los acuerdos para los que podrías calificar.', feats: ['Todo lo que quedó expuesto sobre ti, punto por punto', 'Un plan paso a paso para arreglarlo, en palabras simples', 'Tus acuerdos, con enlaces oficiales de reclamo gratis', '30 días de acceso, descargable en PDF'], price: '$5', per: 'pago único', cta: 'Empezar', featured: true },
+        { title: 'Monitoreo', sub: 'Recibe una alerta apenas algo nuevo te afecte.', feats: ['Cada nueva filtración que incluya tu email', 'Cada nuevo acuerdo para el que podrías calificar', 'Alertas de filtraciones y acuerdos en una sola suscripción', 'Prueba gratis de 14 días, cancela cuando quieras'], price: '$7.99', per: '/mes · $39.99/año', cta: 'Empezar prueba gratis', featured: false },
+      ],
+      note: 'Los enlaces de reclamo siempre son gratis. Cuando un acuerdo está abierto, te enviamos directo al sitio del administrador designado por el tribunal; nunca cobramos por presentar un reclamo y no tomamos nada de él. Quien te pida pagar por reclamar es una estafa.',
+      fine: 'Los planes pagados se cobran en dólares de EE. UU. a través de Stripe. El precio del botón es el que pagas; cualquier impuesto aplicable se muestra en esa misma pantalla. Revisar siempre es gratis.',
+      ctaH: 'Empieza con la revisión gratis',
+      ctaP: 'Ve qué quedó expuesto en segundos. Sin cuenta, sin tarjeta. Solo pagas si quieres el informe completo o el monitoreo.',
+      ctaBtn: 'Revisar mi email',
+    }
+  : {
+      h1: 'Pricing',
+      standfirst:
+        'Checking your email or a password is always free, with no account and no card. The paid plans are a one-time report and optional monitoring: a flat price, shown before you pay, that you can cancel anytime.',
+      tiers: [
+        { title: 'Free check', sub: 'See whether your email or a password turns up in known breaches.', feats: ['Your email checked against known breaches', 'Any password checked privately, on your device', 'No account, no card, no catch', 'Result in seconds'], price: '$0', per: 'to check', cta: 'Check my email', featured: false },
+        { title: 'Full Report', sub: 'Everything exposed, a plan to fix it, and the settlements you may qualify for.', feats: ['Everything that was exposed about you, item by item', 'A step-by-step plan to fix it, in plain English', 'Your settlement matches, with free official claim links', '30 days of access, downloadable as a PDF'], price: '$5', per: 'one time', cta: 'Get started', featured: true },
+        { title: 'Monitoring', sub: 'Get alerted the moment something new affects you.', feats: ['Every new breach that includes your email', 'Every new settlement you may qualify for', 'Breach and settlement alerts in one subscription', '14-day free trial, cancel anytime'], price: '$7.99', per: '/mo · $39.99/yr', cta: 'Start free trial', featured: false },
+      ],
+      note: "Claim links are always free. When a settlement is open, we send you straight to the court-appointed administrator's own site: we never charge to file a claim, and we take nothing from it. Anyone who asks you to pay to file is a scam.",
+      fine: 'Paid plans are charged in US dollars through Stripe. The price on the button is the price you pay; any tax due is shown on that same screen. Checking stays free, always.',
+      ctaH: 'Start with the free check',
+      ctaP: 'See what was exposed in seconds. No account, no card. You only pay if you want the full report or monitoring.',
+      ctaBtn: 'Check my email',
+    };
+---
+<main class="wrap article" style="max-width:1120px">
+  <h1>{t.h1}</h1>
+  <p class="standfirst">{t.standfirst}</p>
+
+  <div class="price3">
+    {t.tiers.map((tier) => (
+      <div class={`pcard${tier.featured ? ' feat' : ''}`}>
+        <h3>{tier.title}</h3>
+        <p class="psub">{tier.sub}</p>
+        <ul class="feats">
+          {tier.feats.map((f) => <li><Fragment set:html={check} /><span>{f}</span></li>)}
+        </ul>
+        <div class="buy">
+          <div class="p">{tier.price} <small>{tier.per}</small></div>
+          <a class={`btn ${tier.featured ? 'primary' : 'ghost'}`} href={home}>{tier.cta}</a>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="note"><p>{t.note}</p></div>
+  <p class="plan-fine">{t.fine}</p>
+
+  <div class="cta">
+    <h2>{t.ctaH}</h2>
+    <p>{t.ctaP}</p>
+    <a class="btn primary" href={home}>{t.ctaBtn}</a>
+  </div>
+</main>
