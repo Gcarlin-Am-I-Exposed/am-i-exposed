@@ -3,6 +3,7 @@ interface Props { lang?: 'en' | 'es'; }
 const { lang = 'en' } = Astro.props;
 const es = lang === 'es';
 const home = es ? '/es/' : '/';
+const monitorHref = es ? '/es/monitoreo/' : '/monitoring/';
 
 const check = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.5 4.5l-7 7-4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
@@ -43,7 +44,7 @@ const t = es
   <p class="standfirst">{t.standfirst}</p>
 
   <div class="price3">
-    {t.tiers.map((tier) => (
+    {t.tiers.map((tier, i) => (
       <div class={`pcard${tier.featured ? ' feat' : ''}`}>
         <h3>{tier.title}</h3>
         <p class="psub">{tier.sub}</p>
@@ -52,7 +53,7 @@ const t = es
         </ul>
         <div class="buy">
           <div class="p">{tier.price} <small>{tier.per}</small></div>
-          <a class={`btn ${tier.featured ? 'primary' : 'ghost'}`} href={home}>{tier.cta}</a>
+          <a class={`btn ${tier.featured ? 'primary' : 'ghost'}`} href={i === 2 ? monitorHref : home}>{tier.cta}</a>
         </div>
       </div>
     ))}

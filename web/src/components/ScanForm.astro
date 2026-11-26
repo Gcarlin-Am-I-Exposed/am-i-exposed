@@ -3,7 +3,7 @@ import type { HomeStrings, Lang } from '../i18n/strings';
 interface Props { t: HomeStrings; lang: Lang; }
 const { t, lang } = Astro.props;
 const es = lang === 'es';
-const pricingHref = es ? '/es/precios/' : '/pricing/';
+const monitorHref = es ? '/es/monitoreo/' : '/monitoring/';
 
 // Strings the client script needs to render the result.
 const rs = es
@@ -36,7 +36,7 @@ const rs = es
       resultLabel: 'Result',
     };
 ---
-<form class="searchbar" id="scanForm" data-lang={lang} data-pricing={pricingHref}>
+<form class="searchbar" id="scanForm" data-lang={lang} data-monitor={monitorHref}>
   <input type="email" name="email" placeholder={t.emailPh} aria-label={t.heroCta} required autocomplete="email" />
   <button class="btn primary" type="submit" data-label={t.heroCta}>{t.heroCta}</button>
 </form>
@@ -52,7 +52,9 @@ const rs = es
   if (form && out && i18nEl) {
     const S = JSON.parse(i18nEl.textContent || '{}');
     const lang = form.dataset.lang || 'en';
-    const pricingHref = form.dataset.pricing || '/pricing/';
+    const monitorHref = form.dataset.monitor || '/monitoring/';
+    let currentEmail = '';
+    const alertsHref = () => `${monitorHref}?email=${encodeURIComponent(currentEmail)}`;
 
     const esc = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, (c) =>
       ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#x27;' }[c] as string));
@@ -66,7 +68,7 @@ const rs = es
     }
     function ctas() {
       return `<div class="ctas"><button class="btn primary" type="button" id="ctaReport">${esc(S.ctaReport)}</button>`
-        + `<a class="btn gold" href="${esc(pricingHref)}">${esc(S.ctaAlerts)}</a></div>`;
+        + `<a class="btn gold" href="${esc(alertsHref())}">${esc(S.ctaAlerts)}</a></div>`;
     }
     function foundHtml(breaches: any[]) {
       const n = breaches.length;
@@ -88,7 +90,7 @@ const rs = es
       return card(
         `<div class="sum"><p class="k" style="font-size:18px;color:var(--money);margin-top:4px">${esc(S.cleanTitle)}</p>`
         + `<p class="max">${esc(S.cleanSub)}</p></div>`
-        + `<div class="ctas"><a class="btn gold" href="${esc(pricingHref)}">${esc(S.ctaAlerts)}</a></div>`
+        + `<div class="ctas"><a class="btn gold" href="${esc(alertsHref())}">${esc(S.ctaAlerts)}</a></div>`
       );
     }
     function loadingHtml() {
@@ -117,6 +119,7 @@ const rs = es
       const btn = form.querySelector('button') as HTMLButtonElement;
       const email = (input.value || '').trim();
       if (!email) return;
+      currentEmail = email;
       btn.disabled = true; btn.textContent = '…';
       out.hidden = false; out.innerHTML = loadingHtml();
       try {

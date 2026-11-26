@@ -1,0 +1,112 @@
+---
+interface Props { lang?: 'en' | 'es'; }
+const { lang = 'en' } = Astro.props;
+const es = lang === 'es';
+
+const check = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.5 4.5l-7 7-4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+const t = es
+  ? {
+      title: 'Que no se te pase ni un acuerdo más.',
+      sub: 'Activa el monitoreo y te enviamos un correo apenas una nueva filtración incluya tu email, o se abra un nuevo acuerdo para el que podrías calificar.',
+      feats: ['Cada nueva filtración que incluya tu email', 'Cada nuevo acuerdo para el que podrías calificar', 'Alertas de filtraciones y acuerdos en una sola suscripción', 'Prueba gratis de 14 días, cancela en un clic'],
+      monthly: 'Mensual', yearly: 'Anual', perMo: '/mes', perYr: '/año',
+      emailPh: 'tu@email.com',
+      consent: 'Acepto que usen mi nombre y estado para cruzarlos con los casos activos y avisarme. Puedo darme de baja cuando quiera.',
+      startTrial: 'Empezar prueba de 14 días',
+      note: 'Prueba gratis de 14 días, cancela cuando quieras. No necesitas cuenta; te enviamos un correo para confirmar. Los enlaces para reclamar siempre son gratis.',
+    }
+  : {
+      title: 'Never miss a settlement again.',
+      sub: 'Turn on monitoring and we email you the moment a new breach includes your address, or a new settlement opens that you may qualify for.',
+      feats: ['Every new breach that includes your email', 'Every new settlement you may qualify for', 'Breach and settlement alerts in one subscription', '14-day free trial, cancel in one click'],
+      monthly: 'Monthly', yearly: 'Yearly', perMo: '/mo', perYr: '/yr',
+      emailPh: 'you@email.com',
+      consent: 'I agree that my name and state may be used to match me against active cases and alert me. I can unsubscribe at any time.',
+      startTrial: 'Start 14-day free trial',
+      note: '14-day free trial, cancel anytime. No account needed; we email you to confirm. Claim links are always free.',
+    };
+
+const rs = es
+  ? { errEmail: 'Ingresa tu email para empezar la prueba.', errConsent: 'Acepta los términos para continuar.', payFail: 'No se pudo iniciar el pago. Inténtalo de nuevo.', loading: 'Abriendo el pago seguro…' }
+  : { errEmail: 'Enter your email to start the trial.', errConsent: 'Please agree to the terms to continue.', payFail: "Couldn't start checkout. Please try again.", loading: 'Opening secure checkout…' };
+---
+<div class="monitor-card" id="monitorCard" data-lang={lang}>
+  <h2>{t.title}</h2>
+  <p class="lede">{t.sub}</p>
+  <ul class="feats">
+    {t.feats.map((f) => <li><Fragment set:html={check} /><span>{f}</span></li>)}
+  </ul>
+
+  <div class="seg" role="group" aria-label="Billing interval">
+    <button type="button" class="seg-btn" data-interval="month" aria-pressed="true">{t.monthly} · <b>$7.99</b><small>{t.perMo}</small></button>
+    <button type="button" class="seg-btn" data-interval="year" aria-pressed="false">{t.yearly} · <b>$39.99</b><small>{t.perYr}</small></button>
+  </div>
+
+  <form id="monitorForm">
+    <input type="email" id="monEmail" name="email" placeholder={t.emailPh} aria-label={t.emailPh} required autocomplete="email" />
+    <label class="consent"><input type="checkbox" id="monConsent" /> <span>{t.consent}</span></label>
+    <button class="btn primary" type="submit" id="monStart">{t.startTrial}</button>
+  </form>
+  <p class="note" id="monMsg">{t.note}</p>
+</div>
+
+<script type="application/json" id="monI18n" set:html={JSON.stringify(rs)}></script>
+
+<script>
+  const card = document.getElementById('monitorCard');
+  const form = document.getElementById('monitorForm') as HTMLFormElement | null;
+  const i18nEl = document.getElementById('monI18n');
+  if (card && form && i18nEl) {
+    const S = JSON.parse(i18nEl.textContent || '{}');
+    const lang = card.getAttribute('data-lang') || 'en';
+    const emailEl = document.getElementById('monEmail') as HTMLInputElement;
+    const consentEl = document.getElementById('monConsent') as HTMLInputElement;
+    const msg = document.getElementById('monMsg') as HTMLElement;
+    const defaultNote = msg.textContent || '';
+    let interval = 'month';
+
+    // prefill email from ?email=
+    try {
+      const q = new URLSearchParams(location.search).get('email');
+      if (q) emailEl.value = q;
+    } catch (e) { /* ignore */ }
+
+    card.querySelectorAll('.seg-btn').forEach((b) => {
+      b.addEventListener('click', () => {
+        interval = (b as HTMLElement).dataset.interval || 'month';
+        card.querySelectorAll('.seg-btn').forEach((o) =>
+          o.setAttribute('aria-pressed', o === b ? 'true' : 'false'));
+      });
+    });
+
+    function fail(text: string) {
+      msg.textContent = text;
+      msg.style.color = 'var(--alert)';
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = (emailEl.value || '').trim();
+      if (!email || !emailEl.checkValidity()) return fail(S.errEmail);
+      if (!consentEl.checked) return fail(S.errConsent);
+      msg.style.color = '';
+      msg.textContent = S.loading;
+      const btn = document.getElementById('monStart') as HTMLButtonElement;
+      btn.disabled = true;
+      try {
+        const r = await fetch(`/api/checkout?plan=monitoring_${interval}`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lang, email }),
+        });
+        const data = await r.json().catch(() => null);
+        if (!r.ok || !data || !data.url) throw new Error((data && data.error) || S.payFail);
+        window.location.href = data.url;
+      } catch (err: any) {
+        btn.disabled = false;
+        fail(err && err.message ? err.message : S.payFail);
+        setTimeout(() => { msg.style.color = ''; msg.textContent = defaultNote; }, 6000);
+      }
+    });
+  }
+</script>

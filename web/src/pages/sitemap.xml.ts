@@ -7,6 +7,8 @@ const SITE = 'https://www.am-i-exposed.com';
 const PAIRS: { en: string; es: string }[] = [
   { en: '/', es: '/es/' },
   { en: '/pricing/', es: '/es/precios/' },
+  { en: '/monitoring/', es: '/es/monitoreo/' },
+  { en: '/manage/', es: '/es/gestionar/' },
   { en: '/faq/', es: '/es/preguntas-frecuentes/' },
   { en: '/privacy/', es: '/es/privacidad/' },
   { en: '/terms/', es: '/es/terminos/' },

@@ -114,7 +114,7 @@ const homeHref = lang === 'es' ? '/es/' : '/';
           <li>{t.p1b}</li>
           <li>{t.p1c}</li>
         </ul>
-        <button class="btn primary" type="button">{t.p1cta}</button>
+        <a class="btn primary" href={lang === 'es' ? '/es/precios/' : '/pricing/'}>{t.p1cta}</a>
       </div>
       <div class="pcard feat">
         <h3>{t.p2t}</h3>
@@ -124,7 +124,7 @@ const homeHref = lang === 'es' ? '/es/' : '/';
           <li>{t.p2b}</li>
           <li>{t.p2c}</li>
         </ul>
-        <button class="btn gold" type="button">{t.p2cta}</button>
+        <a class="btn gold" href={lang === 'es' ? '/es/monitoreo/' : '/monitoring/'}>{t.p2cta}</a>
       </div>
     </div>
   </div>
