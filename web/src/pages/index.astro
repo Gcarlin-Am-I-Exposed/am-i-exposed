@@ -4,6 +4,13 @@ import Home from '../components/Home.astro';
 import { strings } from '../i18n/strings';
 const t = strings.en;
 ---
-<Base t={t} canonical="https://www.am-i-exposed.com/">
+<Base
+  title={t.title}
+  description={t.metaDesc}
+  canonical="https://www.am-i-exposed.com/"
+  lang={t.htmlLang}
+  ogLocale={t.ogLocale}
+  hreflang={true}
+>
   <Home t={t} lang="en" />
 </Base>

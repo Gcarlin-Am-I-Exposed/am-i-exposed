@@ -118,3 +118,41 @@ a { color: var(--link); }
 @media (prefers-reduced-motion: reduce) {
   .sweep, .smil * { animation: none !important; }
 }
+
+/* ---- settlement article (detail page) ---- */
+.article { max-width: 760px; }
+.crumbs { font-size: 13px; color: var(--muted); margin: 24px 0 4px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.crumbs a { color: var(--link); text-decoration: none; }
+.crumbs a:hover { text-decoration: underline; }
+.article h1 { font-size: clamp(28px, 4vw, 40px); margin: 8px 0 0; }
+.standfirst { font-size: 19px; line-height: 1.5; margin: 16px 0 8px; }
+.article h2 { font-size: 22px; margin: 34px 0 6px; }
+.article h3 { font-family: var(--font-ui); font-weight: 700; font-size: 17px; margin: 22px 0 2px; }
+.article p { margin: 8px 0; }
+.article a { color: var(--link); }
+table.facts { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 15px; }
+.facts th { text-align: left; font-weight: 600; padding: 9px 18px 9px 0; vertical-align: top; white-space: nowrap; color: var(--muted); border-bottom: 1px solid var(--rule); }
+.facts td { padding: 9px 0; border-bottom: 1px solid var(--rule); }
+ul.exposed { margin: 8px 0; padding-left: 20px; }
+ul.exposed li { margin: 3px 0; }
+.source { font-size: 13px; color: var(--muted); }
+.article .note { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 14px 16px; margin: 26px 0; font-size: 14px; color: var(--muted); }
+.article .note p { margin: 0; }
+.article .cta { background: var(--surface); border: 1px solid var(--coin); border-radius: 16px; padding: 22px; margin: 28px 0; }
+.article .cta h2 { margin-top: 0; }
+.article .cta .btn { margin-top: 12px; }
+
+/* ---- settlements index / hub ---- */
+.settle-head { padding-block: clamp(32px, 5vw, 56px); border-bottom: 1px solid var(--rule); }
+.settle-head h1 { font-size: clamp(30px, 4.4vw, 44px); max-width: 18ch; }
+.letters { display: flex; flex-wrap: wrap; gap: 6px; margin: 24px 0 0; }
+.letters a { border: 1px solid var(--rule); background: var(--surface); border-radius: 8px; min-width: 36px; min-height: 36px; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: var(--ink); text-decoration: none; }
+.letters a:hover { border-color: var(--coin); }
+.settle-list { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 10px; }
+.settle-list li { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 14px 16px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; align-items: baseline; }
+.settle-list a.co { font-weight: 700; font-size: 16px; color: var(--ink); text-decoration: none; }
+.settle-list a.co:hover { color: var(--gold-deep); }
+.settle-list .amt { font-family: var(--font-num); font-size: 14px; color: var(--ink); white-space: nowrap; }
+.settle-list .st { grid-column: 1 / -1; font-size: 12.5px; color: var(--muted); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.settle-sec { padding-block: clamp(28px, 4vw, 44px); }
+.settle-sec h2 { font-size: 26px; border-bottom: 1px solid var(--rule); padding-bottom: 6px; }

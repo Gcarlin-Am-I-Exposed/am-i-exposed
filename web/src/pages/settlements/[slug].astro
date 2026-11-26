@@ -1,0 +1,98 @@
+---
+import Base from '../../layouts/Base.astro';
+import { loadRecords, composePage } from '../../lib/settlements';
+
+export function getStaticPaths() {
+  return loadRecords().map((rec) => ({ params: { slug: rec.slug }, props: { rec } }));
+}
+
+const { rec } = Astro.props;
+const p = composePage(rec);
+---
+<Base title={p.title} description={p.desc} canonical={p.url} ogTitle={p.h1} jsonld={p.jsonld}>
+  <header class="head">
+    <div class="wrap">
+      <a class="brand" href="/"><svg aria-hidden="true"><use href="#m2a" /></svg><span>Am I Exposed?</span></a>
+      <nav>
+        <a href="/settlements/">All settlements</a>
+        <a href="/">Check my email</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap article">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span aria-hidden="true">›</span>
+      <a href="/settlements/">Settlements</a> <span aria-hidden="true">›</span>
+      <span>{p.empresa}</span>
+    </nav>
+
+    <h1>{p.h1}</h1>
+    <p class="standfirst" set:html={p.ledeHtml}></p>
+
+    {p.facts.length > 0 && (
+      <>
+        <h2>The numbers</h2>
+        <table class="facts"><tbody>
+          {p.facts.map((row) => (
+            <tr><th scope="row">{row.k}</th><td set:html={row.v}></td></tr>
+          ))}
+        </tbody></table>
+      </>
+    )}
+
+    {p.coveredHtml && (
+      <>
+        <h2>Who was covered</h2>
+        <p set:html={p.coveredHtml}></p>
+      </>
+    )}
+
+    {p.exposed.length > 0 && (
+      <>
+        <h2>What was exposed</h2>
+        <ul class="exposed">
+          {p.exposed.map((x) => <li set:html={x}></li>)}
+        </ul>
+      </>
+    )}
+
+    {p.onRecordHtml && (
+      <>
+        <h2>What is on the record</h2>
+        <p set:html={p.onRecordHtml}></p>
+        {p.publishedHtml && <p set:html={p.publishedHtml}></p>}
+      </>
+    )}
+
+    <h2>Where to claim</h2>
+    <p set:html={p.claimHtml}></p>
+    <p class="source" set:html={p.sourceHtml}></p>
+
+    {p.faq.length > 0 && (
+      <>
+        <h2>Common questions about the {p.empresa} {p.abierto || p.tipo === 'acuerdo' ? 'settlement' : 'case'}</h2>
+        {p.faq.map((f) => (
+          <>
+            <h3>{f.q}</h3>
+            <p set:html={f.a}></p>
+          </>
+        ))}
+      </>
+    )}
+
+    <div class="note"><p set:html={p.caveatHtml}></p></div>
+
+    <div class="cta">
+      <h2>{p.hibp ? 'Was your address in this breach?' : 'Check your own exposure'}</h2>
+      <p set:html={p.ctaHtml}></p>
+      <a class="btn primary" href="/">Check my email</a>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <p class="dis">We're not a law firm and we don't file claims for you. We're not affiliated with the court or the claims administrator. The administrator decides eligibility.</p>
+    </div>
+  </footer>
+</Base>

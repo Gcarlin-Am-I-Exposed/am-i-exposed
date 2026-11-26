@@ -272,6 +272,22 @@ for r in abiertos:
 for p in paginas.values():
     p['hibp'] = hibp_por_core.get(core(p['empresa']))
 
+if '--export-json' in sys.argv:
+    # Opt-in: dump the fully merged page records (plus the normalized claim
+    # link) so the Astro rebuild can render them in the new design. A normal
+    # run never takes this path and produces the live HTML exactly as before.
+    _out = []
+    for _p in paginas.values():
+        _rec = {k: v for k, v in _p.items() if k != '_peso'}
+        _rec['claim_href'] = claim_site.normalizar(_p.get('sitio'))
+        _rec['claim_display'] = claim_site.mostrar(_p.get('sitio'))
+        _out.append(_rec)
+    _out.sort(key=lambda r: r.get('slug') or '')
+    json.dump(_out, open(os.path.join(ROOT, 'data', 'settlements-content.json'), 'w',
+                         encoding='utf-8'), ensure_ascii=False, indent=1)
+    print('exported %d settlement records to data/settlements-content.json' % len(_out))
+    raise SystemExit(0)
+
 CAVEAT = ('Being in the breach is not the same as being in the class. Class membership '
           'usually turns on having received the company&rsquo;s own notice letter, and only '
           'the settlement administrator can confirm it. We are not lawyers, we take no fee '
