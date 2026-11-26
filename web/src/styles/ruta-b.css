@@ -208,18 +208,21 @@ ul.exposed li { margin: 3px 0; }
 .pw-input input { width: 100%; border: 1px solid var(--rule); background: var(--surface); border-radius: var(--pill); padding: 0 48px 0 18px; min-height: 52px; font: 16px var(--font-ui); color: var(--ink); }
 .pw-input input:focus { outline: 3px solid var(--gold-deep); outline-offset: 2px; border-color: var(--gold-deep); }
 .pw-toggle { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); border: 0; background: transparent; font-size: 18px; cursor: pointer; width: 36px; height: 36px; border-radius: 50%; line-height: 1; }
-.pw-found, .pw-clean { padding: 22px; max-width: none; }
-.pw-found h2, .pw-clean h2 { margin: 0 0 8px; font-size: 22px; }
-.pw-found h3 { margin: 18px 0 6px; font-family: var(--font-ui); font-weight: 700; font-size: 16px; }
-.pw-meter { display: flex; align-items: center; gap: 4px; margin-bottom: 12px; }
-.pw-meter .bar { width: 28px; height: 8px; border-radius: 4px; background: var(--rule); }
+.pw-sevbox { margin: 14px 14px 2px; padding: 13px 14px; border-radius: 12px; background: var(--chk-bg); }
+.pw-found.crit .pw-sevbox, .pw-found.high .pw-sevbox { background: rgba(180,35,24,.07); }
+.pw-sevbox .pw-meter { margin: 0 0 9px; justify-content: center; }
+.pw-sum { margin: 0; font-size: 13.5px; line-height: 1.46; color: var(--ink); text-align: center; }
+.pw-meter { display: flex; align-items: center; gap: 4px; }
+.pw-meter .bar { width: 26px; height: 8px; border-radius: 4px; background: var(--rule); }
 .pw-meter .pw-sev { margin-left: 8px; font-weight: 700; font-size: 13px; }
 .pw-found.crit .bar.on, .pw-found.high .bar.on { background: var(--alert); }
 .pw-found.crit .pw-sev, .pw-found.high .pw-sev { color: var(--alert); }
 .pw-found.mod .bar.on, .pw-found.low .bar.on { background: var(--gold-deep); }
 .pw-found.mod .pw-sev, .pw-found.low .pw-sev { color: var(--gold-deep); }
-.pw-found ol.steps { padding-left: 20px; }
-.pw-found ol.steps li { margin: 8px 0; }
+.pw-steps-h { margin: 16px 16px 6px; font-family: var(--font-ui); font-weight: 700; font-size: 15px; }
+.pw-found ol.steps { padding-left: 22px; margin: 0 16px; }
+.pw-found ol.steps li { margin: 8px 0; font-size: 14px; line-height: 1.5; }
+.pw-found .ctas { padding: 14px; }
 @media (max-width: 520px) { .pw-form { flex-direction: column; } .pw-form .btn { width: 100%; } }
 
 /* ── Breach-found alert (scan result) ─────────────────────────────── */
