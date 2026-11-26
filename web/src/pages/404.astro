@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import ContentChrome from '../components/ContentChrome.astro';
+---
+<Base
+  title="Page not found | Am I Exposed?"
+  description="That page doesn't exist. Check your email against known data breaches instead."
+  canonical="https://www.am-i-exposed.com/404"
+  lang="en"
+  ogLocale="en_US"
+>
+  <ContentChrome lang="en">
+    <main class="wrap article" style="text-align:center; padding-block: clamp(48px,10vw,120px)">
+      <p class="eyebrow" style="justify-content:center">404</p>
+      <h1>This page doesn't exist.</h1>
+      <p class="lede" style="margin-inline:auto">The page you're looking for isn't here. It may have moved, or the link was wrong.</p>
+      <p style="margin-top:24px">
+        <a class="btn primary" href="/">Check my email</a>
+        <a class="btn ghost" href="/settlements/" style="margin-left:8px">Browse settlements</a>
+      </p>
+    </main>
+  </ContentChrome>
+</Base>

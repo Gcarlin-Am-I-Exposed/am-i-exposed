@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro';
+import ContentChrome from '../../components/ContentChrome.astro';
+import PasswordForm from '../../components/PasswordForm.astro';
+---
+<Base
+  title="Revisa si tu contraseña fue filtrada | ¿Estoy expuesto?"
+  description="Revisa cualquier contraseña contra filtraciones conocidas, en privado. Tu contraseña nunca sale de tu dispositivo (k-anonymity). Gratis, sin cuenta."
+  canonical="https://www.am-i-exposed.com/es/contrasena/"
+  lang="es"
+  ogLocale="es_US"
+>
+  <ContentChrome lang="es">
+    <main class="wrap article" style="max-width:640px"><PasswordForm lang="es" /></main>
+  </ContentChrome>
+</Base>

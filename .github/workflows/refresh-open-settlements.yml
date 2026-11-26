@@ -71,6 +71,10 @@ jobs:
         run: |
           python3 tools/cross-hibp.py
           python3 tools/build-settlement-pages.py
+          # Structured export the Astro rebuild (web/) consumes. Lands in
+          # data/ so the "git add -A data" step below commits it, keeping the
+          # Astro settlement pages in sync with each weekly refresh.
+          python3 tools/build-settlement-pages.py --export-json
           python3 tools/build-sitemap.py
 
       # Dos chequeos, distinta severidad a proposito (cambio del 22/11/2026):

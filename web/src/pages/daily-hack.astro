@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import ContentChrome from '../components/ContentChrome.astro';
+import DailyHack from '../components/DailyHack.astro';
+import { loadSummary } from '../lib/dailyhack';
+const s = loadSummary();
+const title = `Who Got Hacked Today: ${s.new} New Victims | Am I Exposed?`;
+const desc = 'Daily record of companies hit by ransomware, with country, industry, group and source. Updated every morning. United States, Latin America and the rest of the world.';
+---
+<Base title={title} description={desc} canonical="https://www.am-i-exposed.com/daily-hack/" lang="en" ogLocale="en_US">
+  <ContentChrome lang="en"><DailyHack lang="en" /></ContentChrome>
+</Base>

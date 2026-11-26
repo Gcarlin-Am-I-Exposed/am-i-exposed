@@ -1,0 +1,30 @@
+---
+interface Props { lang?: string; }
+const { lang = 'en' } = Astro.props;
+const home = lang === 'es' ? '/es/' : '/';
+const es = lang === 'es';
+const t = {
+  check: es ? 'Revisar mi email' : 'Check my email',
+  settle: es ? 'Acuerdos' : 'Settlements',
+  dis: es
+    ? 'No somos un estudio de abogados y no presentamos reclamos por ti. No estamos afiliados al tribunal ni al administrador. El administrador decide la elegibilidad.'
+    : "We're not a law firm and we don't file claims for you. We're not affiliated with the court or the claims administrator. The administrator decides eligibility.",
+};
+---
+<header class="head">
+  <div class="wrap">
+    <a class="brand" href={home}><svg aria-hidden="true"><use href="#m2a" /></svg><span>Am I Exposed?</span></a>
+    <nav>
+      {!es && <a href="/settlements/">{t.settle}</a>}
+      <a href={home}>{t.check}</a>
+    </nav>
+  </div>
+</header>
+
+<slot />
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="dis">{t.dis}</p>
+  </div>
+</footer>

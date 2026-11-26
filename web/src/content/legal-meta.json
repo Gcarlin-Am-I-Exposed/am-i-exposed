@@ -1,0 +1,66 @@
+{
+ "privacy": {
+  "title": "Privacy policy | Am I Exposed?",
+  "desc": "What data this service handles and what it does not keep, who it is shared with, how long it is held, and how to exercise your rights.",
+  "canonical": "https://www.am-i-exposed.com/privacy/",
+  "ogLocale": "en_US",
+  "lang": "en",
+  "bytes": 8409
+ },
+ "terms": {
+  "title": "Terms and conditions | Am I Exposed?",
+  "desc": "Terms of use: what the free check covers, what the paid action plan includes, refunds, liability and governing law.",
+  "canonical": "https://www.am-i-exposed.com/terms/",
+  "ogLocale": "en_US",
+  "lang": "en",
+  "bytes": 6568
+ },
+ "us-privacy-notice": {
+  "title": "U.S. privacy notice | Am I Exposed?",
+  "desc": "How Am I Exposed? handles the personal information of United States residents, the email we send, your subscription, and the rights we offer.",
+  "canonical": "https://www.am-i-exposed.com/us-privacy-notice/",
+  "ogLocale": "en_US",
+  "lang": "en",
+  "bytes": 9360
+ },
+ "faq": {
+  "title": "Frequently asked questions | Am I Exposed?",
+  "desc": "What being exposed means, whether your money is at risk, whether anyone can watch you through the camera, and what to do right now. In plain language.",
+  "canonical": "https://www.am-i-exposed.com/faq/",
+  "ogLocale": "en_US",
+  "lang": "en",
+  "bytes": 13084
+ },
+ "privacidad": {
+  "title": "Política de privacidad | ¿Estoy expuesto?",
+  "desc": "Qué datos trata este servicio y cuáles no guarda, con quién se comparten, cuánto se conservan y cómo ejercer tus derechos.",
+  "canonical": "https://www.am-i-exposed.com/es/privacidad/",
+  "ogLocale": "es_US",
+  "lang": "es",
+  "bytes": 8700
+ },
+ "terminos": {
+  "title": "Términos y condiciones | ¿Estoy expuesto?",
+  "desc": "Condiciones de uso del servicio: qué incluye la revisión gratuita, qué incluye el plan de acción de pago, devoluciones, responsabilidad y ley aplicable.",
+  "canonical": "https://www.am-i-exposed.com/es/terminos/",
+  "ogLocale": "es_US",
+  "lang": "es",
+  "bytes": 6585
+ },
+ "aviso-privacidad-eeuu": {
+  "title": "Aviso de privacidad para EE. UU. | ¿Estoy expuesto?",
+  "desc": "Cómo tratamos los datos personales de residentes en Estados Unidos, los correos que enviamos, tu suscripción y los derechos que ofrecemos.",
+  "canonical": "https://www.am-i-exposed.com/es/aviso-privacidad-eeuu/",
+  "ogLocale": "es_US",
+  "lang": "es",
+  "bytes": 9760
+ },
+ "preguntas-frecuentes": {
+  "title": "Preguntas frecuentes | ¿Estoy expuesto?",
+  "desc": "Qué significa estar expuesto, si corre peligro tu dinero, si alguien puede ver tu cámara y qué hacer ahora mismo. Explicado sin tecnicismos.",
+  "canonical": "https://www.am-i-exposed.com/es/preguntas-frecuentes/",
+  "ogLocale": "es_US",
+  "lang": "es",
+  "bytes": 13115
+ }
+}

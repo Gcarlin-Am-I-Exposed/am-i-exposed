@@ -1,0 +1,147 @@
+---
+import type { HomeStrings, Lang } from '../i18n/strings';
+interface Props { t: HomeStrings; lang: Lang; }
+const { t, lang } = Astro.props;
+const es = lang === 'es';
+const monitorHref = es ? '/es/monitoreo/' : '/monitoring/';
+
+// Strings the client script needs to render the result.
+const rs = es
+  ? {
+      loading: 'Buscando en filtraciones conocidas…',
+      breachOne: 'filtración conocida', breachMany: 'filtraciones conocidas',
+      foundSub: 'Ve exactamente qué quedó expuesto y los acuerdos para los que podrías calificar en tu Full Report.',
+      cleanTitle: 'Buena noticia: tu email no está en ninguna filtración que seguimos.',
+      cleanSub: 'Las filtraciones nuevas pasan todo el tiempo. Activa el monitoreo y te enteras primero.',
+      exposed: 'Expuesto:', stealer: 'En un stealer log',
+      ctaReport: 'Ver mi Full Report — $5', ctaAlerts: 'Recibir alertas',
+      note: 'Los enlaces de reclamo siempre son gratis. No guardamos tu email.',
+      error: 'Algo salió mal. Inténtalo de nuevo.',
+      rate: 'Demasiadas consultas. Espera un minuto e inténtalo de nuevo.',
+      payFail: 'No se pudo iniciar el pago. Inténtalo de nuevo.',
+      resultLabel: 'Resultado',
+    }
+  : {
+      loading: 'Searching known breaches…',
+      breachOne: 'known breach', breachMany: 'known breaches',
+      foundSub: 'See exactly what was exposed and the settlements you may qualify for in your Full Report.',
+      cleanTitle: "Good news — your email isn't in any breach we track.",
+      cleanSub: 'New breaches happen all the time. Turn on monitoring and you hear first.',
+      exposed: 'Exposed:', stealer: 'In a stealer log',
+      ctaReport: 'Unlock my Full Report — $5', ctaAlerts: 'Get breach alerts',
+      note: "Claim links are always free. We don't store your email.",
+      error: 'Something went wrong. Please try again.',
+      rate: 'Too many checks. Wait a minute and try again.',
+      payFail: "Couldn't start checkout. Please try again.",
+      resultLabel: 'Result',
+    };
+---
+<form class="searchbar" id="scanForm" data-lang={lang} data-monitor={monitorHref}>
+  <input type="email" name="email" placeholder={t.emailPh} aria-label={t.heroCta} required autocomplete="email" />
+  <button class="btn primary" type="submit" data-label={t.heroCta}>{t.heroCta}</button>
+</form>
+<p class="trust">{t.heroTrust}</p>
+<p class="pw-link"><a href={es ? '/es/contrasena/' : '/password/'}>{es ? '¿Y una contraseña? Revísala →' : 'Check a password instead →'}</a></p>
+<div id="scanResult" hidden></div>
+
+<script type="application/json" id="scanI18n" set:html={JSON.stringify(rs)}></script>
+
+<script>
+  const form = document.getElementById('scanForm') as HTMLFormElement | null;
+  const out = document.getElementById('scanResult') as HTMLElement | null;
+  const i18nEl = document.getElementById('scanI18n');
+  if (form && out && i18nEl) {
+    const S = JSON.parse(i18nEl.textContent || '{}');
+    const lang = form.dataset.lang || 'en';
+    const monitorHref = form.dataset.monitor || '/monitoring/';
+    let currentEmail = '';
+    const alertsHref = () => `${monitorHref}?email=${encodeURIComponent(currentEmail)}`;
+
+    const esc = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, (c) =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#x27;' }[c] as string));
+    const coin = '<svg aria-hidden="true"><use href="#m2a"></use></svg>';
+    const year = (d: string) => (/\d{4}/.exec(d || '') || [''])[0];
+
+    function card(inner: string) {
+      return `<div class="result"><div class="tophead">${coin}<span>Am I Exposed?</span>`
+        + `<span class="exlabel">${esc(S.resultLabel)}</span></div>${inner}`
+        + `<p class="note">${esc(S.note)}</p></div>`;
+    }
+    function ctas() {
+      return `<div class="ctas"><button class="btn primary" type="button" id="ctaReport">${esc(S.ctaReport)}</button>`
+        + `<a class="btn gold" href="${esc(alertsHref())}">${esc(S.ctaAlerts)}</a></div>`;
+    }
+    function foundHtml(breaches: any[]) {
+      const n = breaches.length;
+      const rows = breaches.map((b) => {
+        const classes = Array.isArray(b.dataClasses) ? b.dataClasses.slice(0, 6).join(', ') : '';
+        const stealer = b.isStealerLog ? `<span class="chip chk">${esc(S.stealer)}</span>` : '';
+        const y = year(b.breachDate);
+        return `<li><b>${esc(b.title || b.name)}</b>${y ? `<span class="v">${esc(y)}</span>` : ''}`
+          + `<span class="meta">${stealer}${classes ? `${esc(S.exposed)} ${esc(classes)}` : ''}</span></li>`;
+      }).join('');
+      return card(
+        `<div class="sum"><p class="amt">${n}</p>`
+        + `<p class="k">${esc(n === 1 ? S.breachOne : S.breachMany)}</p>`
+        + `<p class="max">${esc(S.foundSub)}</p></div>`
+        + `<ul class="items">${rows}</ul>${ctas()}`
+      );
+    }
+    function cleanHtml() {
+      return card(
+        `<div class="sum"><p class="k" style="font-size:18px;color:var(--money);margin-top:4px">${esc(S.cleanTitle)}</p>`
+        + `<p class="max">${esc(S.cleanSub)}</p></div>`
+        + `<div class="ctas"><a class="btn gold" href="${esc(alertsHref())}">${esc(S.ctaAlerts)}</a></div>`
+      );
+    }
+    function loadingHtml() {
+      return `<div class="result"><div class="sum" style="padding:32px 18px">`
+        + `<div style="width:56px;height:56px;margin:0 auto 12px">${coin}</div>`
+        + `<p class="k">${esc(S.loading)}</p></div></div>`;
+    }
+
+    async function startCheckout(email: string) {
+      try {
+        const r = await fetch('/api/checkout?plan=report', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lang, email }),
+        });
+        const data = await r.json().catch(() => null);
+        if (!r.ok || !data || !data.url) throw new Error((data && data.error) || S.payFail);
+        window.location.href = data.url;
+      } catch (err: any) {
+        alert(err && err.message ? err.message : S.payFail);
+      }
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = form.querySelector('input[name=email]') as HTMLInputElement;
+      const btn = form.querySelector('button') as HTMLButtonElement;
+      const email = (input.value || '').trim();
+      if (!email) return;
+      currentEmail = email;
+      btn.disabled = true; btn.textContent = '…';
+      out.hidden = false; out.innerHTML = loadingHtml();
+      try {
+        const r = await fetch('/api/check-email', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, lang, origen: 'web' }),
+        });
+        const data = await r.json().catch(() => ({}));
+        if (r.status === 429) throw new Error(S.rate);
+        if (!r.ok) throw new Error(data.error || S.error);
+        out.innerHTML = data.found && Array.isArray(data.breaches) && data.breaches.length
+          ? foundHtml(data.breaches) : cleanHtml();
+        const rep = document.getElementById('ctaReport');
+        if (rep) rep.addEventListener('click', () => startCheckout(email));
+        out.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch (err: any) {
+        out.innerHTML = `<div class="result"><div class="sum"><p class="k" style="color:var(--alert)">`
+          + esc(err && err.message ? err.message : S.error) + `</p></div></div>`;
+      } finally {
+        btn.disabled = false; btn.textContent = btn.dataset.label || 'Check';
+      }
+    });
+  }
+</script>

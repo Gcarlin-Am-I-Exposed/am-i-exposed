@@ -1,0 +1,69 @@
+---
+interface Props { lang?: 'en' | 'es'; }
+const { lang = 'en' } = Astro.props;
+const es = lang === 'es';
+const PORTAL = 'https://billing.stripe.com/p/login/cNi28k1Oi4lU4kLe0B0co00';
+const SUPPORT = 'mailto:support@selenticgroup.com?subject=Subscription%20help';
+
+const t = es
+  ? {
+      h1: 'Gestiona tu suscripción',
+      standfirst: '¿Tienes monitoreo de filtraciones o de acuerdos y quieres cambiarlo o cancelarlo? Puedes hacerlo tú mismo, en línea, en menos de un minuto. Sin llamadas, sin escribirnos, sin esperas.',
+      cta1h: 'Gestiona o cancela en un clic',
+      cta1p: 'Abre tu página de facturación, alojada de forma segura por Stripe. Ahí puedes cancelar, cambiar entre mensual y anual, o actualizar tu tarjeta.',
+      cta1btn: 'Gestionar suscripción',
+      howh: 'Cómo funciona',
+      steps: [
+        'Haz clic en <strong>Gestionar suscripción</strong> arriba.',
+        'Ingresa el email con el que te suscribiste. Stripe te envía un enlace seguro de un solo uso.',
+        'Abre ese enlace desde tu correo para ver tu suscripción y <strong>cancelar en un clic</strong>. La cancelación surte efecto al final del periodo que ya pagaste.',
+      ],
+      howp: 'El enlace lo envía Stripe, nuestro procesador de pagos, así que nadie más puede abrir tu página de facturación solo con saber tu email. Si un enlace vence, pide uno nuevo en la misma página.',
+      note: 'Revisar tu email o una contraseña en Am I Exposed <strong>siempre es gratis</strong> y no tiene suscripción: esta página es solo para los planes opcionales de monitoreo. Si nunca activaste el monitoreo, no hay nada que cancelar.',
+      elseh: '¿Necesitas otra cosa?',
+      elsep: 'Si no encuentras tu suscripción, o te cobraron por error, lo resolvemos.',
+      elsebtn: 'Escríbenos',
+    }
+  : {
+      h1: 'Manage your subscription',
+      standfirst: 'Have breach or settlement monitoring and want to change or cancel it? You can do it yourself, online, in under a minute. No call, no email to us, no waiting.',
+      cta1h: 'Manage or cancel in one click',
+      cta1p: 'Open your billing page, hosted securely by Stripe. You can cancel, switch between monthly and yearly, or update your card there.',
+      cta1btn: 'Manage subscription',
+      howh: 'How it works',
+      steps: [
+        'Click <strong>Manage subscription</strong> above.',
+        'Enter the email address you subscribed with. Stripe sends you a secure, single-use link.',
+        'Open that link from your inbox to see your subscription and <strong>cancel in one click</strong>. A cancellation takes effect at the end of the period you have already paid for.',
+      ],
+      howp: 'The link comes from Stripe, our payment processor, so no one else can open your billing page just by knowing your email. If a link expires, request a new one from the same page.',
+      note: 'Checking your email or a password on Am I Exposed is <strong>always free</strong> and has no subscription — this page is only for the optional breach or settlement monitoring plans. If you never started monitoring, there is nothing to cancel.',
+      elseh: 'Need something else?',
+      elsep: 'If you cannot find your subscription, or you were charged in error, we will sort it out.',
+      elsebtn: 'Email us',
+    };
+---
+<main class="wrap article">
+  <h1>{t.h1}</h1>
+  <p class="standfirst">{t.standfirst}</p>
+
+  <div class="cta">
+    <h2 style="margin-top:0">{t.cta1h}</h2>
+    <p>{t.cta1p}</p>
+    <a class="btn primary" href={PORTAL} rel="noopener">{t.cta1btn}</a>
+  </div>
+
+  <h2>{t.howh}</h2>
+  <ol class="steps">
+    {t.steps.map((s) => <li set:html={s}></li>)}
+  </ol>
+  <p>{t.howp}</p>
+
+  <div class="note"><p set:html={t.note}></p></div>
+
+  <div class="cta">
+    <h2 style="margin-top:0">{t.elseh}</h2>
+    <p>{t.elsep}</p>
+    <a class="btn gold" href={SUPPORT}>{t.elsebtn}</a>
+  </div>
+</main>

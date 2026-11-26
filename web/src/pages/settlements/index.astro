@@ -1,0 +1,98 @@
+---
+import Base from '../../layouts/Base.astro';
+import { loadRecords, money, fechaLarga } from '../../lib/settlements';
+
+const recs = loadRecords();
+const today = new Date();
+const todayUTC = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate());
+
+function isoPast(d: string | null): boolean | null {
+  if (!d) return null;
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d);
+  if (!m) return null;
+  return Date.UTC(+m[1], +m[2] - 1, +m[3]) < todayUTC;
+}
+
+interface Row {
+  name: string; slug: string; amount: string; when: string; chip: string; chipCls: string;
+}
+const rows: Row[] = recs.map((r) => {
+  const past = isoPast(r.plazo);
+  const open = r.tipo === 'abierto' || (r.tipo === 'acuerdo' && past === false);
+  const amount = money(r.pago) ? `${money(r.pago)}/person` : (money(r.fondo) ? `${money(r.fondo)} fund` : '');
+  let chip = 'Settled', chipCls = 'chk';
+  if (r.tipo === 'abierto' || (r.tipo === 'acuerdo' && past === false)) { chip = 'Open to claim'; chipCls = 'ok'; }
+  else if (r.tipo === 'acuerdo' && past === true) { chip = 'Claims closed'; chipCls = 'chk'; }
+  else if (r.tipo !== 'acuerdo') { chip = 'No settlement yet'; chipCls = 'chk'; }
+  const when = r.plazo ? `${past ? 'Closed' : 'Closes'} ${fechaLarga(r.plazo)}` : '';
+  return { name: r.empresa, slug: r.slug, amount, when, chip, chipCls, _open: open } as Row & { _open: boolean };
+});
+
+const openCount = rows.filter((r: any) => r._open).length;
+const total = rows.length;
+
+// group by first letter
+function bucket(name: string): string {
+  const c = (name[0] || '#').toUpperCase();
+  return /[A-Z]/.test(c) ? c : '#';
+}
+const groups: Record<string, Row[]> = {};
+for (const r of rows) {
+  const b = bucket(r.name);
+  (groups[b] ||= []).push(r);
+}
+const letters = Object.keys(groups).sort((a, b) => (a === '#' ? 1 : b === '#' ? -1 : a.localeCompare(b)));
+for (const l of letters) groups[l].sort((a, b) => a.name.localeCompare(b.name));
+
+const title = 'Open data breach settlements you can claim | Am I Exposed?';
+const desc = `We track ${total.toLocaleString('en-US')} data breach settlements and lawsuits — ${openCount} open to claim right now. Find a company you've dealt with and see what they're paying.`;
+---
+<Base title={title} description={desc} canonical="https://www.am-i-exposed.com/settlements/">
+  <header class="head">
+    <div class="wrap">
+      <a class="brand" href="/"><svg aria-hidden="true"><use href="#m2a" /></svg><span>Am I Exposed?</span></a>
+      <nav>
+        <a href="/">Check my email</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="settle-head full">
+    <div class="wrap">
+      <span class="eyebrow">Open settlements</span>
+      <h1>The settlements companies are paying right now.</h1>
+      <p class="lede">We track {total.toLocaleString('en-US')} data breach settlements and lawsuits, {openCount} of them open to claim today. Claim links are always free — we never charge to file.</p>
+      <div class="stats" style="max-width:640px">
+        <div class="stat"><div class="n">{openCount}</div><div class="l">open to claim now</div></div>
+        <div class="stat"><div class="n">{total.toLocaleString('en-US')}</div><div class="l">settlements tracked</div></div>
+        <div class="stat"><div class="n"><a class="btn primary" href="/" style="font-size:15px">Check my email</a></div><div class="l">free, no account</div></div>
+      </div>
+      <nav class="letters" aria-label="Jump to letter">
+        {letters.map((l) => <a href={`#l-${l === '#' ? '0' : l}`}>{l}</a>)}
+      </nav>
+    </div>
+  </section>
+
+  <main class="wrap">
+    {letters.map((l) => (
+      <section class="settle-sec" id={`l-${l === '#' ? '0' : l}`}>
+        <h2>{l}</h2>
+        <ul class="settle-list">
+          {groups[l].map((r) => (
+            <li>
+              <a class="co" href={`/settlements/${r.slug}/`}>{r.name}</a>
+              {r.amount && <span class="amt">{r.amount}</span>}
+              <span class="st"><span class={`chip ${r.chipCls}`}>{r.chip}</span>{r.when && <span>{r.when}</span>}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <p class="dis">We're not a law firm and we don't file claims for you. We're not affiliated with the court or the claims administrator. The administrator decides eligibility.</p>
+    </div>
+  </footer>
+</Base>

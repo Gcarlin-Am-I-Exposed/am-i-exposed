@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro';
+import Home from '../../components/Home.astro';
+import { strings } from '../../i18n/strings';
+const t = strings.es;
+---
+<Base
+  title={t.title}
+  description={t.metaDesc}
+  canonical="https://www.am-i-exposed.com/es/"
+  lang={t.htmlLang}
+  ogLocale={t.ogLocale}
+  hreflang={true}
+>
+  <Home t={t} lang="es" />
+</Base>
