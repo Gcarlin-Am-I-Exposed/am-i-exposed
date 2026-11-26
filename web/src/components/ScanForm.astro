@@ -41,6 +41,7 @@ const rs = es
   <button class="btn primary" type="submit" data-label={t.heroCta}>{t.heroCta}</button>
 </form>
 <p class="trust">{t.heroTrust}</p>
+<p class="pw-link"><a href={es ? '/es/contrasena/' : '/password/'}>{es ? '¿Y una contraseña? Revísala →' : 'Check a password instead →'}</a></p>
 <div id="scanResult" hidden></div>
 
 <script type="application/json" id="scanI18n" set:html={JSON.stringify(rs)}></script>
