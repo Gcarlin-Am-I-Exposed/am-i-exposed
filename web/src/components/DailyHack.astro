@@ -1,0 +1,123 @@
+---
+import { loadSummary, loadTodayItems } from '../lib/dailyhack';
+
+interface Props { lang?: 'en' | 'es'; }
+const { lang = 'en' } = Astro.props;
+const es = lang === 'es';
+const home = es ? '/es/' : '/';
+
+const s = loadSummary();
+const items = loadTodayItems(s.date);
+
+function tc(x: string): string {
+  if (!x) return es ? 'Sin identificar' : 'Unidentified';
+  return x.replace(/\b\w/g, (c) => c.toUpperCase());
+}
+function statusLabel(st: string): { txt: string; cls: string } {
+  const v = st.toLowerCase();
+  if (v.startsWith('confirm') || v.startsWith('verific')) return { txt: es ? 'Confirmado' : 'Confirmed', cls: 'ok' };
+  return { txt: es ? 'Reclamado' : 'Claimed', cls: 'chk' };
+}
+
+const t = es
+  ? {
+      h1: 'Quién fue hackeado hoy',
+      lede: `Un registro diario de las empresas e instituciones que los grupos de ransomware dicen haber atacado. ${s.week} casos en los últimos 7 días, cada uno con su fuente y con la diferencia entre lo que el grupo afirma y lo que la víctima confirma.`,
+      lToday: 'nuevas hoy', lWeek: 'en los últimos 7 días', lUs: 'en Estados Unidos', lLatam: 'en Latinoamérica',
+      hToday: 'Casos de hoy', hGroups: 'Grupos más activos', hSectors: 'Por industria', hCountries: 'Por país',
+      hEmail: '¿Y tu email?',
+      pEmail: 'Cuando una de estas empresas pierde una base de datos, los emails y contraseñas terminan circulando. La revisión es gratis, no necesita cuenta ni tarjeta, y tu email no se guarda.',
+      ctaEmail: 'Revisar si mi email se filtró',
+      hAccuse: 'Informamos, no acusamos',
+      pAccuse1: 'Cada caso de esta página viene de lo que un grupo criminal publicó en su propio sitio de filtraciones, según lo registran rastreadores públicos, de una filtración verificada por Have I Been Pwned, o de la prensa. Que una empresa aparezca aquí significa que alguien afirmó un ataque: no es un veredicto, no prueba que la empresa haya hecho algo malo, y no prueba que tus datos estén circulando.',
+      pAccuse2: 'No verificamos de forma independiente ninguna de esas afirmaciones, no alojamos datos filtrados, y no publicamos nada de lo que los grupos dicen tener. Cada fila indica su estado y enlaza a su fuente para que lo compruebes tú mismo.',
+      source: 'Fuente',
+    }
+  : {
+      h1: 'Who got hacked today',
+      lede: `A daily record of the companies and institutions that ransomware groups say they have attacked. ${s.week} cases in the last 7 days, each with its source and with the difference between what the group claims and what the victim confirms.`,
+      lToday: 'new today', lWeek: 'in the last 7 days', lUs: 'in the United States', lLatam: 'in Latin America',
+      hToday: "Today's cases", hGroups: 'Most active groups', hSectors: 'By industry', hCountries: 'By country',
+      hEmail: 'What about your email?',
+      pEmail: 'When one of these companies loses a database, the emails and passwords end up circulating. The check is free, needs no account and no card, and your email is not stored.',
+      ctaEmail: 'Check if my email was leaked',
+      hAccuse: 'We report, we do not accuse',
+      pAccuse1: "Every case on this page comes from what a criminal group published on its own leak site, as recorded by public trackers, from a breach verified by Have I Been Pwned, or from the press. A company appearing here means someone claimed an attack: it is not a verdict, it does not prove the company did anything wrong, and it does not prove your data is circulating.",
+      pAccuse2: 'We do not independently verify any of those claims, we do not host leaked data, and we publish none of what the groups say they hold. Every row states its status and links to its source so you can check it yourself.',
+      source: 'Source',
+    };
+
+const usLabel = es ? 'Estados Unidos' : 'United States';
+---
+<section class="settle-head full">
+  <div class="wrap">
+    <span class="eyebrow">{es ? 'Radar diario' : 'Daily radar'}</span>
+    <h1>{t.h1}</h1>
+    <p class="lede">{t.lede}</p>
+    <div class="stats" style="max-width:720px">
+      <div class="stat"><div class="n">{s.new}</div><div class="l">{t.lToday}</div></div>
+      <div class="stat"><div class="n">{s.week}</div><div class="l">{t.lWeek}</div></div>
+      <div class="stat"><div class="n">{s.us}</div><div class="l">{t.lUs}</div></div>
+      <div class="stat"><div class="n">{s.latam}</div><div class="l">{t.lLatam}</div></div>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+  <section class="settle-sec">
+    <h2>{t.hToday}</h2>
+    <ul class="settle-list">
+      {items.map((it) => {
+        const st = statusLabel(it.status);
+        return (
+          <li>
+            <span class="co">{it.victim}</span>
+            {it.sourceUrl && <span class="amt"><a href={it.sourceUrl} rel="nofollow noopener">{it.source || t.source}</a></span>}
+            <span class="st">
+              <span class={`chip ${st.cls}`}>{st.txt}</span>
+              <span>{tc(it.group)} · {tc(it.sector)}{it.country ? ` · ${tc(it.country)}` : ''}</span>
+            </span>
+          </li>
+        );
+      })}
+    </ul>
+  </section>
+
+  <section class="settle-sec">
+    <div class="cta">
+      <h2 style="margin-top:0">{t.hEmail}</h2>
+      <p>{t.pEmail}</p>
+      <a class="btn primary" href={home}>{t.ctaEmail}</a>
+    </div>
+  </section>
+
+  <div class="dh-grid">
+    <section>
+      <h2>{t.hGroups}</h2>
+      <ul class="dh-rank">
+        {s.top_groups.map(([name, n]) => <li><span>{tc(name)}</span><span class="v">{n}</span></li>)}
+      </ul>
+    </section>
+    <section>
+      <h2>{t.hSectors}</h2>
+      <ul class="dh-rank">
+        {s.top_sectors.map(([name, n]) => <li><span>{tc(name)}</span><span class="v">{n}</span></li>)}
+      </ul>
+    </section>
+    <section>
+      <h2>{t.hCountries}</h2>
+      <ul class="dh-rank">
+        <li><span>{usLabel}</span><span class="v">{s.us}</span></li>
+        {s.latam_countries.map(([name, n]) => <li><span>{tc(name)}</span><span class="v">{n}</span></li>)}
+      </ul>
+    </section>
+  </div>
+
+  <section class="settle-sec">
+    <div class="note">
+      <h3 style="margin:0 0 6px">{t.hAccuse}</h3>
+      <p>{t.pAccuse1}</p>
+      <p>{t.pAccuse2}</p>
+    </div>
+  </section>
+</main>

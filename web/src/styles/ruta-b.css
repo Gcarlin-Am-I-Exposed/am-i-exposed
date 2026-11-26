@@ -168,3 +168,11 @@ ul.exposed li { margin: 3px 0; }
 .pcard .buy .btn { width: 100%; margin-top: 4px; }
 .plan-fine { color: var(--muted); font-size: 13px; margin-top: 18px; max-width: 70ch; }
 @media (max-width: 860px) { .price3 { grid-template-columns: 1fr; } }
+
+/* ---- daily hack ---- */
+.dh-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; padding-block: clamp(20px, 3vw, 36px); }
+.dh-grid h2 { font-size: 20px; border-bottom: 1px solid var(--rule); padding-bottom: 6px; }
+.dh-rank { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; }
+.dh-rank li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--rule); font-size: 14.5px; }
+.dh-rank .v { font-family: var(--font-num); color: var(--muted); }
+@media (max-width: 760px) { .dh-grid { grid-template-columns: 1fr; } }

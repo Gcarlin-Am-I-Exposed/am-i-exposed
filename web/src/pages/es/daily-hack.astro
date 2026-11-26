@@ -1,0 +1,12 @@
+---
+import Base from '../../layouts/Base.astro';
+import ContentChrome from '../../components/ContentChrome.astro';
+import DailyHack from '../../components/DailyHack.astro';
+import { loadSummary } from '../../lib/dailyhack';
+const s = loadSummary();
+const title = `Quién fue hackeado hoy: ${s.new} nuevas víctimas | ¿Estoy expuesto?`;
+const desc = 'Registro diario de empresas golpeadas por ransomware, con país, industria, grupo y fuente. Se actualiza cada mañana. Estados Unidos, Latinoamérica y el resto del mundo.';
+---
+<Base title={title} description={desc} canonical="https://www.am-i-exposed.com/es/daily-hack/" lang="es" ogLocale="es_US">
+  <ContentChrome lang="es"><DailyHack lang="es" /></ContentChrome>
+</Base>
