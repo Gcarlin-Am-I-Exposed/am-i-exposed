@@ -1,0 +1,161 @@
+---
+// The free full report. Rendered entirely from the scan handoff in
+// sessionStorage (aie:report): the breaches HIBP returned plus the real
+// class-action settlements they were matched against. No email in any URL, no
+// server call, nothing stored. A direct visit (no handoff) shows a scan prompt.
+interface Props { lang?: 'en' | 'es'; }
+const { lang = 'en' } = Astro.props;
+const es = lang === 'es';
+const homeHref = es ? '/es/' : '/';
+const monitorHref = es ? '/es/monitoreo/' : '/monitoring/';
+
+const rs = es
+  ? {
+      alertTitle: 'Tu email apareció en una filtración',
+      alertSub: 'Esto es todo lo que encontramos, gratis. Los acuerdos de abajo son demandas colectivas reales de EE. UU. Los enlaces para reclamar siempre son gratis.',
+      empty: 'Primero haz un escaneo gratis para ver tu reporte.',
+      emptyCta: 'Volver al escaneo',
+      settleHead: 'Acuerdos para los que podrías calificar',
+      settleIntro: 'Cruzamos tus filtraciones con demandas colectivas reales de EE. UU. Podrías calificar si fuiste cliente, miembro, paciente o empleado de la empresa en las fechas afectadas, aunque nunca recibieras una carta. No somos abogados y no reclamamos por ti.',
+      noMatch: 'Todavía no hay un acuerdo colectivo abierto ligado a tus filtraciones. Activa las alertas y te avisamos apenas se abra uno.',
+      upTo: 'hasta', perPerson: 'por persona',
+      openChip: 'Abierto', closedChip: 'Cerrado',
+      claimBy: 'Reclama hasta', eligible: 'Quién califica:', claimAt: 'Sitio oficial de reclamo',
+      breachHead: 'Filtraciones en las que apareció tu email',
+      exposed: 'Expuesto:', stealer: 'En un stealer log',
+      reliefHead: '¿Quieres el paso a paso?',
+      reliefSub: 'Recibe una guía personal, paso a paso, para blindar cada cuenta expuesta y presentar cada reclamo de la forma correcta.',
+      ctaRelief: 'Recupera la tranquilidad, paso a paso · $5',
+      ctaAlerts: 'Recibir alertas',
+      disclaimer: 'Los montos son la cifra publicada por cada administrador del acuerdo, mostrada tal cual y nunca sumada ni prometida. Nada aquí es asesoría legal ni financiera.',
+      payFail: 'No se pudo iniciar el pago. Inténtalo de nuevo.',
+    }
+  : {
+      alertTitle: 'Your Email Appeared in a Breach',
+      alertSub: "Here's everything we found, free. The settlements below are real US class actions — claim links are always free.",
+      empty: 'Run a free scan first to see your report.',
+      emptyCta: 'Back to the scan',
+      settleHead: 'Settlements you may qualify for',
+      settleIntro: 'We matched your breaches to real US class-action settlements. You may qualify if you were a customer, member, patient or employee of the company during the affected dates — even if you never got a letter. We are not lawyers and we do not file for you.',
+      noMatch: 'No open class-action settlement is keyed to your breaches yet. Turn on alerts and we tell you the moment one opens.',
+      upTo: 'up to', perPerson: 'per person',
+      openChip: 'Open', closedChip: 'Closed',
+      claimBy: 'Claim by', eligible: 'Who qualifies:', claimAt: 'Official claim site',
+      breachHead: 'Breaches your email appeared in',
+      exposed: 'Exposed:', stealer: 'In a stealer log',
+      reliefHead: 'Want the step-by-step?',
+      reliefSub: 'Get a personal, step-by-step guide to lock down every exposed account and file each claim the right way.',
+      ctaRelief: 'Get relief now — step by step · $5',
+      ctaAlerts: 'Get breach alerts',
+      disclaimer: "Amounts are each settlement administrator's own published figure, shown as listed and never summed or promised. Nothing here is legal or financial advice.",
+      payFail: "Couldn't start checkout. Please try again.",
+    };
+---
+<section class="freport" id="freeReport" data-lang={lang} data-home={homeHref} data-monitor={monitorHref}>
+  <div class="fr-loading"><div class="fr-coin"><svg aria-hidden="true"><use href="#m2a"></use></svg></div></div>
+</section>
+
+<script type="application/json" id="frI18n" set:html={JSON.stringify(rs)}></script>
+
+<script>
+  const root = document.getElementById('freeReport');
+  const i18nEl = document.getElementById('frI18n');
+  if (root && i18nEl) {
+    const S = JSON.parse(i18nEl.textContent || '{}');
+    const lang = root.getAttribute('data-lang') || 'en';
+    const homeHref = root.getAttribute('data-home') || '/';
+    const monitorHref = root.getAttribute('data-monitor') || '/monitoring/';
+
+    const esc = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, (c) =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#x27;' }[c] as string));
+    const warn = '<svg class="exwarn" viewBox="0 0 24 24" aria-hidden="true">'
+      + '<path d="M12 3 2 20h20L12 3Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>'
+      + '<path d="M12 10v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
+      + '<circle cx="12" cy="17.2" r="1.1" fill="currentColor"/></svg>';
+    const year = (d: string) => (/\d{4}/.exec(d || '') || [''])[0];
+    const money = (n: number) => '$' + Number(n).toLocaleString(lang === 'es' ? 'es-US' : 'en-US');
+    function prettyDate(iso: string) {
+      const [y, m, d] = String(iso || '').split('-').map(Number);
+      if (!y) return '';
+      try {
+        return new Date(y, m - 1, d).toLocaleDateString(lang === 'es' ? 'es-US' : 'en-US',
+          { year: 'numeric', month: 'long', day: 'numeric' });
+      } catch { return iso; }
+    }
+
+    let blob: any = null;
+    try {
+      const raw = sessionStorage.getItem('aie:report');
+      if (raw) blob = JSON.parse(raw);
+    } catch (e) { /* ignore */ }
+    // Treat a handoff older than 30 min as stale.
+    if (blob && blob.ts && Date.now() - blob.ts > 30 * 60 * 1000) blob = null;
+
+    if (!blob || !Array.isArray(blob.breaches) || !blob.breaches.length) {
+      root.innerHTML = `<div class="fr-empty"><p>${esc(S.empty)}</p>`
+        + `<a class="btn primary" href="${esc(homeHref)}">${esc(S.emptyCta)}</a></div>`;
+    } else {
+      const email: string = typeof blob.email === 'string' ? blob.email : '';
+      const breaches: any[] = blob.breaches;
+      const matches: any[] = Array.isArray(blob.matches) ? blob.matches : [];
+      const alertsHref = `${monitorHref}?email=${encodeURIComponent(email)}`;
+
+      // Settlements section
+      let settleBody: string;
+      if (matches.length) {
+        settleBody = matches.map((it) => {
+          const open = it.status === 'open';
+          const chip = `<span class="chip ${open ? 'ok' : 'muted'}">${esc(open ? S.openChip : S.closedChip)}</span>`;
+          const amt = (typeof it.porPersona === 'number' && it.porPersona > 0)
+            ? `<span class="fr-amt">${esc(S.upTo)} ${money(it.porPersona)} <small>${esc(S.perPerson)}</small></span>` : '';
+          const by = (open && it.plazo) ? `<p class="fr-by">${esc(S.claimBy)} ${esc(prettyDate(it.plazo))}</p>` : '';
+          const elig = it.elegible ? `<p class="fr-elig"><b>${esc(S.eligible)}</b> ${esc(it.elegible)}</p>` : '';
+          const link = it.sitio
+            ? `<a class="fr-claim" href="https://${esc(it.sitio)}" target="_blank" rel="noopener noreferrer nofollow">${esc(S.claimAt)}: ${esc(it.sitio)} ↗</a>`
+            : '';
+          return `<div class="fr-set ${open ? 'open' : 'closed'}"><div class="fr-set-h">`
+            + `<span class="fr-co">${esc(it.empresa)}</span>${chip}</div>`
+            + `${amt}${by}${elig}${link}</div>`;
+        }).join('');
+      } else {
+        settleBody = `<p class="fr-note">${esc(S.noMatch)}</p>`
+          + `<a class="btn gold" href="${esc(alertsHref)}">${esc(S.ctaAlerts)}</a>`;
+      }
+
+      // Breaches section
+      const breachBody = breaches.map((b) => {
+        const classes = Array.isArray(b.dataClasses) ? b.dataClasses.join(', ') : '';
+        const stealer = b.isStealerLog ? `<span class="chip chk">${esc(S.stealer)}</span>` : '';
+        const y = year(b.breachDate);
+        return `<li><b>${esc(b.title || b.name)}</b>${y ? `<span class="v">${esc(y)}</span>` : ''}`
+          + `<span class="meta">${stealer}${classes ? `${esc(S.exposed)} ${esc(classes)}` : ''}</span></li>`;
+      }).join('');
+
+      root.innerHTML =
+        `<div class="fr-banner">${warn}<div><h1>${esc(S.alertTitle)}</h1>`
+        + `<p>${esc(S.alertSub)}</p></div></div>`
+        + `<div class="fr-sec"><h2>${esc(S.settleHead)}</h2>`
+        + `<p class="fr-intro">${esc(S.settleIntro)}</p>${settleBody}</div>`
+        + `<div class="fr-sec"><h2>${esc(S.breachHead)}</h2><ul class="items">${breachBody}</ul></div>`
+        + `<div class="fr-relief"><h2>${esc(S.reliefHead)}</h2><p>${esc(S.reliefSub)}</p>`
+        + `<div class="ctas"><button class="btn primary" type="button" id="frRelief">${esc(S.ctaRelief)}</button>`
+        + `<a class="btn ghost" href="${esc(alertsHref)}">${esc(S.ctaAlerts)}</a></div></div>`
+        + `<p class="fr-disc">${esc(S.disclaimer)}</p>`;
+
+      const relief = document.getElementById('frRelief');
+      if (relief) relief.addEventListener('click', async () => {
+        try {
+          const r = await fetch('/api/checkout?plan=report', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ lang, email }),
+          });
+          const data = await r.json().catch(() => null);
+          if (!r.ok || !data || !data.url) throw new Error((data && data.error) || S.payFail);
+          window.location.href = data.url;
+        } catch (err: any) {
+          alert(err && err.message ? err.message : S.payFail);
+        }
+      });
+    }
+  }
+</script>

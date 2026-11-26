@@ -11,10 +11,11 @@ interface Props {
   ogTitle?: string;
   jsonld?: unknown;
   hreflang?: boolean; // emit en/es/x-default alternates (home pages)
+  noindex?: boolean;  // per-user/dynamic pages (free report) must not be indexed
 }
 const {
   title, description, canonical,
-  lang = 'en', ogLocale = 'en_US', ogTitle, jsonld, hreflang = false,
+  lang = 'en', ogLocale = 'en_US', ogTitle, jsonld, hreflang = false, noindex = false,
 } = Astro.props;
 // JSON-LD is embedded safely: < is escaped so the data can never close the tag.
 const jsonldStr = jsonld ? JSON.stringify(jsonld).replace(/</g, '\\u003c') : null;
@@ -26,7 +27,7 @@ const jsonldStr = jsonld ? JSON.stringify(jsonld).replace(/</g, '\\u003c') : nul
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
     <meta name="theme-color" content="#FBF8F2" />

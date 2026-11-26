@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import ContentChrome from '../components/ContentChrome.astro';
+import FreeReport from '../components/FreeReport.astro';
+---
+<Base
+  title="Your free report | Am I Exposed?"
+  description="Your free full breach-and-settlement report."
+  canonical="https://www.am-i-exposed.com/report/"
+  lang="en"
+  ogLocale="en_US"
+  noindex={true}
+>
+  <ContentChrome lang="en">
+    <main class="wrap article" style="max-width:640px"><FreeReport lang="en" /></main>
+  </ContentChrome>
+</Base>
