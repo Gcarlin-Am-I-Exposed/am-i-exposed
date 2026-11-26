@@ -16,9 +16,9 @@
     --line:        rgba(0,0,0,.09);
     --line-strong: rgba(0,0,0,.16);
 
-    --accent:      #105BFF;
+    --accent:      #B5FC4F;
     --accent-ink:  #0A46C8;
-    --accent-soft: rgba(16,91,255,.11);
+    --accent-soft: rgba(181,252,79,.16);
     --violet:      #6C56FC;
     --violet-soft: rgba(108,86,252,.11);
     --good:        #4E8A05;
@@ -31,8 +31,8 @@
     --bad:         #D3373C;
     --bad-soft:    rgba(229,72,77,.12);
 
-    --btn-bg:      #105BFF;
-    --btn-ink:     #FFFFFF;
+    --btn-bg:      #B5FC4F;
+    --btn-ink:     #0B0B0C;
 
     --shadow-sm:   0 1px 2px rgba(0,0,0,.05);
     --shadow:      0 2px 6px rgba(0,0,0,.05), 0 12px 28px rgba(0,0,0,.05);
@@ -49,7 +49,7 @@
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
         color-scheme: dark;
-        --bg:          #17181F;
+        --bg:          #0B0B0C;
         --surface:     #1E2029;
         --surface-2:   #262833;
         --ink:         #F6F6F7;
@@ -59,9 +59,9 @@
         --line:        rgba(255,255,255,.10);
         --line-strong: rgba(255,255,255,.20);
 
-        --accent:      #5B8CFF;
+        --accent:      #B5FC4F;
         --accent-ink:  #9DBAFF;
-        --accent-soft: rgba(91,140,255,.16);
+        --accent-soft: rgba(181,252,79,.16);
         --violet:      #9C8CFF;
         --violet-soft: rgba(156,140,255,.14);
         --good:        #8FCB3A;
@@ -74,8 +74,8 @@
         --bad:         #FF6B6F;
         --bad-soft:    rgba(255,107,111,.14);
 
-        --btn-bg:      #105BFF;
-        --btn-ink:     #FFFFFF;
+        --btn-bg:      #B5FC4F;
+        --btn-ink:     #0B0B0C;
 
         --shadow-sm:   0 1px 2px rgba(0,0,0,.5);
         --shadow:      0 2px 6px rgba(0,0,0,.45), 0 12px 28px rgba(0,0,0,.4);
@@ -85,7 +85,7 @@
 
 :root[data-theme="dark"] {
     color-scheme: dark;
-    --bg:          #17181F;
+    --bg:          #0B0B0C;
     --surface:     #1E2029;
     --surface-2:   #262833;
     --ink:         #F6F6F7;
@@ -95,9 +95,9 @@
     --line:        rgba(255,255,255,.10);
     --line-strong: rgba(255,255,255,.20);
 
-    --accent:      #5B8CFF;
+    --accent:      #B5FC4F;
     --accent-ink:  #9DBAFF;
-    --accent-soft: rgba(91,140,255,.16);
+    --accent-soft: rgba(181,252,79,.16);
     --violet:      #9C8CFF;
     --violet-soft: rgba(156,140,255,.14);
     --good:        #8FCB3A;
@@ -110,8 +110,8 @@
     --bad:         #FF6B6F;
     --bad-soft:    rgba(255,107,111,.14);
 
-    --btn-bg:      #105BFF;
-    --btn-ink:     #FFFFFF;
+    --btn-bg:      #B5FC4F;
+    --btn-ink:     #0B0B0C;
 
     --shadow-sm:   0 1px 2px rgba(0,0,0,.5);
     --shadow:      0 2px 6px rgba(0,0,0,.45), 0 12px 28px rgba(0,0,0,.4);
@@ -170,6 +170,7 @@ img { max-width: 100%; }
     color: var(--ink);
 }
 .brand svg { flex-shrink: 0; }
+.brand-icon { flex-shrink: 0; width: 24px; height: 24px; border-radius: 5px; display: block; }
 .brand span { white-space: nowrap; }
 .topbar-right { display: flex; align-items: center; gap: 8px; }
 
@@ -431,13 +432,13 @@ img { max-width: 100%; }
     margin-top: 10px;
     padding: clamp(34px, 6vw, 62px) clamp(22px, 5vw, 52px) clamp(30px, 5vw, 48px);
     border-radius: 28px;
-    /* SettleMate's exact recipe: a vivid royal-blue base with a vertical
-       overlay that glows white at the top, clears by 60%, and deepens
-       slightly at the bottom. */
+    /* Catch-style dark hero: near-black with a soft gold glow up top and a
+       faint lime wash at the base. */
     background:
-        linear-gradient(to bottom, rgba(255,255,255,.40) 0%, rgba(255,255,255,0) 58%, rgba(0,0,0,.10) 100%),
-        #0067EB;
-    box-shadow: 0 10px 24px rgba(0,103,235,.22), 0 28px 64px rgba(0,103,235,.20);
+        radial-gradient(120% 95% at 50% -12%, rgba(240,182,74,.22) 0%, transparent 55%),
+        radial-gradient(90% 70% at 50% 120%, rgba(181,252,79,.10) 0%, transparent 60%),
+        #101013;
+    box-shadow: 0 10px 24px rgba(0,0,0,.40), 0 28px 64px rgba(0,0,0,.45);
     color: #fff;
 }
 .hero-card h1 { color: #F5F5F7; letter-spacing: -0.01em; }
@@ -449,11 +450,11 @@ img { max-width: 100%; }
    the white button out to a near-invisible, disabled-looking state. A soft lift
    shadow keeps it reading as a raised, tappable button. */
 .hero-card .search .btn {
-    background: #fff;
-    color: #0A46C8;
-    box-shadow: 0 2px 10px rgba(0,0,0,.18);
+    background: linear-gradient(135deg, #F6CB63, #E3A82F);
+    color: #1b1304;
+    box-shadow: 0 2px 10px rgba(0,0,0,.35);
 }
-.hero-card .search .btn:hover { background: #F0F4FF; }
+.hero-card .search .btn:hover { background: linear-gradient(135deg, #FFD775, #ECB03A); }
 .hero-card .search input {
     border-color: rgba(255,255,255,.45);
     box-shadow: 0 1px 2px rgba(0,0,0,.08);
