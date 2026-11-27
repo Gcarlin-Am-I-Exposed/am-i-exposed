@@ -122,7 +122,10 @@ export default async function handler(req, res) {
             // body can echo the email, but type/code/param describe the problem
             // (e.g. a non-recurring price used in subscription mode) without it.
             const e = data?.error || {};
-            console.error('checkout: stripe session create failed', r.status, e.type, e.code, e.param);
+            // Include the message for diagnosis, with the email redacted (a
+            // validation body can echo customer_email; a price error does not).
+            const safeMsg = email ? String(e.message || '').split(email).join('[email]') : String(e.message || '');
+            console.error('checkout: stripe session create failed', r.status, e.type, e.code, e.param, safeMsg);
             return res.status(502).json({ error: 'Could not start checkout' });
         }
         return res.status(200).json({ url: data.url });
