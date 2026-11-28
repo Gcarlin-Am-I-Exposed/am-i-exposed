@@ -71,8 +71,8 @@ const homeHref = lang === 'es' ? '/es/' : '/';
         ))}
       </ul>
       <div class="ctas">
-        <button class="btn primary" type="button">{t.exCtaFree}</button>
-        <button class="btn gold" type="button">{t.ctaReport}</button>
+        <button class="btn primary" type="button" data-scan-jump>{t.exCtaFree}</button>
+        <button class="btn gold" type="button" data-scan-jump>{t.ctaReport}</button>
       </div>
       <p class="note">{t.ctaNote}</p>
     </div>
@@ -136,3 +136,17 @@ const homeHref = lang === 'es' ? '/es/' : '/';
     <p class="dis">{t.disc}</p>
   </div>
 </footer>
+
+<script>
+  // The result card above is an EXAMPLE. Its two CTAs send the visitor back to
+  // the hero email bar — the real first step — rather than nowhere.
+  const email = document.querySelector('#scanForm input[name="email"]') as HTMLInputElement | null;
+  for (const btn of document.querySelectorAll('[data-scan-jump]')) {
+    btn.addEventListener('click', () => {
+      if (!email) return;
+      email.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // Focus after the scroll settles so the keyboard/caret lands correctly.
+      window.setTimeout(() => email.focus({ preventScroll: true }), 420);
+    });
+  }
+</script>
